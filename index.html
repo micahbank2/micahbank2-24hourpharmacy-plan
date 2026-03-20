@@ -50,6 +50,12 @@ h1{font-size:24px;font-weight:700}
 .rc-v{font-size:18px;font-weight:700;margin:2px 0}
 .rc-n{font-size:11px;color:#555}
 
+/* Strategy note */
+.strategy{background:#1a1a1a;border-radius:10px;padding:16px;margin-bottom:16px;color:#fff}
+.strategy-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888;margin-bottom:8px}
+.strategy-b{font-size:13px;line-height:1.6;color:#e8e5e0}
+.strategy-b strong{color:#fff}
+
 /* Sections */
 .sec{background:#fff;border:1px solid #e8e5e0;border-radius:10px;margin-bottom:10px;overflow:hidden}
 .sec.shut .sb{display:none}
@@ -165,10 +171,15 @@ h1{font-size:24px;font-weight:700}
 
 <div class="nx" id="nx"><div class="nx-t">Next actions</div><div id="ni"></div></div>
 
+<div class="strategy">
+<div class="strategy-t">Primary revenue thesis</div>
+<div class="strategy-b"><strong>Insurance lead gen (Oct-Jan)</strong> + <strong>prescription discount cards (evergreen)</strong> + <strong>telehealth referrals (high-intent off-hours traffic)</strong>. Display ads are supplemental, not primary. Health and beauty OTC content expands the site surface area and adds Amazon/iHerb affiliate revenue year-round. A person searching for a pharmacy at 2am is the same person who converts on telehealth, OTC products, and insurance. Serve all of it.</div>
+</div>
+
 <div class="rv">
-<div class="rc"><div class="rc-l">Months 1-3</div><div class="rc-v">$0-100</div><div class="rc-n">Build + apply</div></div>
-<div class="rc"><div class="rc-l">Months 6-12</div><div class="rc-v">$2-5K/mo</div><div class="rc-n">100+ pages, ads</div></div>
-<div class="rc"><div class="rc-l">Year 2+</div><div class="rc-v">$10-25K/mo</div><div class="rc-n">5K+ pages</div></div>
+<div class="rc"><div class="rc-l">Months 1-3</div><div class="rc-v">$0-100</div><div class="rc-n">Build, apply, launch</div></div>
+<div class="rc"><div class="rc-l">Months 6-12</div><div class="rc-v">$2-5K/mo</div><div class="rc-n">Insurance leads, OTC content, 100+ pages</div></div>
+<div class="rc"><div class="rc-l">Year 2+</div><div class="rc-v">$10-25K/mo</div><div class="rc-n">5K+ pages, direct sponsorships</div></div>
 </div>
 
 <div id="sc"></div>
@@ -191,18 +202,44 @@ h1{font-size:24px;font-weight:700}
 <a class="qli" href="https://pagespeed.web.dev/" target="_blank"><div class="qli-i">PS</div><div><div class="qli-n">PageSpeed Insights</div><div class="qli-d">Core Web Vitals</div></div></a>
 <a class="qli" href="https://app.uptimerobot.com/" target="_blank"><div class="qli-i">UR</div><div><div class="qli-n">UptimeRobot</div><div class="qli-d">Uptime monitoring</div></div></a>
 
-<div class="qlc">Affiliate networks</div>
+<div class="qlc">Discount card affiliates</div>
+<a class="qli" href="https://affiliate.lowermyrx.com/" target="_blank"><div class="qli-i">LM</div><div><div class="qli-n">LowerMyRx</div><div class="qli-d">Up to $4/fill</div></div></a>
+<a class="qli" href="https://ndcaffiliate.com/" target="_blank"><div class="qli-i">ND</div><div><div class="qli-n">National Drug Card</div><div class="qli-d">$2-2.50/fill</div></div></a>
+<a class="qli" href="https://partners.singlecare.com/" target="_blank"><div class="qli-i">SC</div><div><div class="qli-n">SingleCare Partners</div><div class="qli-d">$2.50/signup</div></div></a>
+
+<div class="qlc">Pharmacy retail affiliates</div>
 <a class="qli" href="https://members.cj.com/" target="_blank"><div class="qli-i">CJ</div><div><div class="qli-n">CJ Affiliate</div><div class="qli-d">Walgreens, CVS, Rite Aid, eHealth</div></div></a>
 <a class="qli" href="https://app.impact.com/" target="_blank"><div class="qli-i">IM</div><div><div class="qli-n">Impact</div><div class="qli-d">SingleCare, Hims, Ro</div></div></a>
 <a class="qli" href="https://rakutenadvertising.com/" target="_blank"><div class="qli-i">RK</div><div><div class="qli-n">Rakuten Advertising</div><div class="qli-d">Walgreens (alt)</div></div></a>
-<a class="qli" href="https://affiliate-program.amazon.com/" target="_blank"><div class="qli-i">AZ</div><div><div class="qli-n">Amazon Associates</div><div class="qli-d">Amazon Pharmacy, OTC</div></div></a>
-<a class="qli" href="https://affiliate.lowermyrx.com/" target="_blank"><div class="qli-i">LM</div><div><div class="qli-n">LowerMyRx</div><div class="qli-d">Discount card affiliate</div></div></a>
-<a class="qli" href="https://ndcaffiliate.com/" target="_blank"><div class="qli-i">ND</div><div><div class="qli-n">National Drug Card</div><div class="qli-d">Discount card affiliate</div></div></a>
-<a class="qli" href="https://partners.singlecare.com/" target="_blank"><div class="qli-i">SC</div><div><div class="qli-n">SingleCare Partners</div><div class="qli-d">Discount card affiliate</div></div></a>
+<a class="qli" href="https://affiliate-program.amazon.com/" target="_blank"><div class="qli-i">AZ</div><div><div class="qli-n">Amazon Associates</div><div class="qli-d">Pharmacy, OTC, devices</div></div></a>
+
+<div class="qlc">Insurance lead gen (peak Oct-Jan)</div>
+<a class="qli" href="https://mediaalpha.com/publishers/" target="_blank"><div class="qli-i">MA</div><div><div class="qli-n">MediaAlpha</div><div class="qli-d">Health insurance leads, $50-200/lead</div></div></a>
+<a class="qli" href="https://www.everquote.com/affiliates/" target="_blank"><div class="qli-i">EQ</div><div><div class="qli-n">EverQuote</div><div class="qli-d">Insurance lead gen</div></div></a>
+<a class="qli" href="https://ehealthinsurance.com/info/site-publisher" target="_blank"><div class="qli-i">EH</div><div><div class="qli-n">eHealth Partners</div><div class="qli-d">ACA/Medicare, $10-75/app</div></div></a>
+
+<div class="qlc">Telehealth affiliates</div>
+<a class="qli" href="https://www.teladoc.com/partners/" target="_blank"><div class="qli-i">TD</div><div><div class="qli-n">Teladoc</div><div class="qli-d">Telehealth referrals</div></div></a>
+<a class="qli" href="https://www.mdlive.com/affiliates/" target="_blank"><div class="qli-i">MD</div><div><div class="qli-n">MDLive</div><div class="qli-d">Urgent care telehealth</div></div></a>
+<a class="qli" href="https://clinic.amazon.com" target="_blank"><div class="qli-i">AC</div><div><div class="qli-n">Amazon Clinic</div><div class="qli-d">Amazon telehealth</div></div></a>
+<a class="qli" href="https://www.performcb.com" target="_blank"><div class="qli-i">NX</div><div><div class="qli-n">Nurx (PerformCB)</div><div class="qli-d">$25-75/lead</div></div></a>
+
+<div class="qlc">Health and beauty OTC</div>
+<a class="qli" href="https://www.iherb.com/info/affiliates" target="_blank"><div class="qli-i">IH</div><div><div class="qli-n">iHerb Affiliates</div><div class="qli-d">Supplements, 10% commission</div></div></a>
+<a class="qli" href="https://www.vitacost.com/affiliate-program" target="_blank"><div class="qli-i">VC</div><div><div class="qli-n">Vitacost</div><div class="qli-d">Natural health products</div></div></a>
+<a class="qli" href="https://www.vitaminshoppe.com/c/affiliate-program" target="_blank"><div class="qli-i">VS</div><div><div class="qli-n">Vitamin Shoppe</div><div class="qli-d">Supplement affiliate</div></div></a>
 
 <div class="qlc">Ads</div>
-<a class="qli" href="https://www.google.com/adsense/" target="_blank"><div class="qli-i">AS</div><div><div class="qli-n">Google AdSense</div><div class="qli-d">Display ads</div></div></a>
+<a class="qli" href="https://www.google.com/adsense/" target="_blank"><div class="qli-i">AS</div><div><div class="qli-n">Google AdSense</div><div class="qli-d">Display ads, phase 1</div></div></a>
 <a class="qli" href="https://www.raptive.com/" target="_blank"><div class="qli-i">RP</div><div><div class="qli-n">Raptive</div><div class="qli-d">Premium ads (25K+ pvs)</div></div></a>
+
+<div class="qlc">AI tools</div>
+<a class="qli" href="https://claude.ai" target="_blank"><div class="qli-i">AI</div><div><div class="qli-n">Claude</div><div class="qli-d">Content, strategy, coding</div></div></a>
+<a class="qli" href="https://surferseo.com" target="_blank"><div class="qli-i">SF</div><div><div class="qli-n">Surfer SEO</div><div class="qli-d">Content optimization vs. SERP</div></div></a>
+<a class="qli" href="https://ahrefs.com" target="_blank"><div class="qli-i">AH</div><div><div class="qli-n">Ahrefs</div><div class="qli-d">SEO, keyword research</div></div></a>
+<a class="qli" href="https://make.com" target="_blank"><div class="qli-i">MK</div><div><div class="qli-n">Make.com</div><div class="qli-d">No-code automation ($9/mo)</div></div></a>
+<a class="qli" href="https://linkwhisper.com" target="_blank"><div class="qli-i">LW</div><div><div class="qli-n">LinkWhisper</div><div class="qli-d">Internal linking automation</div></div></a>
+<a class="qli" href="https://ideogram.ai" target="_blank"><div class="qli-i">ID</div><div><div class="qli-n">Ideogram</div><div class="qli-d">AI image generation</div></div></a>
 
 <div class="qlc">Business ops</div>
 <a class="qli" href="https://www.waveapps.com/" target="_blank"><div class="qli-i">WV</div><div><div class="qli-n">Wave Accounting</div><div class="qli-d">Bookkeeping, invoices</div></div></a>
@@ -229,29 +266,35 @@ h1{font-size:24px;font-weight:700}
 <li>Q4 estimated tax payment due Jan 15 <span class="cal-tag cal-tax">Tax</span></li>
 <li>ACA open enrollment ends Jan 15 - last push for insurance content <span class="cal-tag cal-rev">Revenue</span></li>
 <li>New Year's pharmacy hours article should already be live <span class="cal-tag cal-seo">SEO</span></li>
+<li>Post-holiday OTC clearance - Walgreens/CVS affiliate content, cold and flu aisle roundups <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">February-March</div><ul class="cal-items">
 <li>Flu season tail - pharmacy traffic still elevated <span class="cal-tag cal-seo">SEO</span></li>
 <li>Tax season - people searching for health deductions <span class="cal-tag cal-seo">SEO</span></li>
 <li>Write "Tax Deductions for Prescription Costs" article <span class="cal-tag cal-seo">SEO</span></li>
+<li>Valentines Day OTC/health gift guides (vitamins, blood pressure monitors, etc.) <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">April</div><ul class="cal-items">
 <li>Q1 estimated tax payment due Apr 15 <span class="cal-tag cal-tax">Tax</span></li>
 <li>Allergy season starts - pharmacy traffic uptick <span class="cal-tag cal-seo">SEO</span></li>
+<li>Publish allergy medication comparison content - OTC antihistamine affiliate articles (Claritin vs Zyrtec vs generic) <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">May-June</div><ul class="cal-items">
 <li>Q2 estimated tax payment due Jun 15 <span class="cal-tag cal-tax">Tax</span></li>
 <li>Summer travel pharmacy guide ("Finding a pharmacy on vacation") <span class="cal-tag cal-seo">SEO</span></li>
 <li>Review and update all city page pharmacy data (hours change seasonally) <span class="cal-tag cal-seo">SEO</span></li>
+<li>Sunscreen, bug spray, travel health kit guides - high summer OTC purchase intent <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">July-August</div><ul class="cal-items">
 <li>Back-to-school pharmacy needs (vaccinations, prescriptions) <span class="cal-tag cal-seo">SEO</span></li>
+<li>Publish supplement and vitamin buying guides before back-to-school season <span class="cal-tag cal-rev">Revenue</span></li>
 <li><b>Start writing ACA open enrollment guide NOW</b> - needs to be indexed before October <span class="cal-tag cal-rev">Revenue</span></li>
 <li><b>Start writing Medicare Part D guide</b> <span class="cal-tag cal-rev">Revenue</span></li>
+<li>Apply to MediaAlpha and EverQuote NOW so accounts are live before Oct spike <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">September</div><ul class="cal-items">
@@ -259,14 +302,16 @@ h1{font-size:24px;font-weight:700}
 <li><b>Publish all insurance/enrollment content</b> - must be indexed before Oct <span class="cal-tag cal-rev">Revenue</span></li>
 <li>Medicare open enrollment starts Oct 15 - prep content NOW <span class="cal-tag cal-rev">Revenue</span></li>
 <li>Flu season starting - pharmacy traffic rising <span class="cal-tag cal-seo">SEO</span></li>
+<li>Publish flu shot guides, cold medicine comparisons - sets up affiliate revenue through winter <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m" style="border-color:#0066CC;border-width:2px"><div class="cal-mt" style="color:#0066CC">October-November (PEAK REVENUE)</div><ul class="cal-items">
-<li><b>ACA open enrollment begins Nov 1</b> - insurance lead revenue spikes 10-20x <span class="cal-tag cal-rev">Revenue</span></li>
+<li><b>ACA open enrollment begins Nov 1</b> - MediaAlpha/EverQuote insurance leads spike 10-20x. This is your highest revenue-per-visitor window of the year. <span class="cal-tag cal-rev">Revenue</span></li>
 <li>Medicare open enrollment: Oct 15 - Dec 7 <span class="cal-tag cal-rev">Revenue</span></li>
 <li>Flu season peak - highest pharmacy search volume of year <span class="cal-tag cal-seo">SEO</span></li>
 <li>Publish Thanksgiving pharmacy hours article (2 weeks before) <span class="cal-tag cal-seo">SEO</span></li>
 <li>Publish Christmas/New Year's pharmacy hours (by Dec 1) <span class="cal-tag cal-seo">SEO</span></li>
+<li>Holiday OTC gift guides (thermometers, blood pressure monitors, pill organizers) - Amazon Associates conversions spike <span class="cal-tag cal-rev">Revenue</span></li>
 </ul></div>
 
 <div class="cal-m"><div class="cal-mt">December</div><ul class="cal-items">
@@ -384,47 +429,71 @@ const D=[
 {id:"s2d",t:"Raptive at 25K pvs/mo",h:"",d:0},
 {id:"s2e",t:"Mediavine at 50K sess/mo",h:"",d:0},
 ]},
-{id:"s3",title:"Stream 3: Pharmacy links",meta:"2-5.6% per sale",badge:"a",desc:"Buttons built. Wire to links.",items:[
+{id:"s3",title:"Stream 3: Pharmacy retail links",meta:"2-5.6% per sale",badge:"a",desc:"Buttons built. Wire to affiliate links.",items:[
 {id:"s3a",t:"Sign up <b>CJ Affiliate</b>",h:"",d:0,m:"15 min"},
 {id:"s3b",t:"Sign up <b>Rakuten</b>",h:"",d:0,m:"15 min"},
 {id:"s3c",t:"Apply Walgreens",h:"2%, 30-day cookie.",d:0,m:"10 min"},
 {id:"s3d",t:"Apply Rite Aid",h:"5.6%, 15-day.",d:0,m:"10 min"},
 {id:"s3e",t:"Apply CVS",h:"",d:0,m:"10 min"},
-{id:"s3f",t:"Sign up <b>Amazon Associates</b>",h:"",d:0,m:"15 min"},
-{id:"s3g",t:"Install <b>Lasso</b> ($149/yr)",h:"",d:0,m:"15 min"},
+{id:"s3f",t:"Sign up <b>Amazon Associates</b>",h:"OTC products, medical devices, vitamins.",d:0,m:"15 min"},
+{id:"s3g",t:"Install <b>Lasso</b> ($149/yr)",h:"Affiliate link management plugin.",d:0,m:"15 min"},
 {id:"s3h",t:"Wire all buttons",h:"",d:0,m:"30 min"},
 ]},
-{id:"s4",title:"Stream 4: Insurance leads",meta:"$10-75/app. Peak Oct-Jan",badge:"a",items:[
-{id:"s4a",t:"Apply eHealth via CJ",h:"$10-75, 120-day cookie.",d:0,m:"10 min"},
-{id:"s4b",t:"Wire CTAs",h:"",d:0,m:"15 min"},
-{id:"s4c",t:"Write /insurance/ hub",h:"",d:0,m:"2 hrs"},
-{id:"s4d",t:"Write Medicare guide",h:"",d:0,m:"2 hrs"},
-{id:"s4e",t:"ACA enrollment guide",h:"Publish by September.",d:0,m:"3 hrs",due:"Sep"},
+{id:"s4",title:"Stream 4: Insurance leads",meta:"$10-200/lead. Peaks 10-20x Oct-Jan",badge:"a",desc:"Highest revenue-per-visitor window. Must have content indexed BEFORE October.",items:[
+{id:"s4a",t:"Apply <b>MediaAlpha</b>",h:"mediaalpha.com/publishers/ - $50-200/lead during open enrollment.",d:0,m:"15 min"},
+{id:"s4b",t:"Apply <b>EverQuote</b>",h:"everquote.com/affiliates/ - insurance lead gen network.",d:0,m:"15 min"},
+{id:"s4c",t:"Apply eHealth via CJ",h:"$10-75, 120-day cookie.",d:0,m:"10 min"},
+{id:"s4d",t:"Wire insurance CTAs to pages",h:"",d:0,m:"15 min"},
+{id:"s4e",t:"Write /insurance/ hub page",h:"",d:0,m:"2 hrs"},
+{id:"s4f",t:"Write Medicare Part D guide",h:"",d:0,m:"2 hrs"},
+{id:"s4g",t:"Write ACA enrollment guide",h:"Must be published by September to be indexed.",d:0,m:"3 hrs",due:"Sep"},
 ]},
-{id:"s5",title:"Stream 5: Telehealth",meta:"$25-100+/referral",badge:"a",items:[
+{id:"s5",title:"Stream 5: Telehealth",meta:"$25-100+/referral",badge:"a",desc:"High-intent off-hours traffic. Someone searching at 2am is primed for telehealth.",items:[
 {id:"s5a",t:"Sign up <b>Impact.com</b>",h:"",d:0,m:"15 min"},
-{id:"s5b",t:"Apply Hims",h:"",d:0,m:"10 min"},
-{id:"s5c",t:"Apply Ro",h:"",d:0,m:"10 min"},
-{id:"s5d",t:"PerformCB > Nurx",h:"",d:0,m:"15 min"},
-{id:"s5e",t:"Wire CTAs",h:"",d:0,m:"15 min"},
-{id:"s5f",t:"Telehealth guide",h:"",d:0,m:"2 hrs"},
+{id:"s5b",t:"Apply <b>Hims/Hers</b>",h:"$50-100+ per referral via Impact.",d:0,m:"10 min"},
+{id:"s5c",t:"Apply <b>Ro</b>",h:"$50-100+ per referral via Impact.",d:0,m:"10 min"},
+{id:"s5d",t:"Apply <b>Teladoc</b>",h:"teladoc.com/partners/",d:0,m:"10 min"},
+{id:"s5e",t:"Apply <b>MDLive</b>",h:"mdlive.com/affiliates/ - urgent care angle",d:0,m:"10 min"},
+{id:"s5f",t:"PerformCB > Nurx",h:"$25-75/lead",d:0,m:"15 min"},
+{id:"s5g",t:"Wire telehealth CTAs on city pages",h:"'Need a doctor at 2am?' placement.",d:0,m:"15 min"},
+{id:"s5h",t:"Write telehealth guide",h:"",d:0,m:"2 hrs"},
 ]},
-{id:"s6",title:"Stream 6: Rx delivery",meta:"1-4%/order",badge:"l",items:[
-{id:"s6a",t:"Add delivery CTA",h:"Uses Amazon Associates.",d:0,m:"30 min"},
-{id:"s6b",t:"Delivery comparison article",h:"",d:0,m:"2 hrs"},
+{id:"s6",title:"Stream 6: Health and beauty OTC",meta:"iHerb 10%, Amazon 1-8%",badge:"a",desc:"Expands content surface area. Every OTC product comparison article earns year-round.",items:[
+{id:"s6a",t:"Sign up <b>iHerb</b> affiliates",h:"iherb.com/info/affiliates - 10% commission on supplements.",d:0,m:"15 min"},
+{id:"s6b",t:"Sign up <b>Vitacost</b>",h:"Natural health products.",d:0,m:"10 min"},
+{id:"s6c",t:"Sign up <b>Vitamin Shoppe</b>",h:"",d:0,m:"10 min"},
+{id:"s6d",t:"Write OTC medication comparison articles",h:"Claritin vs Zyrtec, generic vs brand, etc.",d:0,m:"2 hrs each"},
+{id:"s6e",t:"Write supplement buying guides",h:"Best vitamins, protein powder, sleep aids at pharmacy.",d:0,m:"2 hrs each"},
+{id:"s6f",t:"Write medical device guides",h:"Blood pressure monitors, thermometers, glucose meters - high Amazon commissions.",d:0,m:"2 hrs each"},
+{id:"s6g",t:"Seasonal OTC content",h:"Allergy, cold/flu, sunscreen, back-to-school.",d:0,due:"Seasonal"},
 ]},
-{id:"s7",title:"Stream 7: Email list",meta:"Phase 2",badge:"l",items:[
-{id:"s7a",t:"Set up MailerLite",h:"",d:0,m:"20 min"},
-{id:"s7b",t:"Create lead magnet PDF",h:"",d:0,m:"2 hrs"},
-{id:"s7c",t:"Signup forms on pages",h:"",d:0,m:"30 min"},
-{id:"s7d",t:"Welcome email sequence",h:"",d:0,m:"2 hrs"},
-{id:"s7e",t:"Weekly newsletter",h:"",d:0,due:"Ongoing"},
+{id:"s7",title:"Stream 7: Rx delivery",meta:"1-4%/order",badge:"l",items:[
+{id:"s7a",t:"Add delivery CTA",h:"Uses Amazon Associates.",d:0,m:"30 min"},
+{id:"s7b",t:"Delivery comparison article",h:"",d:0,m:"2 hrs"},
 ]},
-{id:"s8",title:"Stream 8: Direct ads",meta:"Phase 3+",badge:"l",items:[
-{id:"s8a",t:"Featured pharmacy card",h:"",d:0},
-{id:"s8b",t:"Media kit",h:"",d:0},
-{id:"s8c",t:"Cold outreach",h:"",d:0},
-{id:"s8d",t:"Stripe invoicing",h:"",d:0},
+{id:"s8",title:"Stream 8: Email list",meta:"Phase 2",badge:"l",items:[
+{id:"s8a",t:"Set up MailerLite",h:"",d:0,m:"20 min"},
+{id:"s8b",t:"Create lead magnet PDF",h:"",d:0,m:"2 hrs"},
+{id:"s8c",t:"Signup forms on pages",h:"",d:0,m:"30 min"},
+{id:"s8d",t:"Welcome email sequence",h:"",d:0,m:"2 hrs"},
+{id:"s8e",t:"Weekly newsletter",h:"",d:0,due:"Ongoing"},
+]},
+{id:"s9",title:"Stream 9: Direct ads",meta:"Phase 3+",badge:"l",items:[
+{id:"s9a",t:"Featured pharmacy card",h:"",d:0},
+{id:"s9b",t:"Media kit",h:"",d:0},
+{id:"s9c",t:"Cold outreach to independent pharmacies",h:"$50-200/mo per pharmacy.",d:0},
+{id:"s9d",t:"Supplement brand sponsorships",h:"Phase 3+ once traffic proves out.",d:0},
+{id:"s9e",t:"Stripe invoicing",h:"",d:0},
+]},
+{id:"aitools",title:"AI tools setup",meta:"One-person scale engine",badge:"l",desc:"These tools let one person run what would otherwise need a team.",items:[
+{id:"ai1",t:"Set up <b>Make.com</b> account",h:"make.com - $9/mo for automation workflows.",d:0,m:"20 min"},
+{id:"ai2",t:"Make.com: new pharmacy data detected > WP draft created > notify",h:"Automate the data pipeline loop.",d:0,m:"1 hr"},
+{id:"ai3",t:"Set up <b>Surfer SEO</b>",h:"Grade AI-generated content before publishing. Catches thin content.",d:0,m:"30 min"},
+{id:"ai4",t:"Set up <b>Ahrefs</b>",h:"Keyword research for OTC + insurance content. Find gaps competitors miss.",d:0,m:"30 min"},
+{id:"ai5",t:"Install <b>LinkWhisper</b> ($77/yr)",h:"Auto-suggests internal links as you publish. Critical at 100+ pages.",d:0,m:"15 min"},
+{id:"ai6",t:"Use Claude for bulk city content",h:"Write prompt template, batch-generate all 5K city pages using data pipeline.",d:0},
+{id:"ai7",t:"Use Claude for meta descriptions in bulk",h:"One prompt, export CSV, import to RankMath.",d:0},
+{id:"ai8",t:"Use Claude for YMYL compliance review",h:"Check each page for FTC disclosures, medical disclaimers, accuracy.",d:0,due:"Ongoing"},
 ]},
 {id:"scale",title:"Content scaling",meta:"Ongoing",badge:"l",items:[
 {id:"sc1",t:"50 cities (month 2)",h:"",d:0},
@@ -432,6 +501,8 @@ const D=[
 {id:"sc3",t:"200+ cities (month 6)",h:"",d:0},
 {id:"sc4",t:"5,000+ locations (year 2)",h:"",d:0},
 {id:"sc5",t:"2-3 blog posts/week",h:"From month 2.",d:0,due:"Ongoing"},
+{id:"sc6",t:"OTC product comparison articles",h:"1-2 per week once site is live.",d:0,due:"Ongoing"},
+{id:"sc7",t:"Seasonal content calendar",h:"See calendar tab. Missing Oct-Jan insurance window = real money lost.",d:0,due:"Ongoing"},
 ]},
 {id:"maint",title:"Monthly maintenance",meta:"Recurring, do every month",badge:"a",desc:"Set a calendar reminder. These keep data accurate and SEO healthy.",items:[
 {id:"m1",t:"Spot-check 10 city pages for accuracy",h:"Verify hours, phones, addresses.",d:0,m:"30 min",due:"Monthly"},
@@ -454,7 +525,7 @@ function bc(b){return{a:"ba",b:"bb",d:"bd",l:"bl"}[b]||"ba";}
 function bt(s){if(s.bT)return s.bT;return{a:"In progress",b:"Blocked",d:"Complete",l:"Later"}[s.badge]||"";}
 function ss(s){let t=s.items.length,d=0;s.items.forEach(i=>{if(S[i.id]&&S[i.id].d)d++;});return{t,d,p:t?Math.round(d/t*100):0};}
 function gs(){let t=0,d=0;D.forEach(s=>s.items.forEach(i=>{t++;if(S[i.id]&&S[i.id].d)d++;}));return{t,d,p:t?Math.round(d/t*100):0};}
-function na(){const a=[];const pr=["legal","hosting","deploy","plugins","content","analytics","gcloud","finder","pipeline","s1","s2","s3","s4","s5"];
+function na(){const a=[];const pr=["legal","hosting","deploy","plugins","content","analytics","gcloud","finder","pipeline","s1","s2","s3","s4","s5","s6"];
 for(const id of pr){const s=D.find(x=>x.id===id);if(!s)continue;const n=s.items.find(i=>!(S[i.id]&&S[i.id].d));if(n)a.push({s:s.title,i:n});if(a.length>=4)break;}return a;}
 function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
 
@@ -529,6 +600,7 @@ const mFields=[
 {id:"affiliate_revenue",l:"Affiliate revenue ($)"},
 {id:"insurance_leads",l:"Insurance leads"},
 {id:"telehealth_refs",l:"Telehealth referrals"},
+{id:"otc_affiliate",l:"OTC/health affiliate ($)"},
 {id:"email_subs",l:"Email subscribers"},
 {id:"total_revenue",l:"Total revenue ($)"},
 {id:"expenses",l:"Expenses ($)"},
