@@ -4,627 +4,1283 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>24HourPharmacy.com - Command Center</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'DM Sans',-apple-system,sans-serif;background:#FAF8F5;color:#1a1a1a;line-height:1.6;font-size:14px}
-.w{max-width:860px;margin:0 auto;padding:24px 20px 140px}
-h1{font-size:24px;font-weight:700}
-.hsub{font-size:13px;color:#888;margin-bottom:20px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;
+  --surface:#ffffff;
+  --surface2:#f1f5f9;
+  --border:#e2e8f0;
+  --border2:#cbd5e1;
+  --text:#0f172a;
+  --muted:#64748b;
+  --accent:#2563eb;
+  --accent-light:#eff6ff;
+  --accent-border:#bfdbfe;
+  --accent-dark:#1d4ed8;
+  --success:#16a34a;
+  --success-light:#f0fdf4;
+  --success-border:#bbf7d0;
+  --warning:#b45309;
+  --warning-light:#fffbeb;
+  --warning-border:#fde68a;
+  --danger:#dc2626;
+  --danger-light:#fef2f2;
+  --r:8px;
+  --r-lg:12px;
+  --shadow:0 1px 3px rgba(0,0,0,0.07),0 1px 2px rgba(0,0,0,0.04);
+}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5;min-height:100vh}
 
-/* Tabs */
-.tabs{display:flex;gap:2px;border-bottom:2px solid #e8e5e0;margin-bottom:20px;overflow-x:auto}
-.tab{padding:8px 16px;font-size:13px;font-weight:500;color:#888;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;font-family:inherit}
-.tab:hover{color:#1a1a1a}
-.tab.on{color:#0066CC;border-bottom-color:#0066CC}
-.pane{display:none}
-.pane.on{display:block}
+/* ---- Header ---- */
+.app-header{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:200}
+.header-left{display:flex;align-items:center;gap:10px}
+.app-logo{width:26px;height:26px;background:var(--accent);border-radius:6px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;flex-shrink:0}
+.app-name{font-size:14px;font-weight:700;color:var(--text)}
+.app-tagline{font-size:12px;color:var(--muted);margin-left:4px}
+.header-right{font-size:11px;color:var(--muted)}
 
-/* Sticky bar */
-.bar{position:sticky;top:0;background:#FAF8F5;z-index:100;padding:10px 0;border-bottom:1px solid #e8e5e0;margin-bottom:16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.pout{flex:1;min-width:160px}
-.plab{font-size:11px;color:#888;display:flex;justify-content:space-between;margin-bottom:3px}
-.pbar{height:7px;background:#e8e5e0;border-radius:4px;overflow:hidden}
-.pfil{height:100%;background:#0066CC;border-radius:4px;transition:width .4s}
-.srch{padding:6px 10px;font-size:12px;border:1px solid #e8e5e0;border-radius:6px;font-family:inherit;width:180px;outline:none}
-.srch:focus{border-color:#0066CC}
-.fb{padding:5px 10px;font-size:11px;font-weight:500;border:1px solid #e8e5e0;border-radius:5px;background:#fff;color:#555;cursor:pointer;font-family:inherit}
-.fb.on{background:#0066CC;color:#fff;border-color:#0066CC}
-.rb{padding:5px 10px;font-size:11px;border:1px solid #e8e5e0;border-radius:5px;background:#fff;color:#999;cursor:pointer;font-family:inherit}
-.rb:hover{background:#FCEBEB;color:#791F1F;border-color:#F09595}
-.xb{padding:5px 10px;font-size:11px;border:1px solid #e8e5e0;border-radius:5px;background:#fff;color:#555;cursor:pointer;font-family:inherit}
-.xb:hover{background:#E6F1FB;color:#0C447C;border-color:#85B7EB}
+/* ---- Tabs ---- */
+.tabs-nav{background:var(--surface);border-bottom:1px solid var(--border);padding:0 24px;display:flex;position:sticky;top:52px;z-index:100}
+.tab-btn{padding:10px 14px;font-size:13px;font-weight:500;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:inherit;transition:all .15s;white-space:nowrap}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 
-/* Next actions */
-.nx{background:#fff;border:2px solid #0066CC;border-radius:10px;padding:14px;margin-bottom:16px}
-.nx-t{font-size:13px;font-weight:700;color:#0066CC;margin-bottom:6px}
-.nx-i{display:flex;gap:8px;margin-bottom:5px;font-size:12px}
-.nx-d{width:6px;height:6px;border-radius:50%;background:#0066CC;flex-shrink:0;margin-top:6px}
-.nx-e{font-size:12px;color:#888;font-style:italic}
-.nx-time{font-size:10px;color:#999;margin-left:4px}
+/* ---- Layout ---- */
+.main-layout{display:grid;grid-template-columns:1fr 240px;gap:16px;max-width:1240px;margin:0 auto;padding:20px 24px;align-items:start}
+.main-layout > main{min-width:0;width:100%}
+@media(max-width:1024px){.main-layout{grid-template-columns:1fr;padding:16px}.sidebar{order:-1;position:static!important;max-height:none}}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
 
-/* Revenue cards */
-.rv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}
-.rc{background:#fff;border:1px solid #e8e5e0;border-radius:8px;padding:10px}
-.rc-l{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px}
-.rc-v{font-size:18px;font-weight:700;margin:2px 0}
-.rc-n{font-size:11px;color:#555}
+/* ---- Sidebar ---- */
+.sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:108px;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:thin}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-track{background:transparent}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
 
-/* Strategy note */
-.strategy{background:#1a1a1a;border-radius:10px;padding:16px;margin-bottom:16px;color:#fff}
-.strategy-t{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888;margin-bottom:8px}
-.strategy-b{font-size:13px;line-height:1.6;color:#e8e5e0}
-.strategy-b strong{color:#fff}
+/* ---- Cards ---- */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.card-header{padding:13px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-title{font-size:13px;font-weight:600}
 
-/* Sections */
-.sec{background:#fff;border:1px solid #e8e5e0;border-radius:10px;margin-bottom:10px;overflow:hidden}
-.sec.shut .sb{display:none}
-.sec.match-no{display:none}
-.sh{padding:10px 14px;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
-.sh:hover{background:#FDFCFA}
-.sv{width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:#999;transition:transform .2s;flex-shrink:0}
-.sec.shut .sv{transform:rotate(-90deg)}
-.si{flex:1;min-width:0}
-.st{font-size:13px;font-weight:700}
-.sm{font-size:11px;color:#888}
-.bg{font-size:9px;font-weight:500;padding:2px 7px;border-radius:8px;white-space:nowrap}
-.ba{background:#E6F1FB;color:#0C447C}
-.bb{background:#FAEEDA;color:#633806}
-.bd{background:#E1F5EE;color:#085041}
-.bl{background:#F1EFE8;color:#5F5E5A}
-.sp{width:60px;height:4px;background:#e8e5e0;border-radius:2px;overflow:hidden;flex-shrink:0}
-.sf{height:100%;background:#00AA55;border-radius:2px;transition:width .3s}
-.spct{font-size:10px;font-weight:500;color:#888;min-width:24px;text-align:right}
-.sb{border-top:1px solid #e8e5e0}
-.sd{padding:8px 14px;font-size:12px;color:#555;background:#FAFAF8;border-bottom:1px solid #f0ede8}
+/* ---- Progress ring ---- */
+.progress-wrap{display:flex;align-items:center;gap:14px;padding:14px 16px}
+.ring-svg{transform:rotate(-90deg);flex-shrink:0}
+.ring-track{fill:none;stroke:var(--border);stroke-width:5}
+.ring-fill{fill:none;stroke:var(--accent);stroke-width:5;stroke-linecap:round;transition:stroke-dashoffset .5s ease}
+.progress-pct{font-size:18px;font-weight:700;line-height:1}
+.progress-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.progress-label{font-size:13px;font-weight:600}
 
-/* Items */
-.it{display:flex;align-items:start;gap:8px;padding:8px 14px;border-bottom:1px solid #f5f3f0}
-.it:last-child{border-bottom:none}
-.it:hover{background:#FDFCFA}
-.it.dn{opacity:.5}
-.it.hd{display:none}
-.ck{width:16px;height:16px;border-radius:3px;border:2px solid #ccc;flex-shrink:0;margin-top:1px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
-.ck:hover{border-color:#0066CC}
-.ck.on{background:#0066CC;border-color:#0066CC}
-.ck.on::after{content:"\2713";color:#fff;font-size:10px;font-weight:700}
-.ic{flex:1;min-width:0}
-.il{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.ix{font-size:12px}
-.ix b{font-weight:600}
-.ih{font-size:10px;color:#999;margin-top:1px}
-.ie{font-size:10px;color:#0066CC;cursor:pointer;display:inline-block;margin-top:2px}
-.ie:hover{text-decoration:underline}
-.im{font-size:10px;padding:1px 6px;border-radius:4px;background:#F1EFE8;color:#5F5E5A}
-.idue{font-size:10px;padding:1px 6px;border-radius:4px;background:#FAEEDA;color:#633806}
-.ins{font-size:11px;color:#555;margin-top:4px;padding:4px 8px;background:#F7F6F3;border-radius:4px;display:flex;justify-content:space-between;align-items:start;gap:8px;white-space:pre-wrap;word-break:break-word}
-.ine{font-size:10px;color:#0066CC;cursor:pointer;flex-shrink:0}
-.ine:hover{text-decoration:underline}
-.ina{margin-top:4px;display:none}
-.ini{width:100%;padding:4px 8px;font-size:11px;font-family:inherit;border:1px solid #e8e5e0;border-radius:4px;resize:none;min-height:24px;outline:none;background:#FAFAF8}
-.ini:focus{border-color:#0066CC}
-.isv{font-size:10px;color:#0066CC;cursor:pointer;margin-top:2px;display:inline-block}
+/* ---- Revenue targets ---- */
+.targets-grid{padding:12px 16px;display:flex;flex-direction:column;gap:9px}
+.target-row{display:flex;justify-content:space-between;align-items:center;padding:7px 10px;border-radius:6px;background:var(--bg)}
+.target-label{font-size:12px;font-weight:600}
+.target-sub{font-size:11px;color:var(--muted)}
+.target-amount{font-size:13px;font-weight:700;white-space:nowrap;flex-shrink:0;margin-left:8px}
 
-/* Quick links */
-.ql{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:16px}
-.qlc{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#888;margin:16px 0 8px;grid-column:1/-1}
-.qli{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#fff;border:1px solid #e8e5e0;border-radius:8px;text-decoration:none;color:#1a1a1a;font-size:12px;transition:border-color .15s}
-.qli:hover{border-color:#0066CC}
-.qli-i{width:24px;height:24px;border-radius:6px;background:#F7F6F3;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-.qli-n{font-weight:500}
-.qli-d{font-size:10px;color:#888}
+/* ---- Collapsible (sidebar) ---- */
+.collapsible-header{padding:13px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .1s}
+.collapsible-header:hover{background:var(--bg)}
+.collapsible-body{overflow:hidden;transition:max-height .22s ease,opacity .22s ease}
+.collapsible-body.collapsed{max-height:0!important;opacity:0}
+.chevron{width:15px;height:15px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.chevron.rotated{transform:rotate(180deg)}
 
-/* Metrics */
-.met-row{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.met-m{padding:4px 8px;font-size:11px;border:1px solid #e8e5e0;border-radius:4px;background:#fff;cursor:pointer;font-family:inherit;color:#555}
-.met-m.on{background:#0066CC;color:#fff;border-color:#0066CC}
-.met-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;margin-bottom:16px}
-.met-card{background:#fff;border:1px solid #e8e5e0;border-radius:8px;padding:10px}
-.met-lab{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:.5px}
-.met-val{font-size:11px;margin-top:4px}
-.met-inp{width:100%;padding:4px 6px;font-size:13px;font-weight:700;font-family:inherit;border:1px solid transparent;border-radius:4px;outline:none;background:transparent}
-.met-inp:hover{border-color:#e8e5e0}
-.met-inp:focus{border-color:#0066CC;background:#fff}
-.met-note{font-size:11px;color:#888;margin-top:12px}
+/* ---- Milestones ---- */
+.milestone-item{display:flex;align-items:flex-start;gap:9px;padding:7px 16px;cursor:pointer;transition:background .1s}
+.milestone-item:hover{background:var(--bg)}
+.milestone-cb{width:14px;height:14px;accent-color:var(--success);cursor:pointer;flex-shrink:0;margin-top:2px}
+.milestone-text{font-size:12px;color:var(--text);line-height:1.4}
+.milestone-item.m-done .milestone-text{text-decoration:line-through;color:var(--muted)}
+.milestones-inner{padding:6px 0 10px}
 
-/* Calendar */
-.cal-m{background:#fff;border:1px solid #e8e5e0;border-radius:8px;padding:14px;margin-bottom:10px}
-.cal-mt{font-size:14px;font-weight:700;margin-bottom:4px}
-.cal-items{font-size:12px;color:#555}
-.cal-items li{margin-bottom:4px;list-style:none;padding-left:16px;position:relative}
-.cal-items li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:#0066CC}
-.cal-due{font-size:10px;color:#888}
-.cal-tag{font-size:9px;padding:1px 6px;border-radius:4px;margin-left:4px}
-.cal-rev{background:#E1F5EE;color:#085041}
-.cal-seo{background:#E6F1FB;color:#0C447C}
-.cal-tax{background:#FCEBEB;color:#791F1F}
+/* ---- Thesis box ---- */
+.thesis-body{padding:12px 16px;font-size:13px;color:var(--text);line-height:1.7}
 
-@media(max-width:600px){.rv{grid-template-columns:1fr}.ql{grid-template-columns:1fr}.met-grid{grid-template-columns:1fr 1fr}.srch{width:100%}}
+/* ---- Checklist toolbar ---- */
+.checklist-toolbar{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap;row-gap:6px}
+.toolbar-left{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex:1;min-width:0}
+.toolbar-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.filter-group{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden}
+.filter-btn{padding:5px 11px;font-size:12px;font-weight:500;color:var(--muted);background:none;border:none;border-right:1px solid var(--border);cursor:pointer;font-family:inherit;transition:all .15s}
+.filter-btn:last-child{border-right:none}
+.filter-btn:hover{background:var(--bg);color:var(--text)}
+.filter-btn.active{background:var(--accent);color:#fff}
+.toolbar-btn{padding:5px 11px;font-size:12px;font-weight:500;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:6px;cursor:pointer;font-family:inherit;transition:all .15s}
+.toolbar-btn:hover{border-color:var(--accent);color:var(--accent)}
+.toolbar-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+.toolbar-spacer{flex:1}
+
+/* ---- Phase blocks ---- */
+.phase-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);margin-bottom:10px;overflow:hidden}
+.phase-header{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;cursor:pointer;user-select:none;border-left:3px solid var(--accent);transition:background .1s}
+.phase-header:hover{background:var(--bg)}
+.phase-header-left{display:flex;align-items:center;gap:9px;min-width:0}
+.phase-badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap;flex-shrink:0}
+.phase-title-text{font-size:13px;font-weight:600;color:var(--text)}
+.phase-new-dot{width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0}
+.phase-header-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.task-count-pill{font-size:11px;color:var(--muted);background:var(--bg);border:1px solid var(--border);padding:1px 8px;border-radius:10px;white-space:nowrap}
+.task-count-pill.all-done{background:var(--success-light);border-color:var(--success-border);color:var(--success)}
+
+/* ---- Task items ---- */
+.task-list{padding:4px 0 8px}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:7px 16px;cursor:default}
+.task-item:hover{background:var(--bg)}
+.task-cb{width:14px;height:14px;margin-top:2px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
+.task-content{flex:1;min-width:120px}
+.task-text{font-size:13px;color:var(--text);line-height:1.45;cursor:pointer;display:block}
+.task-item.t-done .task-text{text-decoration:line-through;color:var(--muted)}
+.task-hint-text{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5;display:none;padding:6px 9px;background:var(--bg);border-radius:5px;border-left:2px solid var(--border2)}
+.task-item.hint-open .task-hint-text{display:block}
+.hint-btn{width:17px;height:17px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-size:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:inherit;transition:all .15s;line-height:1}
+.hint-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
+.task-new-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-border);border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+.task-paid-badge{font-size:9px;font-weight:700;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+.phase-tasks-body{overflow:hidden;transition:max-height .22s ease,opacity .22s ease}
+.phase-tasks-body.collapsed{max-height:0!important;opacity:0}
+.no-tasks-msg{padding:12px 16px;font-size:12px;color:var(--muted);font-style:italic}
+
+/* ---- Quick Links tab ---- */
+.links-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.link-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.link-group-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;padding:12px 16px 8px}
+.link-item{display:flex;align-items:center;gap:11px;padding:9px 16px;text-decoration:none;color:var(--text);transition:background .1s}
+.link-item:hover{background:var(--bg)}
+.link-icon{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0;color:#fff}
+.link-info{flex:1;min-width:0}
+.link-name{font-size:13px;font-weight:500}
+.link-desc{font-size:11px;color:var(--muted)}
+.link-arrow{margin-left:auto;color:var(--border);width:13px;height:13px;flex-shrink:0}
+
+/* ---- Metrics tab ---- */
+.metrics-overflow{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.metrics-table{width:100%;border-collapse:collapse;min-width:880px}
+.metrics-table th{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;padding:9px 10px;text-align:right;background:var(--surface2);border-bottom:1px solid var(--border);white-space:nowrap}
+.metrics-table th:first-child{text-align:left;position:sticky;left:0;background:var(--surface2);z-index:2;min-width:190px}
+.metrics-table td{padding:7px 10px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.metrics-table td:first-child{position:sticky;left:0;background:var(--surface);z-index:1;text-align:left}
+.metrics-table tr:hover td{background:var(--bg)}
+.metrics-table tr:hover td:first-child{background:var(--bg)}
+.metric-label{font-size:12px;font-weight:500}
+.metric-sub{font-size:10px;color:var(--muted);margin-top:1px;white-space:normal;max-width:185px;line-height:1.3}
+.metrics-table input[type=text]{width:76px;padding:3px 6px;border:1px solid transparent;border-radius:4px;font-size:12px;font-family:inherit;color:var(--text);background:transparent;text-align:right;transition:all .15s}
+.metrics-table input[type=text]:hover{border-color:var(--border)}
+.metrics-table input[type=text]:focus{outline:none;border-color:var(--accent);background:var(--accent-light)}
+.section-row td{background:var(--surface2)!important;font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:8px 10px 5px}
+.section-row td:first-child{background:var(--surface2)!important}
+.metric-new-row td:first-child{border-left:2px solid var(--accent)}
+
+/* ---- Calendar tab ---- */
+.calendar-grid{display:flex;flex-direction:column;gap:10px}
+.month-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
+.month-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .1s}
+.month-header:hover{background:var(--bg)}
+.month-header-left{display:flex;align-items:center;gap:9px}
+.month-title{font-size:13px;font-weight:600}
+.month-tags{display:flex;gap:5px;flex-wrap:wrap}
+.m-tag{font-size:10px;font-weight:600;padding:1px 6px;border-radius:3px}
+.m-tag-revenue{background:var(--warning-light);color:var(--warning);border:1px solid var(--warning-border)}
+.m-tag-seo{background:var(--accent-light);color:var(--accent-dark);border:1px solid var(--accent-border)}
+.m-tag-tax{background:#fce7f3;color:#9d174d;border:1px solid #fbcfe8}
+.m-tag-peak{background:var(--danger-light);color:var(--danger);border:1px solid #fecaca}
+.month-body{padding:10px 16px 14px}
+.event-row{display:flex;align-items:flex-start;gap:9px;padding:5px 0;border-bottom:1px solid var(--border)}
+.event-row:last-child{border-bottom:none}
+.event-dot{width:7px;height:7px;border-radius:50%;margin-top:5px;flex-shrink:0}
+.dot-revenue{background:#d97706}
+.dot-seo{background:var(--accent)}
+.dot-tax{background:#db2777}
+.dot-geo{background:#0d9488}
+.event-text{font-size:13px;color:var(--text);line-height:1.45}
+.event-text strong{font-weight:600}
+.event-new{display:inline-block;font-size:9px;font-weight:700;color:#0d9488;background:#f0fdfa;border:1px solid #99f6e4;border-radius:3px;padding:1px 5px;margin-left:6px;vertical-align:middle}
+.recurring-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);padding:16px}
+.recurring-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:11px}
+.recurring-row{display:flex;align-items:flex-start;gap:9px;padding:5px 0;border-bottom:1px solid var(--border)}
+.recurring-row:last-child{border-bottom:none}
+
+@media(max-width:600px){
+  .tabs-nav{padding:0 12px;overflow-x:auto}
+  .tab-btn{padding:9px 10px;font-size:12px}
+  .links-grid{grid-template-columns:1fr}
+  .main-layout{padding:12px}
+  .checklist-toolbar{gap:5px}
+}
 </style>
 </head>
 <body>
-<div class="w">
-<h1>24HourPharmacy.com</h1>
-<p class="hsub">Command center. Checklists, dashboards, metrics, calendar. Saves in your browser.</p>
 
-<div class="tabs" id="tabs">
-<div class="tab on" data-p="plan">Checklist</div>
-<div class="tab" data-p="links">Quick links</div>
-<div class="tab" data-p="metrics">Metrics</div>
-<div class="tab" data-p="calendar">Calendar</div>
-</div>
+<header class="app-header">
+  <div class="header-left">
+    <div class="app-logo">24</div>
+    <span class="app-name">24HourPharmacy.com</span>
+    <span class="app-tagline">Command center</span>
+  </div>
+  <div class="header-right">Saves in browser &middot; <span id="header-progress">0%</span> complete</div>
+</header>
 
-<!-- ========== CHECKLIST PANE ========== -->
-<div class="pane on" id="pane-plan">
+<nav class="tabs-nav">
+  <button class="tab-btn active" data-tab="checklist">Checklist</button>
+  <button class="tab-btn" data-tab="links">Quick links</button>
+  <button class="tab-btn" data-tab="metrics">Metrics</button>
+  <button class="tab-btn" data-tab="calendar">Calendar</button>
+</nav>
 
-<div class="bar" id="bar">
-<div class="pout"><div class="plab"><span>Progress</span><span id="gp">0%</span></div><div class="pbar"><div class="pfil" id="gf"></div></div></div>
-<input class="srch" id="srch" placeholder="Search tasks..." />
-<div style="display:flex;gap:3px">
-<button class="fb on" data-f="all">All</button>
-<button class="fb" data-f="rem">To do</button>
-<button class="fb" data-f="dn">Done</button>
-</div>
-<button class="xb" id="xb">Export</button>
-<button class="rb" id="rbtn">Reset</button>
-</div>
+<div class="main-layout">
+  <main>
+    <!-- CHECKLIST TAB -->
+    <div id="tab-checklist" class="tab-panel active">
+      <div class="checklist-toolbar">
+        <div class="toolbar-left">
+          <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="todo">To do</button>
+            <button class="filter-btn" data-filter="done">Done</button>
+          </div>
+          <button class="toolbar-btn" id="btn-expand-all">Expand all</button>
+          <button class="toolbar-btn" id="btn-collapse-all">Collapse all</button>
+        </div>
+        <div class="toolbar-right">
+          <button class="toolbar-btn" id="btn-export">Export</button>
+          <button class="toolbar-btn danger" id="btn-reset">Reset</button>
+        </div>
+      </div>
+      <div id="checklist-container"></div>
+    </div>
 
-<div class="nx" id="nx"><div class="nx-t">Next actions</div><div id="ni"></div></div>
+    <!-- QUICK LINKS TAB -->
+    <div id="tab-links" class="tab-panel">
+      <div class="links-grid" id="links-container"></div>
+    </div>
 
-<div class="strategy">
-<div class="strategy-t">Primary revenue thesis</div>
-<div class="strategy-b"><strong>Insurance lead gen (Oct-Jan)</strong> + <strong>prescription discount cards (evergreen)</strong> + <strong>telehealth referrals (high-intent off-hours traffic)</strong>. Display ads are supplemental, not primary. Health and beauty OTC content expands the site surface area and adds Amazon/iHerb affiliate revenue year-round. A person searching for a pharmacy at 2am is the same person who converts on telehealth, OTC products, and insurance. Serve all of it.</div>
-</div>
+    <!-- METRICS TAB -->
+    <div id="tab-metrics" class="tab-panel">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Monthly metrics</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:2px">Click any cell to edit. Saves automatically.</div>
+          </div>
+          <button class="toolbar-btn" id="btn-export-metrics">Export CSV</button>
+        </div>
+        <div class="metrics-overflow">
+          <table class="metrics-table" id="metrics-table"></table>
+        </div>
+        <div style="padding:10px 16px;font-size:11px;color:var(--muted);border-top:1px solid var(--border)">All data saves in your browser. Export the checklist tab for a full backup.</div>
+      </div>
+    </div>
 
-<div class="rv">
-<div class="rc"><div class="rc-l">Months 1-3</div><div class="rc-v">$0-100</div><div class="rc-n">Build, apply, launch</div></div>
-<div class="rc"><div class="rc-l">Months 6-12</div><div class="rc-v">$2-5K/mo</div><div class="rc-n">Insurance leads, OTC content, 100+ pages</div></div>
-<div class="rc"><div class="rc-l">Year 2+</div><div class="rc-v">$10-25K/mo</div><div class="rc-n">5K+ pages, direct sponsorships</div></div>
-</div>
+    <!-- CALENDAR TAB -->
+    <div id="tab-calendar" class="tab-panel">
+      <div class="calendar-grid" id="calendar-container"></div>
+    </div>
+  </main>
 
-<div id="sc"></div>
-</div>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <!-- Progress -->
+    <div class="card">
+      <div class="progress-wrap">
+        <div style="position:relative;flex-shrink:0">
+          <svg class="ring-svg" width="62" height="62" viewBox="0 0 62 62">
+            <circle class="ring-track" cx="31" cy="31" r="26"/>
+            <circle class="ring-fill" id="progress-ring" cx="31" cy="31" r="26" stroke-dasharray="163.4" stroke-dashoffset="163.4"/>
+          </svg>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center">
+            <div class="progress-pct" id="progress-pct">0%</div>
+          </div>
+        </div>
+        <div>
+          <div class="progress-label">Overall progress</div>
+          <div class="progress-sub" id="progress-details">0 of 0 tasks</div>
+        </div>
+      </div>
+    </div>
 
-<!-- ========== QUICK LINKS PANE ========== -->
-<div class="pane" id="pane-links">
-<p style="font-size:13px;color:#888;margin-bottom:16px">Bookmarks to every dashboard and tool you'll use. Click to open in new tab.</p>
-<div class="ql">
-<div class="qlc">Your site</div>
-<a class="qli" href="https://24hourpharmacy.com/wp-admin/" target="_blank"><div class="qli-i">WP</div><div><div class="qli-n">WordPress admin</div><div class="qli-d">Content, pages, settings</div></div></a>
-<a class="qli" href="https://hpanel.hostinger.com/" target="_blank"><div class="qli-i">H</div><div><div class="qli-n">Hostinger hPanel</div><div class="qli-d">Hosting, files, SSL</div></div></a>
-<a class="qli" href="https://github.com/micahbank2/24hourpharmacy" target="_blank"><div class="qli-i">GH</div><div><div class="qli-n">GitHub repo</div><div class="qli-d">Source code</div></div></a>
-<a class="qli" href="https://dash.cloudflare.com/" target="_blank"><div class="qli-i">CF</div><div><div class="qli-n">Cloudflare</div><div class="qli-d">CDN, DNS, security</div></div></a>
+    <!-- Revenue targets -->
+    <div class="card">
+      <div class="targets-grid">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:2px">Revenue targets</div>
+        <div class="target-row">
+          <div><div class="target-label">Months 1&ndash;3</div><div class="target-sub">Build, apply, launch</div></div>
+          <div class="target-amount" style="color:var(--muted)">$0&ndash;100</div>
+        </div>
+        <div class="target-row">
+          <div><div class="target-label">Months 6&ndash;12</div><div class="target-sub">Insurance leads, OTC, 100+ pages</div></div>
+          <div class="target-amount" style="color:var(--warning)">$2&ndash;5K/mo</div>
+        </div>
+        <div class="target-row">
+          <div><div class="target-label">Year 2+</div><div class="target-sub">5K+ pages, direct sponsors</div></div>
+          <div class="target-amount" style="color:var(--success)">$10&ndash;25K/mo</div>
+        </div>
+      </div>
+    </div>
 
-<div class="qlc">Analytics</div>
-<a class="qli" href="https://analytics.google.com/" target="_blank"><div class="qli-i">GA</div><div><div class="qli-n">Google Analytics 4</div><div class="qli-d">Traffic, events</div></div></a>
-<a class="qli" href="https://search.google.com/search-console" target="_blank"><div class="qli-i">SC</div><div><div class="qli-n">Search Console</div><div class="qli-d">Rankings, indexing, CWV</div></div></a>
-<a class="qli" href="https://clarity.microsoft.com/" target="_blank"><div class="qli-i">MC</div><div><div class="qli-n">Microsoft Clarity</div><div class="qli-d">Heatmaps, recordings</div></div></a>
-<a class="qli" href="https://pagespeed.web.dev/" target="_blank"><div class="qli-i">PS</div><div><div class="qli-n">PageSpeed Insights</div><div class="qli-d">Core Web Vitals</div></div></a>
-<a class="qli" href="https://app.uptimerobot.com/" target="_blank"><div class="qli-i">UR</div><div><div class="qli-n">UptimeRobot</div><div class="qli-d">Uptime monitoring</div></div></a>
+    <!-- Revenue thesis (collapsible) -->
+    <div class="card">
+      <div class="collapsible-header" data-sidebar="thesis">
+        <span class="card-title">Primary revenue thesis</span>
+        <svg class="chevron" id="chevron-thesis" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="collapsible-body" id="body-thesis">
+        <div class="thesis-body"><strong>Insurance lead gen (Oct&ndash;Jan)</strong> + <strong>prescription discount cards (evergreen)</strong> + <strong>telehealth referrals (high-intent off-hours traffic)</strong>. Display ads are supplemental, not primary. Health and beauty OTC content expands the site surface area and adds Amazon/iHerb affiliate revenue year-round. A person searching for a pharmacy at 2am is the same person who converts on telehealth, OTC products, and insurance. Serve all of it.</div>
+      </div>
+    </div>
 
-<div class="qlc">Discount card affiliates</div>
-<a class="qli" href="https://affiliate.lowermyrx.com/" target="_blank"><div class="qli-i">LM</div><div><div class="qli-n">LowerMyRx</div><div class="qli-d">Up to $4/fill</div></div></a>
-<a class="qli" href="https://ndcaffiliate.com/" target="_blank"><div class="qli-i">ND</div><div><div class="qli-n">National Drug Card</div><div class="qli-d">$2-2.50/fill</div></div></a>
-<a class="qli" href="https://partners.singlecare.com/" target="_blank"><div class="qli-i">SC</div><div><div class="qli-n">SingleCare Partners</div><div class="qli-d">$2.50/signup</div></div></a>
-
-<div class="qlc">Pharmacy retail affiliates</div>
-<a class="qli" href="https://members.cj.com/" target="_blank"><div class="qli-i">CJ</div><div><div class="qli-n">CJ Affiliate</div><div class="qli-d">Walgreens, CVS, Rite Aid, eHealth</div></div></a>
-<a class="qli" href="https://app.impact.com/" target="_blank"><div class="qli-i">IM</div><div><div class="qli-n">Impact</div><div class="qli-d">SingleCare, Hims, Ro</div></div></a>
-<a class="qli" href="https://rakutenadvertising.com/" target="_blank"><div class="qli-i">RK</div><div><div class="qli-n">Rakuten Advertising</div><div class="qli-d">Walgreens (alt)</div></div></a>
-<a class="qli" href="https://affiliate-program.amazon.com/" target="_blank"><div class="qli-i">AZ</div><div><div class="qli-n">Amazon Associates</div><div class="qli-d">Pharmacy, OTC, devices</div></div></a>
-
-<div class="qlc">Insurance lead gen (peak Oct-Jan)</div>
-<a class="qli" href="https://mediaalpha.com/publishers/" target="_blank"><div class="qli-i">MA</div><div><div class="qli-n">MediaAlpha</div><div class="qli-d">Health insurance leads, $50-200/lead</div></div></a>
-<a class="qli" href="https://www.everquote.com/affiliates/" target="_blank"><div class="qli-i">EQ</div><div><div class="qli-n">EverQuote</div><div class="qli-d">Insurance lead gen</div></div></a>
-<a class="qli" href="https://ehealthinsurance.com/info/site-publisher" target="_blank"><div class="qli-i">EH</div><div><div class="qli-n">eHealth Partners</div><div class="qli-d">ACA/Medicare, $10-75/app</div></div></a>
-
-<div class="qlc">Telehealth affiliates</div>
-<a class="qli" href="https://www.teladoc.com/partners/" target="_blank"><div class="qli-i">TD</div><div><div class="qli-n">Teladoc</div><div class="qli-d">Telehealth referrals</div></div></a>
-<a class="qli" href="https://www.mdlive.com/affiliates/" target="_blank"><div class="qli-i">MD</div><div><div class="qli-n">MDLive</div><div class="qli-d">Urgent care telehealth</div></div></a>
-<a class="qli" href="https://clinic.amazon.com" target="_blank"><div class="qli-i">AC</div><div><div class="qli-n">Amazon Clinic</div><div class="qli-d">Amazon telehealth</div></div></a>
-<a class="qli" href="https://www.performcb.com" target="_blank"><div class="qli-i">NX</div><div><div class="qli-n">Nurx (PerformCB)</div><div class="qli-d">$25-75/lead</div></div></a>
-
-<div class="qlc">Health and beauty OTC</div>
-<a class="qli" href="https://www.iherb.com/info/affiliates" target="_blank"><div class="qli-i">IH</div><div><div class="qli-n">iHerb Affiliates</div><div class="qli-d">Supplements, 10% commission</div></div></a>
-<a class="qli" href="https://www.vitacost.com/affiliate-program" target="_blank"><div class="qli-i">VC</div><div><div class="qli-n">Vitacost</div><div class="qli-d">Natural health products</div></div></a>
-<a class="qli" href="https://www.vitaminshoppe.com/c/affiliate-program" target="_blank"><div class="qli-i">VS</div><div><div class="qli-n">Vitamin Shoppe</div><div class="qli-d">Supplement affiliate</div></div></a>
-
-<div class="qlc">Ads</div>
-<a class="qli" href="https://www.google.com/adsense/" target="_blank"><div class="qli-i">AS</div><div><div class="qli-n">Google AdSense</div><div class="qli-d">Display ads, phase 1</div></div></a>
-<a class="qli" href="https://www.raptive.com/" target="_blank"><div class="qli-i">RP</div><div><div class="qli-n">Raptive</div><div class="qli-d">Premium ads (25K+ pvs)</div></div></a>
-
-<div class="qlc">AI tools</div>
-<a class="qli" href="https://claude.ai" target="_blank"><div class="qli-i">AI</div><div><div class="qli-n">Claude</div><div class="qli-d">Content, strategy, coding</div></div></a>
-<a class="qli" href="https://surferseo.com" target="_blank"><div class="qli-i">SF</div><div><div class="qli-n">Surfer SEO</div><div class="qli-d">Content optimization vs. SERP</div></div></a>
-<a class="qli" href="https://ahrefs.com" target="_blank"><div class="qli-i">AH</div><div><div class="qli-n">Ahrefs</div><div class="qli-d">SEO, keyword research</div></div></a>
-<a class="qli" href="https://make.com" target="_blank"><div class="qli-i">MK</div><div><div class="qli-n">Make.com</div><div class="qli-d">No-code automation ($9/mo)</div></div></a>
-<a class="qli" href="https://linkwhisper.com" target="_blank"><div class="qli-i">LW</div><div><div class="qli-n">LinkWhisper</div><div class="qli-d">Internal linking automation</div></div></a>
-<a class="qli" href="https://ideogram.ai" target="_blank"><div class="qli-i">ID</div><div><div class="qli-n">Ideogram</div><div class="qli-d">AI image generation</div></div></a>
-
-<div class="qlc">Business ops</div>
-<a class="qli" href="https://www.waveapps.com/" target="_blank"><div class="qli-i">WV</div><div><div class="qli-n">Wave Accounting</div><div class="qli-d">Bookkeeping, invoices</div></div></a>
-<a class="qli" href="https://app.mailerlite.com/" target="_blank"><div class="qli-i">ML</div><div><div class="qli-n">MailerLite</div><div class="qli-d">Email marketing</div></div></a>
-<a class="qli" href="https://console.cloud.google.com/" target="_blank"><div class="qli-i">GC</div><div><div class="qli-n">Google Cloud Console</div><div class="qli-d">Maps API, billing</div></div></a>
-<a class="qli" href="https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online" target="_blank"><div class="qli-i">IR</div><div><div class="qli-n">IRS EIN Application</div><div class="qli-d">Free, 5 minutes</div></div></a>
-<a class="qli" href="https://www.canva.com/" target="_blank"><div class="qli-i">CV</div><div><div class="qli-n">Canva</div><div class="qli-d">Graphics, social images</div></div></a>
-</div>
-</div>
-
-<!-- ========== METRICS PANE ========== -->
-<div class="pane" id="pane-metrics">
-<p style="font-size:13px;color:#888;margin-bottom:12px">Log your numbers monthly. Click any field to type. Saves automatically.</p>
-<div class="met-row" id="met-months"></div>
-<div class="met-grid" id="met-grid"></div>
-<p class="met-note">All data saves in your browser. Export the checklist tab for a full backup.</p>
-</div>
-
-<!-- ========== CALENDAR PANE ========== -->
-<div class="pane" id="pane-calendar">
-<p style="font-size:13px;color:#888;margin-bottom:16px">Seasonal deadlines and content windows. Health/pharmacy traffic is highly seasonal. Missing a window costs real money.</p>
-
-<div class="cal-m"><div class="cal-mt">January</div><ul class="cal-items">
-<li>Q4 estimated tax payment due Jan 15 <span class="cal-tag cal-tax">Tax</span></li>
-<li>ACA open enrollment ends Jan 15 - last push for insurance content <span class="cal-tag cal-rev">Revenue</span></li>
-<li>New Year's pharmacy hours article should already be live <span class="cal-tag cal-seo">SEO</span></li>
-<li>Post-holiday OTC clearance - Walgreens/CVS affiliate content, cold and flu aisle roundups <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">February-March</div><ul class="cal-items">
-<li>Flu season tail - pharmacy traffic still elevated <span class="cal-tag cal-seo">SEO</span></li>
-<li>Tax season - people searching for health deductions <span class="cal-tag cal-seo">SEO</span></li>
-<li>Write "Tax Deductions for Prescription Costs" article <span class="cal-tag cal-seo">SEO</span></li>
-<li>Valentines Day OTC/health gift guides (vitamins, blood pressure monitors, etc.) <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">April</div><ul class="cal-items">
-<li>Q1 estimated tax payment due Apr 15 <span class="cal-tag cal-tax">Tax</span></li>
-<li>Allergy season starts - pharmacy traffic uptick <span class="cal-tag cal-seo">SEO</span></li>
-<li>Publish allergy medication comparison content - OTC antihistamine affiliate articles (Claritin vs Zyrtec vs generic) <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">May-June</div><ul class="cal-items">
-<li>Q2 estimated tax payment due Jun 15 <span class="cal-tag cal-tax">Tax</span></li>
-<li>Summer travel pharmacy guide ("Finding a pharmacy on vacation") <span class="cal-tag cal-seo">SEO</span></li>
-<li>Review and update all city page pharmacy data (hours change seasonally) <span class="cal-tag cal-seo">SEO</span></li>
-<li>Sunscreen, bug spray, travel health kit guides - high summer OTC purchase intent <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">July-August</div><ul class="cal-items">
-<li>Back-to-school pharmacy needs (vaccinations, prescriptions) <span class="cal-tag cal-seo">SEO</span></li>
-<li>Publish supplement and vitamin buying guides before back-to-school season <span class="cal-tag cal-rev">Revenue</span></li>
-<li><b>Start writing ACA open enrollment guide NOW</b> - needs to be indexed before October <span class="cal-tag cal-rev">Revenue</span></li>
-<li><b>Start writing Medicare Part D guide</b> <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Apply to MediaAlpha and EverQuote NOW so accounts are live before Oct spike <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">September</div><ul class="cal-items">
-<li>Q3 estimated tax payment due Sep 15 <span class="cal-tag cal-tax">Tax</span></li>
-<li><b>Publish all insurance/enrollment content</b> - must be indexed before Oct <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Medicare open enrollment starts Oct 15 - prep content NOW <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Flu season starting - pharmacy traffic rising <span class="cal-tag cal-seo">SEO</span></li>
-<li>Publish flu shot guides, cold medicine comparisons - sets up affiliate revenue through winter <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m" style="border-color:#0066CC;border-width:2px"><div class="cal-mt" style="color:#0066CC">October-November (PEAK REVENUE)</div><ul class="cal-items">
-<li><b>ACA open enrollment begins Nov 1</b> - MediaAlpha/EverQuote insurance leads spike 10-20x. This is your highest revenue-per-visitor window of the year. <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Medicare open enrollment: Oct 15 - Dec 7 <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Flu season peak - highest pharmacy search volume of year <span class="cal-tag cal-seo">SEO</span></li>
-<li>Publish Thanksgiving pharmacy hours article (2 weeks before) <span class="cal-tag cal-seo">SEO</span></li>
-<li>Publish Christmas/New Year's pharmacy hours (by Dec 1) <span class="cal-tag cal-seo">SEO</span></li>
-<li>Holiday OTC gift guides (thermometers, blood pressure monitors, pill organizers) - Amazon Associates conversions spike <span class="cal-tag cal-rev">Revenue</span></li>
-</ul></div>
-
-<div class="cal-m"><div class="cal-mt">December</div><ul class="cal-items">
-<li>ACA enrollment continues through Jan 15 <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Medicare enrollment ends Dec 7 <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Holiday pharmacy hours - high traffic, high ad RPMs <span class="cal-tag cal-rev">Revenue</span></li>
-<li>Year-end: export metrics, review annual revenue, plan next year <span class="cal-tag cal-tax">Tax</span></li>
-</ul></div>
-
-<div style="margin-top:20px;padding:14px;background:#E6F1FB;border-radius:8px;font-size:13px;color:#0C447C">
-<b>Monthly recurring tasks:</b> Spot-check 10 city pages for pharmacy data accuracy. Review Google Analytics for traffic trends. Check Search Console for crawl errors and ranking changes. Review all affiliate dashboards for revenue. Update Wave Accounting with income/expenses. Run PageSpeed Insights on 3 key pages.
-</div>
-</div>
-
+    <!-- Milestones (collapsible) -->
+    <div class="card">
+      <div class="collapsible-header" data-sidebar="milestones">
+        <span class="card-title">Milestones</span>
+        <svg class="chevron" id="chevron-milestones" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+      </div>
+      <div class="collapsible-body" id="body-milestones">
+        <div class="milestones-inner" id="milestones-list"></div>
+      </div>
+    </div>
+  </aside>
 </div>
 
 <script>
-const D=[
-{id:"legal",title:"Legal and business setup",meta:"Do before launch",badge:"a",desc:"EIN and bank account are immediate. LLC within 3 months.",items:[
-{id:"ein",t:"<b>Get an EIN from IRS.gov</b>",h:"Free, 5 min. Needed for affiliate signups + bank account.",d:0,m:"5 min"},
-{id:"bank",t:"<b>Open business bank account</b>",h:"All income in, all expenses out. Never mix.",d:0,m:"30 min"},
-{id:"books",t:"<b>Set up Wave Accounting</b>",h:"Track every dollar.",d:0,m:"20 min"},
-{id:"tax",t:"Set aside 25-30% of revenue for taxes",h:"Quarterly estimates: Apr 15, Jun 15, Sep 15, Jan 15.",d:0,due:"Ongoing"},
-{id:"llc",t:"Form an LLC ($50-500)",h:"Secretary of State website. Skip LegalZoom.",d:0,m:"1 hr"},
-{id:"agent",t:"Registered agent (optional, $50-150/yr)",h:"So home address isn't public.",d:0,m:"15 min"},
-{id:"cpa",t:"Hire a CPA (at $1K+/mo revenue)",h:"$300-800/yr.",d:0},
-{id:"insur",t:"General liability insurance (later)",h:"$300-500/yr.",d:0},
-{id:"tm",t:"Trademark ($250-350, Phase 3+)",h:"",d:0},
-{id:"scorp",t:"S-Corp election (at $50K+/yr)",h:"Need CPA.",d:0},
-]},
-{id:"hosting",title:"Hosting and WordPress",meta:"~1 hour",badge:"b",bT:"Blocked: domain",items:[
-{id:"domain",t:"<b>Get domain access from dad</b>",h:"Unblocks everything.",d:0,m:"???"},
-{id:"hst",t:"<b>Hostinger Premium</b> (~$3/mo)",h:"",d:0,m:"10 min"},
-{id:"wpi",t:"<b>Install WordPress</b>",h:"One-click.",d:0,m:"5 min"},
-{id:"dns",t:"<b>Point domain to Hostinger</b>",h:"Update nameservers.",d:0,m:"10 min"},
-{id:"ssl",t:"<b>Enable SSL / HTTPS</b>",h:"Free Let's Encrypt.",d:0,m:"5 min"},
-{id:"perm",t:"Permalinks to Post name",h:"",d:0,m:"1 min"},
-{id:"adm",t:"Change admin username",h:"",d:0,m:"2 min"},
-{id:"fed",t:"DISALLOW_FILE_EDIT in wp-config",h:"",d:0,m:"5 min"},
-]},
-{id:"deploy",title:"Deploy code from repo",meta:"Upload built code",badge:"b",bT:"Blocked: WP",items:[
-{id:"thm",t:"<b>Child theme built</b> (7 files)",h:"",d:1,m:"Done"},
-{id:"plg",t:"<b>Plugin built</b> (9 files)",h:"",d:1,m:"Done"},
-{id:"dcw",t:"<b>Discount card widget built</b>",h:"",d:1,m:"Done"},
-{id:"ult",t:"Upload child theme zip",h:"",d:0,m:"5 min"},
-{id:"ulp",t:"Upload plugin zip",h:"",d:0,m:"5 min"},
-{id:"act",t:"Activate theme + plugin",h:"",d:0,m:"1 min"},
-{id:"flsh",t:"Save permalinks (flush rewrites)",h:"",d:0,m:"1 min"},
-]},
-{id:"plugins",title:"Install WordPress plugins",meta:"5 plugins, all free",badge:"b",bT:"Blocked: WP",items:[
-{id:"gpt",t:"<b>GeneratePress</b>",h:"",d:0,m:"2 min"},
-{id:"wf",t:"<b>Wordfence</b>",h:"Firewall, 2FA.",d:0,m:"10 min"},
-{id:"rm",t:"<b>RankMath</b>",h:"SEO.",d:0,m:"10 min"},
-{id:"ud",t:"<b>UpdraftPlus</b>",h:"Backups.",d:0,m:"5 min"},
-{id:"spi",t:"<b>ShortPixel</b>",h:"Image compression.",d:0,m:"3 min"},
-]},
-{id:"content",title:"Publish foundation content",meta:"6 pages written",badge:"b",bT:"Blocked: WP",items:[
-{id:"c1",t:"About (830 words)",h:"",d:1},
-{id:"c2",t:"Medical disclaimer (721 words)",h:"",d:1},
-{id:"c3",t:"Affiliate disclosure (710 words)",h:"",d:1},
-{id:"c4",t:"Privacy policy (1,210 words)",h:"",d:1},
-{id:"c5",t:"Terms (996 words)",h:"",d:1},
-{id:"c6",t:"Savings hub (1,313 words)",h:"",d:1},
-{id:"c7",t:"Replace MICAH placeholders",h:"Name, bio, email, state.",d:0,m:"15 min"},
-{id:"c8",t:"Create + paste all pages in WP",h:"",d:0,m:"30 min"},
-{id:"c9",t:"Set up nav menus",h:"",d:0,m:"10 min"},
-{id:"c10",t:"Set homepage",h:"Settings > Reading.",d:0,m:"2 min"},
-]},
-{id:"analytics",title:"Analytics + monitoring",meta:"All free",badge:"b",bT:"Blocked: WP",items:[
-{id:"ga",t:"<b>Google Analytics 4</b>",h:"",d:0,m:"15 min"},
-{id:"gsc",t:"<b>Search Console</b>",h:"Verify + submit sitemap.",d:0,m:"10 min"},
-{id:"mc",t:"<b>Microsoft Clarity</b>",h:"Heatmaps.",d:0,m:"10 min"},
-{id:"ur",t:"<b>UptimeRobot</b>",h:"",d:0,m:"5 min"},
-]},
-{id:"gcloud",title:"Google Cloud (Maps API)",meta:"Free $200/mo",badge:"b",bT:"Needs credit card",items:[
-{id:"gc1",t:"<b>Create Google Cloud account</b>",h:"Credit card required.",d:0,m:"10 min"},
-{id:"gc2",t:"Enable Maps/Places/Geocoding APIs",h:"",d:0,m:"5 min"},
-{id:"gc3",t:"Create + restrict API key",h:"",d:0,m:"10 min"},
-{id:"gc4",t:"Set $1 budget alert",h:"",d:0,m:"3 min"},
-{id:"gc5",t:"Enter key in WP settings",h:"",d:0,m:"2 min"},
-]},
-{id:"finder",title:"Pharmacy finder widget",meta:"Core tool",badge:"b",bT:"Blocked: GCloud",items:[
-{id:"f1",t:"Shortcode registered",h:"",d:1},
-{id:"f2",t:"REST API endpoint",h:"",d:1},
-{id:"f3",t:"Scaffold Vite + React",h:"",d:0,m:"30 min"},
-{id:"f4",t:"Map component",h:"",d:0,m:"2 hrs"},
-{id:"f5",t:"Results list",h:"",d:0,m:"1 hr"},
-{id:"f6",t:"Zip fallback",h:"",d:0,m:"30 min"},
-{id:"f7",t:"Build + deploy",h:"",d:0,m:"15 min"},
-]},
-{id:"pipeline",title:"Data pipeline + 10 cities",meta:"Python, run local",badge:"b",bT:"Blocked: GCloud",items:[
-{id:"p1",t:"Places API query script",h:"",d:0,m:"1 hr"},
-{id:"p2",t:"WP content generator",h:"",d:0,m:"1 hr"},
-{id:"p3",t:"REST API push script",h:"",d:0,m:"30 min"},
-{id:"p4",t:"Generate data for 10 metros",h:"",d:0,m:"30 min"},
-{id:"p5",t:"Push as drafts",h:"",d:0,m:"15 min"},
-{id:"p6",t:"Write 500+ words per city",h:"",d:0,m:"4-6 hrs"},
-{id:"p7",t:"Verify accuracy",h:"",d:0,m:"1 hr"},
-{id:"p8",t:"Publish all 10",h:"",d:0,m:"10 min"},
-]},
-{id:"s1",title:"Stream 1: Discount cards",meta:"$2-4/fill, recurring",badge:"a",desc:"Widget built. Sign up + enter codes.",items:[
-{id:"s1a",t:"Sign up <b>LowerMyRx</b> ($4/fill)",h:"affiliate.lowermyrx.com",d:0,m:"15 min"},
-{id:"s1b",t:"Sign up <b>SingleCare</b> ($2.50/signup)",h:"partners.singlecare.com",d:0,m:"15 min"},
-{id:"s1c",t:"Sign up <b>National Drug Card</b> ($2-2.50/fill)",h:"ndcaffiliate.com",d:0,m:"10 min"},
-{id:"s1d",t:"Enter BIN/PCN/Group in WP settings",h:"",d:0,m:"5 min"},
-{id:"s1e",t:"Verify widget on pages",h:"",d:0,m:"10 min"},
-{id:"s1f",t:"Create /savings/discount-card/ page",h:"",d:0,m:"30 min"},
-{id:"s1g",t:"Test 30 days, keep best",h:"",d:0},
-{id:"s1h",t:"A/B test placement",h:"",d:0},
-]},
-{id:"s2",title:"Stream 2: Display ads",meta:"$8-55/1K views",badge:"a",desc:"Ad zones built. Apply + paste.",items:[
-{id:"s2a",t:"Apply <b>AdSense</b>",h:"Needs 5+ pages.",d:0,m:"20 min"},
-{id:"s2b",t:"Paste code in widgets",h:"",d:0,m:"10 min"},
-{id:"s2c",t:"Verify CWV with ads",h:"LCP<2.5s, CLS<0.1.",d:0,m:"15 min"},
-{id:"s2d",t:"Raptive at 25K pvs/mo",h:"",d:0},
-{id:"s2e",t:"Mediavine at 50K sess/mo",h:"",d:0},
-]},
-{id:"s3",title:"Stream 3: Pharmacy retail links",meta:"2-5.6% per sale",badge:"a",desc:"Buttons built. Wire to affiliate links.",items:[
-{id:"s3a",t:"Sign up <b>CJ Affiliate</b>",h:"",d:0,m:"15 min"},
-{id:"s3b",t:"Sign up <b>Rakuten</b>",h:"",d:0,m:"15 min"},
-{id:"s3c",t:"Apply Walgreens",h:"2%, 30-day cookie.",d:0,m:"10 min"},
-{id:"s3d",t:"Apply Rite Aid",h:"5.6%, 15-day.",d:0,m:"10 min"},
-{id:"s3e",t:"Apply CVS",h:"",d:0,m:"10 min"},
-{id:"s3f",t:"Sign up <b>Amazon Associates</b>",h:"OTC products, medical devices, vitamins.",d:0,m:"15 min"},
-{id:"s3g",t:"Install <b>Lasso</b> ($149/yr)",h:"Affiliate link management plugin.",d:0,m:"15 min"},
-{id:"s3h",t:"Wire all buttons",h:"",d:0,m:"30 min"},
-]},
-{id:"s4",title:"Stream 4: Insurance leads",meta:"$10-200/lead. Peaks 10-20x Oct-Jan",badge:"a",desc:"Highest revenue-per-visitor window. Must have content indexed BEFORE October.",items:[
-{id:"s4a",t:"Apply <b>MediaAlpha</b>",h:"mediaalpha.com/publishers/ - $50-200/lead during open enrollment.",d:0,m:"15 min"},
-{id:"s4b",t:"Apply <b>EverQuote</b>",h:"everquote.com/affiliates/ - insurance lead gen network.",d:0,m:"15 min"},
-{id:"s4c",t:"Apply eHealth via CJ",h:"$10-75, 120-day cookie.",d:0,m:"10 min"},
-{id:"s4d",t:"Wire insurance CTAs to pages",h:"",d:0,m:"15 min"},
-{id:"s4e",t:"Write /insurance/ hub page",h:"",d:0,m:"2 hrs"},
-{id:"s4f",t:"Write Medicare Part D guide",h:"",d:0,m:"2 hrs"},
-{id:"s4g",t:"Write ACA enrollment guide",h:"Must be published by September to be indexed.",d:0,m:"3 hrs",due:"Sep"},
-]},
-{id:"s5",title:"Stream 5: Telehealth",meta:"$25-100+/referral",badge:"a",desc:"High-intent off-hours traffic. Someone searching at 2am is primed for telehealth.",items:[
-{id:"s5a",t:"Sign up <b>Impact.com</b>",h:"",d:0,m:"15 min"},
-{id:"s5b",t:"Apply <b>Hims/Hers</b>",h:"$50-100+ per referral via Impact.",d:0,m:"10 min"},
-{id:"s5c",t:"Apply <b>Ro</b>",h:"$50-100+ per referral via Impact.",d:0,m:"10 min"},
-{id:"s5d",t:"Apply <b>Teladoc</b>",h:"teladoc.com/partners/",d:0,m:"10 min"},
-{id:"s5e",t:"Apply <b>MDLive</b>",h:"mdlive.com/affiliates/ - urgent care angle",d:0,m:"10 min"},
-{id:"s5f",t:"PerformCB > Nurx",h:"$25-75/lead",d:0,m:"15 min"},
-{id:"s5g",t:"Wire telehealth CTAs on city pages",h:"'Need a doctor at 2am?' placement.",d:0,m:"15 min"},
-{id:"s5h",t:"Write telehealth guide",h:"",d:0,m:"2 hrs"},
-]},
-{id:"s6",title:"Stream 6: Health and beauty OTC",meta:"iHerb 10%, Amazon 1-8%",badge:"a",desc:"Expands content surface area. Every OTC product comparison article earns year-round.",items:[
-{id:"s6a",t:"Sign up <b>iHerb</b> affiliates",h:"iherb.com/info/affiliates - 10% commission on supplements.",d:0,m:"15 min"},
-{id:"s6b",t:"Sign up <b>Vitacost</b>",h:"Natural health products.",d:0,m:"10 min"},
-{id:"s6c",t:"Sign up <b>Vitamin Shoppe</b>",h:"",d:0,m:"10 min"},
-{id:"s6d",t:"Write OTC medication comparison articles",h:"Claritin vs Zyrtec, generic vs brand, etc.",d:0,m:"2 hrs each"},
-{id:"s6e",t:"Write supplement buying guides",h:"Best vitamins, protein powder, sleep aids at pharmacy.",d:0,m:"2 hrs each"},
-{id:"s6f",t:"Write medical device guides",h:"Blood pressure monitors, thermometers, glucose meters - high Amazon commissions.",d:0,m:"2 hrs each"},
-{id:"s6g",t:"Seasonal OTC content",h:"Allergy, cold/flu, sunscreen, back-to-school.",d:0,due:"Seasonal"},
-]},
-{id:"s7",title:"Stream 7: Rx delivery",meta:"1-4%/order",badge:"l",items:[
-{id:"s7a",t:"Add delivery CTA",h:"Uses Amazon Associates.",d:0,m:"30 min"},
-{id:"s7b",t:"Delivery comparison article",h:"",d:0,m:"2 hrs"},
-]},
-{id:"s8",title:"Stream 8: Email list",meta:"Phase 2",badge:"l",items:[
-{id:"s8a",t:"Set up MailerLite",h:"",d:0,m:"20 min"},
-{id:"s8b",t:"Create lead magnet PDF",h:"",d:0,m:"2 hrs"},
-{id:"s8c",t:"Signup forms on pages",h:"",d:0,m:"30 min"},
-{id:"s8d",t:"Welcome email sequence",h:"",d:0,m:"2 hrs"},
-{id:"s8e",t:"Weekly newsletter",h:"",d:0,due:"Ongoing"},
-]},
-{id:"s9",title:"Stream 9: Direct ads",meta:"Phase 3+",badge:"l",items:[
-{id:"s9a",t:"Featured pharmacy card",h:"",d:0},
-{id:"s9b",t:"Media kit",h:"",d:0},
-{id:"s9c",t:"Cold outreach to independent pharmacies",h:"$50-200/mo per pharmacy.",d:0},
-{id:"s9d",t:"Supplement brand sponsorships",h:"Phase 3+ once traffic proves out.",d:0},
-{id:"s9e",t:"Stripe invoicing",h:"",d:0},
-]},
-{id:"aitools",title:"AI tools setup",meta:"One-person scale engine",badge:"l",desc:"These tools let one person run what would otherwise need a team.",items:[
-{id:"ai1",t:"Set up <b>Make.com</b> account",h:"make.com - $9/mo for automation workflows.",d:0,m:"20 min"},
-{id:"ai2",t:"Make.com: new pharmacy data detected > WP draft created > notify",h:"Automate the data pipeline loop.",d:0,m:"1 hr"},
-{id:"ai3",t:"Set up <b>Surfer SEO</b>",h:"Grade AI-generated content before publishing. Catches thin content.",d:0,m:"30 min"},
-{id:"ai4",t:"Set up <b>Ahrefs</b>",h:"Keyword research for OTC + insurance content. Find gaps competitors miss.",d:0,m:"30 min"},
-{id:"ai5",t:"Install <b>LinkWhisper</b> ($77/yr)",h:"Auto-suggests internal links as you publish. Critical at 100+ pages.",d:0,m:"15 min"},
-{id:"ai6",t:"Use Claude for bulk city content",h:"Write prompt template, batch-generate all 5K city pages using data pipeline.",d:0},
-{id:"ai7",t:"Use Claude for meta descriptions in bulk",h:"One prompt, export CSV, import to RankMath.",d:0},
-{id:"ai8",t:"Use Claude for YMYL compliance review",h:"Check each page for FTC disclosures, medical disclaimers, accuracy.",d:0,due:"Ongoing"},
-]},
-{id:"scale",title:"Content scaling",meta:"Ongoing",badge:"l",items:[
-{id:"sc1",t:"50 cities (month 2)",h:"",d:0},
-{id:"sc2",t:"100+ cities (month 3)",h:"",d:0},
-{id:"sc3",t:"200+ cities (month 6)",h:"",d:0},
-{id:"sc4",t:"5,000+ locations (year 2)",h:"",d:0},
-{id:"sc5",t:"2-3 blog posts/week",h:"From month 2.",d:0,due:"Ongoing"},
-{id:"sc6",t:"OTC product comparison articles",h:"1-2 per week once site is live.",d:0,due:"Ongoing"},
-{id:"sc7",t:"Seasonal content calendar",h:"See calendar tab. Missing Oct-Jan insurance window = real money lost.",d:0,due:"Ongoing"},
-]},
-{id:"maint",title:"Monthly maintenance",meta:"Recurring, do every month",badge:"a",desc:"Set a calendar reminder. These keep data accurate and SEO healthy.",items:[
-{id:"m1",t:"Spot-check 10 city pages for accuracy",h:"Verify hours, phones, addresses.",d:0,m:"30 min",due:"Monthly"},
-{id:"m2",t:"Review Google Analytics traffic trends",h:"",d:0,m:"15 min",due:"Monthly"},
-{id:"m3",t:"Check Search Console for errors",h:"Crawl errors, indexing, rankings.",d:0,m:"15 min",due:"Monthly"},
-{id:"m4",t:"Review all affiliate dashboards",h:"Log revenue per stream.",d:0,m:"20 min",due:"Monthly"},
-{id:"m5",t:"Update Wave Accounting",h:"Income + expenses.",d:0,m:"15 min",due:"Monthly"},
-{id:"m6",t:"Run PageSpeed Insights on 3 pages",h:"",d:0,m:"10 min",due:"Monthly"},
-{id:"m7",t:"Update WordPress + plugins",h:"Check for updates, apply, test.",d:0,m:"15 min",due:"Monthly"},
-{id:"m8",t:"Verify backups are running",h:"UpdraftPlus log.",d:0,m:"5 min",due:"Monthly"},
-]},
+// =====================================================================
+// DATA
+// =====================================================================
+
+const PHASES = [
+  {
+    id: 'legal',
+    title: 'Legal & Business Setup',
+    badge: 'Do first',
+    badgeColor: '#7c3aed',
+    badgeBg: '#f5f3ff',
+    borderColor: '#7c3aed',
+    isNew: true,
+    defaultOpen: true,
+    tasks: [
+      { id: 'l1', text: 'Form an LLC in your state', hint: 'LegalZoom ($79) or file directly with your state\'s Secretary of State ($50-150). Protects personal assets and establishes the business as a legal entity. Do this before signing any affiliate agreements.' },
+      { id: 'l2', text: 'Apply for an EIN (Employer Identification Number) at IRS.gov', hint: 'Free, takes 5 minutes online at irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online. You need your EIN to open a business bank account and file taxes. Do this immediately after forming the LLC.' },
+      { id: 'l3', text: 'Open a dedicated business bank account', hint: 'Mercury (mercury.com) and Relay are both free, online-first accounts built for LLCs. Never mix personal and business money - it complicates taxes and undermines the liability protection of the LLC.' },
+      { id: 'l4', text: 'Add non-affiliation disclaimer to site footer (appears on every page)', hint: 'Required language: "24HourPharmacy.com is an independent information resource. It is not affiliated with, endorsed by, or connected to Walgreens, CVS, Rite Aid, or any pharmacy chain, nor with Medicare, Medicaid, or any government drug program." Prevents confusion and potential legal issues.' },
+      { id: 'l5', text: 'Add FTC affiliate disclosure above the fold on every page with affiliate links', hint: 'FTC requires that affiliate disclosures are clear and conspicuous - meaning visible without scrolling. Suggested language: "This site earns commissions when you use links on our pages to find pharmacies, save on prescriptions, or access health services. This does not affect our recommendations or the prices you pay." Do not bury this in the footer.' },
+      { id: 'l6', text: 'Create /affiliate-disclosure/ page with full FTC disclosure text', hint: 'A dedicated page explaining all affiliate relationships - which programs, how commissions work, that recommendations are based on quality. Link from site footer. Required by most affiliate networks as part of their publisher agreement.' },
+      { id: 'l7', text: 'Create /privacy-policy/ page covering cookies, affiliate tracking, and analytics data', hint: 'Required for Google AdSense, most affiliate programs, and to comply with GDPR (EU) and CCPA (California). Must cover: what data you collect, affiliate tracking cookies, Google Analytics, user rights and opt-outs. Use Termly.io or iubenda to generate a solid starting draft, then review it.' },
+      { id: 'l8', text: 'Create /terms-of-service/ page', hint: 'Covers: limitations of liability, no medical advice disclaimer, accuracy of pharmacy data, permitted use of the site. Important for a YMYL health site to establish clear terms.' },
+      { id: 'l9', text: 'Add cookie consent banner for GDPR/CCPA compliance', hint: 'Use a free WordPress plugin: CookieYes, Complianz, or Usercentrics Cookiebot. Required to legally use Google Analytics and affiliate tracking cookies for EU visitors and to comply with California CCPA. Needed before applying to AdSense.' },
+      { id: 'l10', text: 'Create /about/ page with author bio, credentials, and origin story', hint: 'Critical for E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) on YMYL health content. Google explicitly evaluates "who is behind this website" for health queries. Include: your identity, why you built this, your research methodology, contact information. This page directly affects how Google ranks your health content.' },
+      { id: 'l11', text: 'Set up Wave Accounting with per-revenue-stream income categories', hint: 'Free at waveapps.com. Create income categories: Discount Card Commissions, Insurance Lead Revenue, Telehealth Referrals, Display Ad Revenue, Retail Pharmacy Affiliates, OTC/Amazon Affiliates. Create expense categories: Hosting/Tools, Paid Ad Spend. Track monthly so tax time is not a crisis.' },
+    ]
+  },
+  {
+    id: 'foundation',
+    title: 'Phase 0: Technical Foundation',
+    badge: 'Weeks 1-4',
+    badgeColor: '#475569',
+    badgeBg: '#f1f5f9',
+    borderColor: '#475569',
+    defaultOpen: true,
+    tasks: [
+      { id: 'f1', text: 'Purchase Hostinger Business hosting plan (minimum for custom plugins)', hint: 'Shared starter plans do not support the custom plugin architecture this site requires. Business plan minimum.' },
+      { id: 'f2', text: 'Confirm domain access with current owner and point DNS to Hostinger', hint: 'Domain is currently controlled externally. Once you have access, update the nameservers in the domain registrar to Hostinger\'s nameservers.' },
+      { id: 'f3', text: 'Install WordPress from Hostinger hPanel one-click installer' },
+      { id: 'f4', text: 'Install and activate GeneratePress theme' },
+      { id: 'f5', text: 'Deploy child theme from GitHub repo (Appearance > Themes > Add New > Upload)', hint: 'Upload the child theme zip built by Claude Code. Contains: single-city.php, front-page.php, archive-state.php, header.php, footer.php, style.css, functions.php.' },
+      { id: 'f6', text: 'Deploy custom plugin (24hr-pharmacy-tools) via Plugins > Add New > Upload', hint: 'Nine-file plugin architecture: custom post types, taxonomies, meta boxes, schema, shortcodes, settings page, rewrite rules, REST API endpoints. This is the core of the site.' },
+      { id: 'f7', text: 'Install RankMath SEO and complete setup wizard', hint: 'Free tier sufficient. Configure: site type (local business information), schema defaults, Google Search Console connection, sitemap settings.' },
+      { id: 'f8', text: 'Install WP Rocket or LiteSpeed Cache and configure', hint: 'WP Rocket ($59/yr) is easier to configure. LiteSpeed Cache is free but more complex. Either one dramatically improves Core Web Vitals. Required for ad network approval.' },
+      { id: 'f9', text: 'Install Wordfence (free) and enable firewall, brute force protection, 2FA', hint: 'Settings: lockout after 5 failed login attempts, enable 2FA for admin account, block XML-RPC (common attack vector you do not need), enable firewall. WordPress is the most attacked CMS on the internet.' },
+      { id: 'f10', text: 'Install UpdraftPlus and configure daily backups to Google Drive', hint: 'Free tier backs up to Google Drive. Settings: daily backup schedule, keep last 7 backups, back up database and files separately. Test a restore before the site goes live.' },
+      { id: 'f11', text: 'Set permalink structure to custom: /city/%postname%/ in Settings > Permalinks' },
+      { id: 'f12', text: 'Add security constants to wp-config.php: DISALLOW_FILE_EDIT, FORCE_SSL_ADMIN', hint: 'DISALLOW_FILE_EDIT prevents editing theme/plugin files through WordPress admin (major security risk). FORCE_SSL_ADMIN ensures all admin traffic uses HTTPS.' },
+      { id: 'f13', text: 'Set up Cloudflare (free tier) for CDN, DNS, and DDoS protection', hint: 'Add domain to Cloudflare, update nameservers at registrar. Enable: Auto Minify, Always Use HTTPS, Brotli compression. Test Rocket Loader carefully with React widgets - may need to exclude widget scripts.' },
+      { id: 'f14', text: 'Restrict Google Maps API key to 24hourpharmacy.com in Google Cloud Console', hint: 'Cloud Console > APIs & Services > Credentials > Edit key. HTTP referrer restrictions: 24hourpharmacy.com/*. API restrictions: Maps JavaScript API, Places API, Geocoding API only. The key is client-side visible, so restriction is essential.' },
+      { id: 'f15', text: 'Enter all API keys and affiliate codes in plugin Settings page (never in repo)', hint: 'The custom plugin has a Settings page in WP admin. Store Google Maps key, LowerMyRx BIN/PCN/Group, affiliate IDs. These get passed to React via wp_localize_script - keeps everything out of git.' },
+      { id: 'f16', text: 'Set up Google Analytics 4 and add tracking code', hint: 'Install via RankMath or a dedicated GA4 plugin. Create conversion events: affiliate_link_click, phone_tap, widget_interaction. You need conversion data before running any paid traffic.' },
+      { id: 'f17', text: 'Add site to Google Search Console and verify ownership', hint: 'Upload HTML verification file to root directory or use DNS TXT record. Submit sitemap URL (usually /sitemap.xml) after verification. Monitor weekly for crawl errors.' },
+      { id: 'f18', text: 'Add site to Microsoft Clarity for heatmaps and session recordings', hint: 'Free. Shows exactly where mobile users tap, scroll depth on city pages, rage clicks. Essential for understanding the 70%+ mobile audience. Install via plugin or paste snippet in header.' },
+      { id: 'f19', text: 'Set up UptimeRobot monitoring (free, 5-minute checks, email/SMS alerts)', hint: '2-minute setup at uptimerobot.com. Sends alert when site goes down. Downtime during peak insurance season (Oct-Jan) is expensive.' },
+    ]
+  },
+  {
+    id: 'launch',
+    title: 'Phase 1: Build & Launch',
+    badge: 'Months 1-3',
+    badgeColor: '#2563eb',
+    badgeBg: '#eff6ff',
+    borderColor: '#2563eb',
+    defaultOpen: false,
+    tasks: [
+      { id: 'b1', text: 'Build and deploy pharmacy finder React widget ([pharmacy_finder] shortcode live)' , hint: 'Uses browser Geolocation API + Google Places API to find nearby 24-hour pharmacies. Built via Claude Code, deployed as Vite IIFE bundle loaded by shortcode in WordPress.' },
+      { id: 'b2', text: 'Build and deploy discount card React widget ([discount_card] shortcode live)', hint: 'Branded card display with BIN/PCN/Group from affiliate partner. Print, save, text-to-phone actions. Primary monetization widget - every city page needs this.' },
+      { id: 'b3', text: 'Test all widgets at 375px mobile width (70%+ of traffic is mobile)', hint: 'Chrome DevTools > Toggle device toolbar > iPhone SE (375px). Test every interaction, scroll behavior, tap targets. Map must render correctly at mobile width.' },
+      { id: 'b4', text: 'Run PageSpeed Insights on city page template and achieve >90 mobile score', hint: 'Test at pagespeed.web.dev. Common issues: React widget bundles blocking render (must load async), unoptimized images, missing critical CSS. Ad network approval requires strong Core Web Vitals.' },
+      { id: 'b5', text: 'Verify Core Web Vitals: LCP <2.5s, CLS <0.1, INP <200ms', hint: 'Check in Search Console > Core Web Vitals report after indexing. LCP = main content loads fast. CLS = page doesn\'t shift as it loads. INP = responds quickly to taps. All three required for ad network approval.' },
+      { id: 'b6', text: 'Publish 10 city pages (top 10 US metros) with 500+ words of unique content each', hint: 'Top 10 metros: New York, Los Angeles, Chicago, Houston, Phoenix, Philadelphia, San Antonio, San Diego, Dallas, San Jose. Use programmatic pipeline for data, then write genuine city-specific content. No thin content.' },
+      { id: 'b7', text: 'Publish 5 core informational articles', hint: 'Suggested: (1) How prescription discount cards work and who should use them. (2) How to find a 24-hour pharmacy near you. (3) What to do when your pharmacy is closed. (4) Walgreens vs CVS 24-hour pharmacy comparison. (5) How to save on prescriptions without insurance.' },
+      { id: 'b8', text: 'Create all required pages: /disclaimer/, /affiliate-disclosure/, /privacy-policy/, /terms/, /about/', hint: 'These must be live before applying to AdSense. AdSense reviewers check for privacy policy and about page explicitly. /disclaimer/ must include the medical disclaimer text from the technical plan.' },
+      { id: 'b9', text: 'Apply for Google AdSense', hint: '10+ city pages and 5+ articles is typically sufficient for approval. Takes 1-2 weeks. $8-15 RPM on health content in phase 1. Required to be live on a real hosting account (not GitHub Pages or free hosting).' },
+      { id: 'b10', text: 'Sign up for LowerMyRx affiliate program', hint: 'Up to $4/fill + override commissions. Best per-use rate. Apply at affiliate.lowermyrx.com' },
+      { id: 'b11', text: 'Sign up for National Drug Card affiliate program', hint: '$2-2.50/fill. Good backup program. Apply at ndcaffiliate.com' },
+      { id: 'b12', text: 'Sign up for SingleCare Partners', hint: '$2.50 per signup. Apply at partners.singlecare.com' },
+      { id: 'b13', text: 'Apply for CJ Affiliate (Walgreens, CVS, Rite Aid, eHealthInsurance access)', hint: 'Apply as publisher at members.cj.com. Then apply to each advertiser individually: Walgreens (2%), Rite Aid (5.6%), eHealthInsurance ($10-75/app with 120-day cookie). eHealth is a major insurance lead gen source.' },
+      { id: 'b14', text: 'Apply for Impact (Hims, Ro, SingleCare access)', hint: 'Apply at app.impact.com. Then apply to: Hims/Hers ($50-100+/referral), Ro ($50-100+/referral). Telehealth is a high-commission vertical with strong off-hours intent match.' },
+      { id: 'b15', text: 'Apply for Amazon Associates', hint: 'amazon.com/associates. Covers OTC health products, pill organizers, blood pressure monitors, thermometers, supplements. Consistent, broad category.' },
+      { id: 'b16', text: 'Apply for iHerb Affiliates (10% commission)', hint: 'iherb.com/info/affiliates. Supplements and natural health products complement pharmacy content well.' },
+      { id: 'b17', text: 'Apply for MediaAlpha publisher account', hint: 'IMPORTANT: Do this now, before you have insurance content live. Account approval takes time. You must be approved and integrated before October when insurance leads spike 10-20x. Apply at mediaalpha.com/publishers/' },
+      { id: 'b18', text: 'Apply for EverQuote affiliate account', hint: 'Same logic as MediaAlpha. Get approved now so you are live for open enrollment. everquote.com/affiliates' },
+      { id: 'b19', text: 'Install Lasso for affiliate link management', hint: 'Wraps affiliate links through clean URLs (24hourpharmacy.com/go/lowermyrx). Easier to manage and update, better click tracking, cleaner FTC disclosure pages.' },
+      { id: 'b20', text: 'Install LinkWhisper for internal linking automation', hint: 'As city pages scale to 100+, LinkWhisper automatically suggests internal links between related content. Critical for passing link equity through the site and reducing crawl budget waste.' },
+      { id: 'b21', text: 'Submit XML sitemap to Google Search Console', hint: 'Sitemap URL is usually 24hourpharmacy.com/sitemap.xml (generated by RankMath). Submit in Search Console > Sitemaps. Resubmit after major content batches.' },
+    ]
+  },
+  {
+    id: 'geo',
+    title: 'GEO & AI Overviews Strategy',
+    badge: 'Parallel track',
+    badgeColor: '#0d9488',
+    badgeBg: '#f0fdfa',
+    borderColor: '#0d9488',
+    isNew: true,
+    defaultOpen: true,
+    tasks: [
+      { id: 'g1', text: 'Add FAQPage JSON-LD schema to every city page with 3-5 common questions', hint: 'AI Overviews appear in 87%+ of health and pharmacy queries - one of the highest rates of any niche. FAQ schema is the primary trigger for being pulled into AI Overviews. Example questions: "Is there a 24-hour Walgreens in [City]?" "What pharmacies are open at midnight in [City]?" "Can I fill a prescription at a 24-hour pharmacy without a prior relationship?" Answer each in 1-2 sentences.' },
+      { id: 'g2', text: 'Add HowTo structured data to all guide and instructional articles', hint: 'Articles like "How to Save on Prescriptions Without Insurance" should use HowTo schema with numbered steps. This format is heavily cited in both AI Overviews and LLM-generated answers to process questions.' },
+      { id: 'g3', text: 'Add MedicalWebPage schema type to health content pages', hint: 'Signals to Google and LLMs that this is health-related content written with editorial care. Combine with Person schema on the About page. Significantly improves YMYL trust signals and E-E-A-T evaluation.' },
+      { id: 'g4', text: 'Audit all city page H2s: rewrite as questions answered fully in the first 2 sentences', hint: 'LLMs and AI Overviews cite pages that answer questions immediately. Instead of "Pharmacy Hours in Houston" use "Are there 24-hour pharmacies in Houston?" followed by a direct answer in the first sentence. This is the single highest-leverage GEO change you can make.' },
+      { id: 'g5', text: 'Update CLAUDE.md: all new content must use question-based H2s answered in opening sentences', hint: 'Add this as a hard requirement in CLAUDE.md so every article and city page generated by Claude Code follows the pattern. Much cheaper to build in from the start than to retrofit 100+ pages later.' },
+      { id: 'g6', text: 'Establish Reddit presence in r/personalfinance answering prescription cost questions', hint: 'No self-promotion in early posts. Search the sub for "prescription" questions and provide genuinely helpful answers (GoodRx vs discount cards, generic substitution, finding cheapest pharmacy). After 10+ helpful posts build credibility, mention the site when directly relevant. Reddit content is indexed by Google and cited heavily by LLMs.' },
+      { id: 'g7', text: 'Establish presence in r/Frugal with pharmacy savings and discount card tips', hint: 'Same approach as r/personalfinance. Posts about comparing prescription prices across pharmacies, which discount programs actually save the most, finding 24-hour pharmacies during emergencies. Add value first.' },
+      { id: 'g8', text: 'Establish presence in r/ChronicIllness answering prescription cost questions', hint: 'High-pain audience with ongoing medication needs - exactly your user. Questions like "what\'s the cheapest way to get [medication] without insurance" come up constantly. Genuine help here builds real community trust and high-quality organic backlinks.' },
+      { id: 'g9', text: 'Answer 10 Quora questions on drug pricing, pharmacy hours, and discount card topics', hint: 'Search Quora for: "prescription discount cards", "finding 24-hour pharmacy", "saving on medications without insurance". Write substantive answers (300+ words) that are genuinely useful. Quora content ranks in Google and gets scraped by LLMs as training data and citation sources.' },
+      { id: 'g10', text: 'Sign up for HARO and respond to healthcare/savings journalist requests', hint: 'Free at helpareporter.com. Monitor Health & Fitness and Business/Finance categories. When journalists ask about pharmacy costs, prescription savings, or drug pricing, respond with expert commentary. One media mention = potentially dozens of high-authority backlinks and LLM citation credibility.' },
+      { id: 'g11', text: 'Conduct first LLM brand test: ask ChatGPT, Perplexity, and Gemini key pharmacy queries', hint: 'Ask each AI: "Where can I find 24-hour pharmacies near me?" "How do I save money on prescriptions?" "What is a prescription discount card and how does it work?" Document exactly what sites get cited. This is your baseline. Run quarterly to track whether your content strategy is earning citations.' },
+      { id: 'g12', text: 'Create quarterly LLM citation tracking spreadsheet', hint: 'Columns: Date tested, Query asked, Sites cited by ChatGPT, Sites cited by Perplexity, Sites cited by Gemini, Was 24hourpharmacy.com cited? Update quarterly. If competitors consistently get cited and you do not, that identifies content gaps to close.' },
+    ]
+  },
+  {
+    id: 'scale',
+    title: 'Phase 2: Content Scale',
+    badge: 'Months 2-6',
+    badgeColor: '#16a34a',
+    badgeBg: '#f0fdf4',
+    borderColor: '#16a34a',
+    defaultOpen: false,
+    tasks: [
+      { id: 's1', text: 'Expand to 50 city pages using the Python data pipeline + REST API', hint: 'Use the programmatic pipeline to create drafts, then add 500+ words of genuine editorial content per city. Do not publish thin pages - Google YMYL evaluation penalizes low-quality health content.' },
+      { id: 's2', text: 'Expand to 100+ city pages' },
+      { id: 's3', text: 'Publish 2-3 informational articles per week', hint: 'Focus on high commercial intent: "best prescription discount card 2026", "how to fill prescription without insurance", "GoodRx vs [competitor]". These drive the highest affiliate conversion rates.' },
+      { id: 's4', text: 'Write ACA open enrollment guide (publish by September 1 to index before October)', hint: 'Highest-RPV content window. Cover: ACA marketplace basics, how to compare plans, pharmacy benefit tiers, what to do if you miss enrollment. Link to eHealthInsurance via CJ Affiliate throughout. Must be indexed and ranking before Oct 1 when insurance traffic spikes.' },
+      { id: 's5', text: 'Write Medicare Part D pharmacy guide (publish by September 1)', hint: 'Medicare open enrollment Oct 15 - Dec 7. Cover: how Part D works, choosing a plan based on your specific medications, the coverage gap ("donut hole"), Extra Help for low-income seniors.' },
+      { id: 's6', text: 'Write flu season guide with OTC medication comparisons (publish August)', hint: 'Cover: flu shot availability at chain pharmacies, best OTC cold/flu medications, when to go urgent care vs pharmacy. Link OTC products via Amazon Associates. Must be live before flu season traffic peaks.' },
+      { id: 's7', text: 'Write Thanksgiving pharmacy hours article (publish 2 weeks before Thanksgiving)', hint: '"Is Walgreens open Thanksgiving?" is one of the highest pharmacy search queries of the year. Cover all major chains with verified hours. High traffic, high ad RPM, highly shareable.' },
+      { id: 's8', text: 'Write Christmas and New Year\'s pharmacy hours article (publish December 1)' },
+      { id: 's9', text: 'Write allergy season content: OTC antihistamine comparison (publish February for April traffic)', hint: 'Claritin vs Zyrtec vs Allegra vs generic alternatives. Price comparison at major chains. Evergreen content that peaks annually. Amazon Associates for OTC product links.' },
+      { id: 's10', text: 'Write summer travel pharmacy guide', hint: '"Finding a Pharmacy on Vacation", "What to Do If You Lose Your Prescription While Traveling", "How to Transfer a Prescription to Another State". Highly shareable, builds links.' },
+      { id: 's11', text: 'Write back-to-school vaccination and prescription needs guide', hint: 'School vaccination requirements by state, getting vaccinations at a pharmacy vs doctor\'s office, back-to-school health checklist. August traffic, links well to Amazon for health supplies.' },
+      { id: 's12', text: 'Write "Tax Deductions for Prescription Costs" article (publish January)', hint: 'Targets tax season search traffic in Jan-April. People searching for health deductions are exactly the audience who needs discount cards and insurance comparison content.' },
+      { id: 's13', text: 'Build email list with MailerLite and create lead magnet', hint: 'Lead magnet: a one-page "Pharmacy Savings Card" PDF showing how to combine discount cards, manufacturer coupons, and generic substitutions. Simple to create, high perceived value. Email list = traffic you own. If Google algo shifts, subscribers come back direct.' },
+      { id: 's14', text: 'Apply to Mediavine or Raptive when hitting 25,000+ monthly sessions', hint: 'Mediavine: 50K sessions minimum (sometimes 25K for health niche). Raptive: 100K monthly pageviews, but $30-55 RPM for health content vs AdSense\'s $8-15. Apply to both, take the best offer.' },
+      { id: 's15', text: '[PAID] Google Ads: launch to discount card and pharmacy finder pages once organic conversion rate is established', isNew: true, hint: 'New paid channel. Do not run paid traffic until you know your baseline organic CTR from page to affiliate link (target: 2%+). Once proven, Google search ads to "prescription discount card" and "pharmacy open near me" can profitably scale what already converts. Start: $10-15/day, single campaign, tight keyword match.' },
+      { id: 's16', text: '[PAID] Pinterest Ads: promote seasonal content to health-conscious demographics', isNew: true, hint: 'New paid channel. Pinterest skews 70%+ female and is heavily used for health research. Flu season guide, open enrollment guide, and pharmacy savings content perform well. Promoted pins to Health/Wellness audience. Test budget: $5-10/day. Lower intent than search but very cheap CPM.' },
+      { id: 's17', text: '[PAID] Meta Retargeting: target visitors who viewed discount card or insurance pages without clicking', isNew: true, hint: 'New paid channel. Install Meta Pixel. Build custom audience: visited /savings/discount-card/ or any insurance content page, did not click affiliate link. Retarget with direct benefit message: "Get your free prescription savings card." Often highest ROAS of any paid channel because intent is already proven.' },
+    ]
+  },
+  {
+    id: 'optimize',
+    title: 'Phase 3: Monetization Optimization',
+    badge: 'Months 6-12',
+    badgeColor: '#d97706',
+    badgeBg: '#fffbeb',
+    borderColor: '#d97706',
+    defaultOpen: false,
+    tasks: [
+      { id: 'o1', text: 'A/B test discount card widget placement (above fold vs mid-page vs both)', hint: 'Use Google Optimize or simple date-based tracking in GA4. Track affiliate link clicks as conversion events. Even a 20% improvement in placement converts significantly at scale.' },
+      { id: 'o2', text: 'A/B test insurance lead CTA copy and button placement on city pages', hint: 'Test: "No insurance? Compare plans from $0/mo" vs "Find health insurance in [City]" vs sidebar widget vs inline CTA. Insurance leads pay $10-75 each. Getting this CTA right is very high value.' },
+      { id: 'o3', text: 'Review and optimize top 20 city pages for affiliate conversion', hint: 'Sort by traffic in GA4. For high-traffic pages with low affiliate click rates: check Clarity heatmaps for scroll depth, verify discount card widget is visible on mobile, evaluate CTA copy strength.' },
+      { id: 'o4', text: 'Build drug price comparison pages (programmatic, high commercial intent)', hint: '"Metformin price at CVS vs Walgreens vs Rite Aid vs GoodRx vs discount card." Extremely high commercial intent. Pulls both pharmacy finder traffic and prescription savings traffic into one page.' },
+      { id: 'o5', text: 'Optimize ad layout for RPM with Mediavine/Raptive (test sticky sidebar, in-content, anchor)', hint: 'Your ad network rep can advise on layout. Health content often performs well with in-content ads between city page sections and mobile anchor ads. Raptive has a layout optimization tool.' },
+      { id: 'o6', text: 'Build telehealth referral content hub at /telehealth/', hint: 'The person searching for a pharmacy at 2am who cannot find one is a perfect telehealth referral. Build: comparison of telehealth services, "when is telehealth better than the pharmacy", specific pages for high-commission verticals (GLP-1/weight loss, mental health, birth control via Nurx/Hims/Ro).' },
+      { id: 'o7', text: 'Negotiate higher commission tiers with LowerMyRx and NDC based on referral volume', hint: 'After 6 months of sending referrals, contact affiliate managers and show your monthly volume. Many programs have undisclosed tiered rates for top affiliates. You do not get what you do not ask for.' },
+      { id: 'o8', text: 'Add direct advertising landing page for independent pharmacies ($50-200/mo featured placement)', hint: 'Create /advertise/ with a simple pitch for independent pharmacies to get featured on their local city pages. Start outreach by email to 20 pharmacies in your highest-traffic cities. One advertiser at $100/mo is meaningful early revenue with zero affiliate dependency.' },
+      { id: 'o9', text: 'Apply to Raptive if not on a premium ad network (100K+ monthly pageviews, $30-55 RPM health)', hint: 'Raptive tends to outperform Mediavine on health content RPM. Worth applying once eligible - the RPM improvement from AdSense to Raptive is typically 3-4x.' },
+      { id: 'o10', text: 'Review affiliate program mix based on 6 months of conversion data', hint: 'Which programs are actually converting with your audience? Cut underperformers, increase focus on what works. Affiliate programs that sounded good in theory don\'t always perform in practice.' },
+    ]
+  },
+  {
+    id: 'growth',
+    title: 'Phase 4: Scale',
+    badge: 'Year 2+',
+    badgeColor: '#dc2626',
+    badgeBg: '#fef2f2',
+    borderColor: '#dc2626',
+    defaultOpen: false,
+    tasks: [
+      { id: 'gr1', text: 'Expand to 5,000+ location pages (suburb and neighborhood level)', hint: 'At this scale, the data pipeline needs to be robust and largely automated. Suburb-level pages often have higher conversion intent ("24-hour pharmacy in Midtown Manhattan" vs "pharmacy in New York City").' },
+      { id: 'gr2', text: 'Build open now checker widget ([open_now_checker] shortcode)', hint: 'Input: pharmacy name + zip code. Output: open/closed right now + today\'s hours via Google Places API. Already planned in the technical architecture.' },
+      { id: 'gr3', text: 'Build drug price checker widget ([price_checker] shortcode)', hint: 'Drug name + zip code -> price comparison grid across nearby pharmacies with and without discount card. High-intent commercial tool. Partner with an RxPricing API or build on GoodRx data.' },
+      { id: 'gr4', text: 'Evaluate PWA (Progressive Web App) conversion for mobile', hint: 'A PWA can be "installed" on a phone like an app, enables push notifications (pharmacy hours alerts, open enrollment reminders), works partially offline. Worth evaluating when you have a returning user base to justify the investment.' },
+      { id: 'gr5', text: 'Begin direct advertising outreach to independent pharmacies', hint: 'Target pharmacies in highest-traffic cities first. Simple pitch: "24HourPharmacy.com gets X visitors per month in [City]. Featured placement = $X/mo." Start small, prove the model, then scale outreach.' },
+      { id: 'gr6', text: 'Evaluate hiring a licensed pharmacist or pharmacy tech as content advisor', hint: 'The single biggest E-E-A-T upgrade possible on a YMYL health site. Even 5 hours/month to review content and add a "Reviewed by [PharmD name]" byline fundamentally changes how Google evaluates the site. Worth pursuing at $2K+/mo revenue.' },
+      { id: 'gr7', text: 'Build email automation sequences for different user segments', hint: 'Discount card users: how to maximize savings, generic substitution tips, pharmacy loyalty programs. Insurance searchers (Oct-Jan): open enrollment countdown, plan comparison guides, enrollment deadline reminders.' },
+      { id: 'gr8', text: 'Evaluate consolidating React widgets into a shared bundle', hint: 'Once you have 4+ widgets live on the same pages, loading separate Vite IIFE bundles per widget adds page weight. A shared bundle reduces total JS significantly and improves Core Web Vitals at scale.' },
+    ]
+  },
 ];
 
-let S={},F="all",Q="";
-const K="24hp2";
-function load(){try{const v=localStorage.getItem(K);if(v)S=JSON.parse(v);else init();}catch(e){init();}}
-function init(){S={};D.forEach(s=>s.items.forEach(i=>{S[i.id]={d:!!i.d,n:""};}));save();}
-function save(){localStorage.setItem(K,JSON.stringify(S));}
-function bc(b){return{a:"ba",b:"bb",d:"bd",l:"bl"}[b]||"ba";}
-function bt(s){if(s.bT)return s.bT;return{a:"In progress",b:"Blocked",d:"Complete",l:"Later"}[s.badge]||"";}
-function ss(s){let t=s.items.length,d=0;s.items.forEach(i=>{if(S[i.id]&&S[i.id].d)d++;});return{t,d,p:t?Math.round(d/t*100):0};}
-function gs(){let t=0,d=0;D.forEach(s=>s.items.forEach(i=>{t++;if(S[i.id]&&S[i.id].d)d++;}));return{t,d,p:t?Math.round(d/t*100):0};}
-function na(){const a=[];const pr=["legal","hosting","deploy","plugins","content","analytics","gcloud","finder","pipeline","s1","s2","s3","s4","s5","s6"];
-for(const id of pr){const s=D.find(x=>x.id===id);if(!s)continue;const n=s.items.find(i=>!(S[i.id]&&S[i.id].d));if(n)a.push({s:s.title,i:n});if(a.length>=4)break;}return a;}
-function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
-
-function matchQ(item,sec){
-  if(!Q)return true;
-  const q=Q.toLowerCase();
-  const txt=(item.t+" "+(item.h||"")+" "+sec.title).toLowerCase();
-  return txt.includes(q);
-}
-
-function render(){
-const c=document.getElementById("sc");c.innerHTML="";
-D.forEach(s=>{
-const st=ss(s);const cl=localStorage.getItem("24hc2-"+s.id)==="1";
-const hasMatch=Q?s.items.some(i=>matchQ(i,s)):true;
-const e=document.createElement("div");
-e.className="sec"+(cl?" shut":"")+(hasMatch?"":" match-no");
-let bg=`<span class="bg ${bc(s.badge)}">${st.p===100?"Complete":bt(s)}</span>`;
-e.innerHTML=`<div class="sh"><div class="sv"><svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 1l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div class="si"><div class="st">${s.title}</div><div class="sm">${s.meta}</div></div>${bg}<div class="sp"><div class="sf" style="width:${st.p}%"></div></div><div class="spct">${st.p}%</div></div><div class="sb">${s.desc?`<div class="sd">${s.desc}</div>`:""}${s.items.map(i=>ri(i,s)).join("")}</div>`;
-e.querySelector(".sh").onclick=()=>{e.classList.toggle("shut");localStorage.setItem("24hc2-"+s.id,e.classList.contains("shut")?"1":"0");};
-c.appendChild(e);
-});bindAll();ug();un();
-}
-
-function ri(i,sec){
-const s=S[i.id]||{d:0,n:""};
-const hd=(F==="rem"&&s.d)||(F==="dn"&&!s.d)||!matchQ(i,sec);
-let badges="";
-if(i.m)badges+=`<span class="im">${i.m}</span>`;
-if(i.due)badges+=`<span class="idue">${i.due}</span>`;
-return`<div class="it${s.d?" dn":""}${hd?" hd":""}" data-id="${i.id}"><div class="ck${s.d?" on":""}" data-id="${i.id}"></div><div class="ic"><div class="il"><div class="ix">${i.t}</div>${badges}</div>${i.h?`<div class="ih">${i.h}</div>`:""}${s.n?`<div class="ins" id="ns-${i.id}">${esc(s.n)}<span class="ine" data-id="${i.id}">edit</span></div>`:`<span class="ie" data-id="${i.id}">+ note</span>`}<div class="ina" id="na-${i.id}"><textarea class="ini" id="ni-${i.id}" placeholder="Add a note...">${esc(s.n)}</textarea><span class="isv" data-id="${i.id}">Save</span></div></div></div>`;
-}
-
-function bindAll(){
-document.querySelectorAll(".ck").forEach(el=>{el.onclick=e=>{e.stopPropagation();const id=el.dataset.id;S[id].d=!S[id].d;save();render();};});
-document.querySelectorAll(".ie").forEach(el=>{el.onclick=e=>{e.stopPropagation();const id=el.dataset.id;document.getElementById("na-"+id).style.display="block";el.style.display="none";document.getElementById("ni-"+id).focus();};});
-document.querySelectorAll(".isv").forEach(el=>{el.onclick=e=>{e.stopPropagation();const id=el.dataset.id;S[id].n=document.getElementById("ni-"+id).value.trim();save();render();};});
-document.querySelectorAll(".ine").forEach(el=>{el.onclick=e=>{e.stopPropagation();const id=el.dataset.id;document.getElementById("na-"+id).style.display="block";const ns=document.getElementById("ns-"+id);if(ns)ns.style.display="none";document.getElementById("ni-"+id).focus();};});
-}
-function ug(){const g=gs();document.getElementById("gp").textContent=g.p+"%";document.getElementById("gf").style.width=g.p+"%";}
-function un(){const a=na();const el=document.getElementById("ni");if(!a.length){el.innerHTML=`<div class="nx-e">All priority items done!</div>`;return;}
-el.innerHTML=a.map(x=>{const tm=x.i.m?`<span class="nx-time">(${x.i.m})</span>`:"";return`<div class="nx-i"><div class="nx-d"></div><div><b>${x.s}:</b> ${x.i.t.replace(/<\/?b>/g,"")} ${tm}</div></div>`;}).join("");}
-
-// Tabs
-document.querySelectorAll(".tab").forEach(t=>{t.onclick=()=>{document.querySelectorAll(".tab").forEach(x=>x.classList.remove("on"));t.classList.add("on");document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));document.getElementById("pane-"+t.dataset.p).classList.add("on");};});
-
-// Filters
-document.querySelectorAll(".fb").forEach(b=>{b.onclick=()=>{document.querySelectorAll(".fb").forEach(x=>x.classList.remove("on"));b.classList.add("on");F=b.dataset.f;render();};});
-
-// Search
-document.getElementById("srch").oninput=e=>{Q=e.target.value;render();};
-
-// Reset
-document.getElementById("rbtn").onclick=()=>{if(confirm("Reset everything?")){localStorage.removeItem(K);D.forEach(s=>s.items.forEach(i=>i.d=0));const orig=["thm","plg","dcw","f1","f2","c1","c2","c3","c4","c5","c6"];init();orig.forEach(id=>{if(S[id])S[id].d=true;});save();render();}};
-
-// Export
-document.getElementById("xb").onclick=()=>{
-let txt="24HOURPHARMACY.COM - EXPORT\n"+"=".repeat(40)+"\n\n";
-D.forEach(s=>{const st=ss(s);txt+=`\n## ${s.title} (${st.p}%)\n`;s.items.forEach(i=>{const si=S[i.id]||{d:0,n:""};txt+=`${si.d?"[x]":"[ ]"} ${i.t.replace(/<\/?b>/g,"")}\n`;if(si.n)txt+=`    Note: ${si.n}\n`;});});
-const b=new Blob([txt],{type:"text/plain"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="24hr-plan-export.txt";a.click();
-};
-
-// Metrics
-const MK="24hp-met";
-let met={};
-try{const v=localStorage.getItem(MK);if(v)met=JSON.parse(v);}catch(e){met={};}
-const mFields=[
-{id:"pageviews",l:"Pageviews"},
-{id:"sessions",l:"Sessions"},
-{id:"discount_fills",l:"Discount card fills"},
-{id:"ad_revenue",l:"Ad revenue ($)"},
-{id:"affiliate_revenue",l:"Affiliate revenue ($)"},
-{id:"insurance_leads",l:"Insurance leads"},
-{id:"telehealth_refs",l:"Telehealth referrals"},
-{id:"otc_affiliate",l:"OTC/health affiliate ($)"},
-{id:"email_subs",l:"Email subscribers"},
-{id:"total_revenue",l:"Total revenue ($)"},
-{id:"expenses",l:"Expenses ($)"},
-{id:"profit",l:"Profit ($)"},
+const MILESTONES = [
+  { id: 'ms1', text: 'LLC formed and EIN received' },
+  { id: 'ms2', text: 'WordPress live with child theme + plugin' },
+  { id: 'ms3', text: 'First city page published' },
+  { id: 'ms4', text: 'All 10 launch city pages live' },
+  { id: 'ms5', text: 'AdSense approved' },
+  { id: 'ms6', text: 'First affiliate commission earned' },
+  { id: 'ms7', text: '1,000 monthly organic sessions' },
+  { id: 'ms8', text: '10,000 monthly pageviews' },
+  { id: 'ms9', text: 'First $100 revenue month' },
+  { id: 'ms10', text: '25,000 monthly sessions (ad network threshold)' },
+  { id: 'ms11', text: 'Accepted to Mediavine or Raptive' },
+  { id: 'ms12', text: 'First insurance lead commission (Oct-Jan)' },
+  { id: 'ms13', text: '100 city pages published' },
+  { id: 'ms14', text: 'Email list reaches 500 subscribers' },
+  { id: 'ms15', text: 'First $500 revenue month' },
+  { id: 'ms16', text: 'First $1,000 revenue month' },
+  { id: 'ms17', text: 'First $2,000 revenue month' },
+  { id: 'ms18', text: 'First direct advertiser signed' },
+  { id: 'ms19', text: 'First $5,000 revenue month' },
 ];
-const months=[];const now=new Date();for(let i=0;i<12;i++){const d=new Date(now.getFullYear(),now.getMonth()-i,1);months.push(d.toISOString().slice(0,7));}
-let curMonth=months[0];
-function renderMet(){
-const mr=document.getElementById("met-months");
-mr.innerHTML=months.slice(0,8).map(m=>`<button class="met-m${m===curMonth?" on":""}" data-m="${m}">${m}</button>`).join("");
-mr.querySelectorAll(".met-m").forEach(b=>{b.onclick=()=>{curMonth=b.dataset.m;renderMet();};});
-const mg=document.getElementById("met-grid");
-const md=met[curMonth]||{};
-mg.innerHTML=mFields.map(f=>`<div class="met-card"><div class="met-lab">${f.l}</div><div class="met-val"><input class="met-inp" data-f="${f.id}" value="${md[f.id]||""}" placeholder="-" /></div></div>`).join("");
-mg.querySelectorAll(".met-inp").forEach(inp=>{
-inp.onchange=()=>{if(!met[curMonth])met[curMonth]={};met[curMonth][inp.dataset.f]=inp.value;localStorage.setItem(MK,JSON.stringify(met));};
+
+const LINK_GROUPS = [
+  {
+    title: 'Your site',
+    links: [
+      { abbr:'WP', label:'WordPress admin', desc:'Content, pages, settings', url:'https://24hourpharmacy.com/wp-admin/', color:'#2563eb' },
+      { abbr:'H', label:'Hostinger hPanel', desc:'Hosting, files, SSL', url:'https://hpanel.hostinger.com/', color:'#673de6' },
+      { abbr:'GH', label:'GitHub repo', desc:'Source code', url:'https://github.com/micahbank2/24hourpharmacy', color:'#1f2937' },
+      { abbr:'CF', label:'Cloudflare', desc:'CDN, DNS, security', url:'https://dash.cloudflare.com/', color:'#f6821f' },
+    ]
+  },
+  {
+    title: 'Analytics',
+    links: [
+      { abbr:'GA', label:'Google Analytics 4', desc:'Traffic, events', url:'https://analytics.google.com/', color:'#e37400' },
+      { abbr:'SC', label:'Search Console', desc:'Rankings, indexing, CWV', url:'https://search.google.com/search-console', color:'#4285f4' },
+      { abbr:'MC', label:'Microsoft Clarity', desc:'Heatmaps, recordings', url:'https://clarity.microsoft.com/', color:'#0078d4' },
+      { abbr:'PS', label:'PageSpeed Insights', desc:'Core Web Vitals', url:'https://pagespeed.web.dev/', color:'#34a853' },
+      { abbr:'UR', label:'UptimeRobot', desc:'Uptime monitoring', url:'https://app.uptimerobot.com/', color:'#3bd671' },
+    ]
+  },
+  {
+    title: 'Discount card affiliates',
+    links: [
+      { abbr:'LM', label:'LowerMyRx', desc:'Up to $4/fill', url:'https://affiliate.lowermyrx.com/', color:'#16a34a' },
+      { abbr:'ND', label:'National Drug Card', desc:'$2-2.50/fill', url:'https://ndcaffiliate.com/', color:'#0d9488' },
+      { abbr:'SC', label:'SingleCare Partners', desc:'$2.50/signup', url:'https://partners.singlecare.com/', color:'#7c3aed' },
+    ]
+  },
+  {
+    title: 'Pharmacy retail affiliates',
+    links: [
+      { abbr:'CJ', label:'CJ Affiliate', desc:'Walgreens, CVS, Rite Aid, eHealth', url:'https://members.cj.com/', color:'#1d4ed8' },
+      { abbr:'IM', label:'Impact', desc:'SingleCare, Hims, Ro', url:'https://app.impact.com/', color:'#0891b2' },
+      { abbr:'RK', label:'Rakuten Advertising', desc:'Walgreens (alt)', url:'https://rakutenadvertising.com/', color:'#cc0000' },
+      { abbr:'AZ', label:'Amazon Associates', desc:'Pharmacy, OTC, devices', url:'https://affiliate-program.amazon.com/', color:'#ff9900' },
+    ]
+  },
+  {
+    title: 'Insurance lead gen (peak Oct-Jan)',
+    links: [
+      { abbr:'MA', label:'MediaAlpha', desc:'Health insurance leads, $50-200/lead', url:'https://mediaalpha.com/publishers/', color:'#6366f1' },
+      { abbr:'EQ', label:'EverQuote', desc:'Insurance lead gen', url:'https://www.everquote.com/affiliates/', color:'#0ea5e9' },
+      { abbr:'EH', label:'eHealth Partners', desc:'ACA/Medicare, $10-75/app', url:'https://ehealthinsurance.com/info/site-publisher', color:'#0369a1' },
+    ]
+  },
+  {
+    title: 'Telehealth affiliates',
+    links: [
+      { abbr:'TD', label:'Teladoc', desc:'Telehealth referrals', url:'https://www.teladoc.com/partners/', color:'#16a34a' },
+      { abbr:'MD', label:'MDLive', desc:'Urgent care telehealth', url:'https://www.mdlive.com/affiliates/', color:'#0d9488' },
+      { abbr:'AC', label:'Amazon Clinic', desc:'Amazon telehealth', url:'https://clinic.amazon.com/', color:'#ff9900' },
+      { abbr:'NX', label:'Nurx (PerformCB)', desc:'$25-75/lead', url:'https://www.performcb.com/', color:'#7c3aed' },
+    ]
+  },
+  {
+    title: 'Health and beauty OTC',
+    links: [
+      { abbr:'IH', label:'iHerb Affiliates', desc:'Supplements, 10% commission', url:'https://www.iherb.com/info/affiliates/', color:'#16a34a' },
+      { abbr:'VC', label:'Vitacost', desc:'Natural health products', url:'https://www.vitacost.com/affiliate-program/', color:'#65a30d' },
+      { abbr:'VS', label:'Vitamin Shoppe', desc:'Supplement affiliate', url:'https://www.vitaminshoppe.com/c/affiliate-program/', color:'#dc2626' },
+    ]
+  },
+  {
+    title: 'Ads',
+    links: [
+      { abbr:'AS', label:'Google AdSense', desc:'Display ads, phase 1', url:'https://www.google.com/adsense/', color:'#4285f4' },
+      { abbr:'RP', label:'Raptive', desc:'Premium ads (25K+ pvs)', url:'https://www.raptive.com/', color:'#dc2626' },
+    ]
+  },
+  {
+    title: 'AI tools',
+    links: [
+      { abbr:'AI', label:'Claude', desc:'Content, strategy, coding', url:'https://claude.ai/', color:'#d97706' },
+      { abbr:'SF', label:'Surfer SEO', desc:'Content optimization vs. SERP', url:'https://surferseo.com/', color:'#0d9488' },
+      { abbr:'AH', label:'Ahrefs', desc:'SEO, keyword research', url:'https://ahrefs.com/', color:'#ff9900' },
+      { abbr:'MK', label:'Make.com', desc:'No-code automation ($9/mo)', url:'https://make.com/', color:'#6366f1' },
+      { abbr:'LW', label:'LinkWhisper', desc:'Internal linking automation', url:'https://linkwhisper.com/', color:'#7c3aed' },
+      { abbr:'ID', label:'Ideogram', desc:'AI image generation', url:'https://ideogram.ai/', color:'#1f2937' },
+    ]
+  },
+  {
+    title: 'Business ops',
+    links: [
+      { abbr:'WV', label:'Wave Accounting', desc:'Bookkeeping, invoices', url:'https://www.waveapps.com/', color:'#16a34a' },
+      { abbr:'ML', label:'MailerLite', desc:'Email marketing', url:'https://app.mailerlite.com/', color:'#0d9488' },
+      { abbr:'GC', label:'Google Cloud Console', desc:'Maps API, billing', url:'https://console.cloud.google.com/', color:'#4285f4' },
+      { abbr:'IR', label:'IRS EIN Application', desc:'Free, 5 minutes', url:'https://www.irs.gov/businesses/small-businesses-self-employed/apply-for-an-employer-identification-number-ein-online', color:'#1f2937' },
+      { abbr:'CV', label:'Canva', desc:'Graphics, social images', url:'https://www.canva.com/', color:'#00c4cc' },
+    ]
+  },
+];
+
+const MONTHS_COLS = [
+  'Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26',
+  'Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26',
+  'Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27',
+];
+
+const METRIC_ROWS = [
+  { section: 'Traffic & Audience' },
+  { id:'organic_sessions', label:'Organic Sessions', hint:'Google Search Console or GA4. Primary traffic source.' },
+  { id:'pageviews', label:'Total Pageviews', hint:'Ad RPM is calculated on pageviews. Track alongside sessions.' },
+  { id:'city_pages', label:'City Pages Live (#)', hint:'Count of published (not draft) city pages. Track growth rate.' },
+  { id:'email_subs', label:'Email Subscribers (#)', isNew:true, hint:'NEW: Your email list is traffic you own. If Google algorithm shifts, subscribers come back direct. Build it from day one alongside SEO.' },
+  { section: 'Revenue' },
+  { id:'adsense', label:'Google AdSense ($)', hint:'Phase 1 display revenue. Expect $8-15 RPM for health content.' },
+  { id:'premium_ads', label:'Mediavine / Raptive ($)', hint:'Phase 2+ premium ad revenue. $20-55 RPM health content - major upgrade from AdSense.' },
+  { id:'discount_cards', label:'Discount Card Commissions ($)', hint:'LowerMyRx, NDC, SingleCare. Per-fill commissions accumulate over time as affiliate codes stay in pharmacy systems.' },
+  { id:'insurance', label:'Insurance Lead Revenue ($)', hint:'MediaAlpha, EverQuote, eHealthInsurance. Spikes 10-20x Oct-Jan. Highest revenue-per-visitor window.' },
+  { id:'telehealth', label:'Telehealth Revenue ($)', hint:'Nurx, Hims, Ro, Teladoc. $25-100 per qualified referral. Off-hours pharmacy traffic converts well.' },
+  { id:'retail_pharma', label:'Retail Pharmacy Affiliates ($)', hint:'Walgreens (2%), Rite Aid (5.6%), CVS via CJ Affiliate.' },
+  { id:'otc_amazon', label:'OTC / Amazon Associates ($)', hint:'Health products, pill organizers, thermometers, supplements. Broad and consistent.' },
+  { id:'total_revenue', label:'Total Revenue ($)', hint:'Sum of all revenue streams. The headline number.' },
+  { section: 'Expenses' },
+  { id:'paid_spend', label:'Paid Ad Spend ($)', isNew:true, hint:'NEW: Track Google Ads, Pinterest Ads, and Meta retargeting spend separately. Keep below 20% of revenue until ROAS is proven on each channel. Do not run paid traffic before organic conversion rates are established.' },
+  { id:'hosting_tools', label:'Hosting + Tools ($)', hint:'Hostinger, Cloudflare, LinkWhisper, Surfer SEO, WP Rocket, etc. Fixed monthly overhead.' },
+  { id:'net', label:'Net Profit ($)', hint:'Total Revenue minus all expenses. The number that determines whether this is a business.' },
+];
+
+const CALENDAR_MONTHS = [
+  {
+    id:'jan',
+    title:'January',
+    tags:['revenue','tax'],
+    events:[
+      { type:'tax', text:'Q4 estimated tax payment due Jan 15' },
+      { type:'revenue', text:'ACA open enrollment ends Jan 15 - last push for insurance content' },
+      { type:'seo', text:"New Year's pharmacy hours article should already be live" },
+      { type:'revenue', text:"Post-holiday OTC clearance - Walgreens/CVS affiliate content, cold and flu aisle roundups" },
+    ]
+  },
+  {
+    id:'feb_mar',
+    title:'February - March',
+    tags:['seo'],
+    events:[
+      { type:'seo', text:'Flu season tail - pharmacy traffic still elevated' },
+      { type:'seo', text:'Tax season - people searching for health deductions' },
+      { type:'seo', text:'Write "Tax Deductions for Prescription Costs" article' },
+      { type:'revenue', text:'Valentines Day OTC/health gift guides (vitamins, blood pressure monitors, etc.)' },
+    ]
+  },
+  {
+    id:'apr',
+    title:'April',
+    tags:['tax','seo'],
+    events:[
+      { type:'tax', text:'Q1 estimated tax payment due Apr 15' },
+      { type:'seo', text:'Allergy season starts - pharmacy traffic uptick' },
+      { type:'revenue', text:'Publish allergy medication comparison content - OTC antihistamine affiliate articles (Claritin vs Zyrtec vs generic)' },
+    ]
+  },
+  {
+    id:'may_jun',
+    title:'May - June',
+    tags:['tax','seo'],
+    events:[
+      { type:'tax', text:'Q2 estimated tax payment due Jun 15' },
+      { type:'seo', text:'Summer travel pharmacy guide ("Finding a pharmacy on vacation")' },
+      { type:'seo', text:'Review and update all city page pharmacy data (hours change seasonally)' },
+      { type:'revenue', text:'Sunscreen, bug spray, travel health kit guides - high summer OTC purchase intent' },
+    ]
+  },
+  {
+    id:'jul_aug',
+    title:'July - August',
+    tags:['revenue'],
+    events:[
+      { type:'seo', text:'Back-to-school pharmacy needs (vaccinations, prescriptions)' },
+      { type:'revenue', text:'Publish supplement and vitamin buying guides before back-to-school season' },
+      { type:'revenue', text:'<strong>Start writing ACA open enrollment guide NOW</strong> - needs to be indexed before October' },
+      { type:'revenue', text:'<strong>Start writing Medicare Part D guide</strong>' },
+      { type:'revenue', text:'<strong>Apply to MediaAlpha and EverQuote NOW</strong> so accounts are live before Oct spike' },
+    ]
+  },
+  {
+    id:'sep',
+    title:'September',
+    tags:['revenue','tax'],
+    events:[
+      { type:'tax', text:'Q3 estimated tax payment due Sep 15' },
+      { type:'revenue', text:'<strong>Publish all insurance/enrollment content</strong> - must be indexed before Oct' },
+      { type:'revenue', text:'Medicare open enrollment starts Oct 15 - prep content NOW' },
+      { type:'seo', text:'Flu season starting - pharmacy traffic rising' },
+      { type:'revenue', text:'Publish flu shot guides, cold medicine comparisons - sets up affiliate revenue through winter' },
+    ]
+  },
+  {
+    id:'oct_nov',
+    title:'October - November',
+    tags:['peak','revenue'],
+    isPeak:true,
+    events:[
+      { type:'revenue', text:'<strong>ACA open enrollment begins Nov 1</strong> - MediaAlpha/EverQuote insurance leads spike 10-20x. Highest revenue-per-visitor window of the year.' },
+      { type:'revenue', text:'<strong>Medicare open enrollment: Oct 15 - Dec 7</strong>' },
+      { type:'seo', text:'Flu season peak - highest pharmacy search volume of year' },
+      { type:'seo', text:'Publish Thanksgiving pharmacy hours article (2 weeks before)' },
+      { type:'seo', text:'Publish Christmas/New Year\'s pharmacy hours (by Dec 1)' },
+      { type:'revenue', text:'Holiday OTC gift guides (thermometers, blood pressure monitors, pill organizers) - Amazon Associates conversions spike' },
+    ]
+  },
+  {
+    id:'dec',
+    title:'December',
+    tags:['revenue','tax'],
+    events:[
+      { type:'revenue', text:'ACA enrollment continues through Jan 15' },
+      { type:'revenue', text:'Medicare enrollment ends Dec 7' },
+      { type:'seo', text:'Holiday pharmacy hours - high traffic, high ad RPMs' },
+      { type:'tax', text:'Year-end: export metrics, review annual revenue, plan next year' },
+    ]
+  },
+];
+
+const RECURRING_TASKS = [
+  { type:'seo', text:'Spot-check 10 city pages for pharmacy data accuracy' },
+  { type:'seo', text:'Review Google Analytics for traffic trends and top-performing pages' },
+  { type:'seo', text:'Check Search Console for crawl errors and ranking changes' },
+  { type:'revenue', text:'Review all affiliate dashboards for revenue (LowerMyRx, NDC, CJ, Impact, etc.)' },
+  { type:'tax', text:'Update Wave Accounting with income and expenses' },
+  { type:'seo', text:'Run PageSpeed Insights on 3 key pages and note any regressions' },
+  { type:'geo', text:'Test brand in ChatGPT and Perplexity for top pharmacy queries. Note what gets cited. Update content strategy accordingly.', isNew:true },
+];
+
+// =====================================================================
+// STATE HELPERS
+// =====================================================================
+const LS_PREFIX = '24hp_';
+function lsGet(key, fallback) {
+  try { const v = localStorage.getItem(LS_PREFIX + key); return v !== null ? JSON.parse(v) : fallback; }
+  catch(e) { return fallback; }
+}
+function lsSet(key, val) {
+  try { localStorage.setItem(LS_PREFIX + key, JSON.stringify(val)); } catch(e) {}
+}
+
+function isTaskDone(id) { return lsGet('task_' + id, false); }
+function setTaskDone(id, done) { lsSet('task_' + id, done); }
+function isPhaseOpen(id, def) { return lsGet('phase_open_' + id, def); }
+function setPhaseOpen(id, open) { lsSet('phase_open_' + id, open); }
+function isSidebarOpen(id, def) { return lsGet('sidebar_open_' + id, def); }
+function setSidebarOpen(id, open) { lsSet('sidebar_open_' + id, open); }
+function isMonthOpen(id) { return lsGet('month_open_' + id, true); }
+function setMonthOpen(id, open) { lsSet('month_open_' + id, open); }
+function isMilestoneDone(id) { return lsGet('milestone_' + id, false); }
+function setMilestoneDone(id, done) { lsSet('milestone_' + id, done); }
+function getMetricVal(rowId, month) { return lsGet('metric_' + rowId + '_' + month, ''); }
+function setMetricVal(rowId, month, val) { lsSet('metric_' + rowId + '_' + month, val); }
+
+// =====================================================================
+// PROGRESS
+// =====================================================================
+let currentFilter = 'all';
+
+function computeProgress() {
+  let total = 0, done = 0;
+  PHASES.forEach(phase => {
+    phase.tasks.forEach(t => {
+      total++;
+      if (isTaskDone(t.id)) done++;
+    });
+  });
+  return { total, done, pct: total ? Math.round(done / total * 100) : 0 };
+}
+
+function updateProgress() {
+  const { total, done, pct } = computeProgress();
+  const circumference = 163.4;
+  const offset = circumference - (pct / 100 * circumference);
+  const ring = document.getElementById('progress-ring');
+  if (ring) ring.setAttribute('stroke-dashoffset', offset);
+  const pctEl = document.getElementById('progress-pct');
+  if (pctEl) pctEl.textContent = pct + '%';
+  const detEl = document.getElementById('progress-details');
+  if (detEl) detEl.textContent = done + ' of ' + total + ' tasks';
+  const hdrEl = document.getElementById('header-progress');
+  if (hdrEl) hdrEl.textContent = pct + '%';
+}
+
+// =====================================================================
+// RENDER CHECKLIST
+// =====================================================================
+function renderChecklist() {
+  const container = document.getElementById('checklist-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  PHASES.forEach(phase => {
+    const tasks = filterTasks(phase.tasks);
+    if (currentFilter !== 'all' && tasks.length === 0) return;
+
+    const doneTasks = phase.tasks.filter(t => isTaskDone(t.id)).length;
+    const totalTasks = phase.tasks.length;
+    const allDone = doneTasks === totalTasks;
+    const open = isPhaseOpen(phase.id, phase.defaultOpen !== false);
+
+    const block = document.createElement('div');
+    block.className = 'phase-block';
+    block.dataset.phaseId = phase.id;
+
+    // Header
+    const header = document.createElement('div');
+    header.className = 'phase-header';
+    header.style.borderLeftColor = phase.borderColor;
+    header.innerHTML = `
+      <div class="phase-header-left">
+        <span class="phase-badge" style="background:${phase.badgeBg};color:${phase.badgeColor}">${phase.badge}</span>
+        <span class="phase-title-text">${phase.title}</span>
+        ${phase.isNew ? '<span class="phase-new-dot" title="Newly added"></span>' : ''}
+      </div>
+      <div class="phase-header-right">
+        <span class="task-count-pill ${allDone ? 'all-done' : ''}">${doneTasks} / ${totalTasks}</span>
+        <svg class="chevron ${open ? 'rotated' : ''}" id="phase-chevron-${phase.id}" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+        </svg>
+      </div>`;
+    header.addEventListener('click', () => togglePhase(phase.id));
+
+    // Body
+    const body = document.createElement('div');
+    body.className = 'phase-tasks-body' + (open ? '' : ' collapsed');
+    body.id = 'phase-body-' + phase.id;
+
+    if (tasks.length === 0 && currentFilter !== 'all') {
+      body.innerHTML = '<div class="no-tasks-msg">No ' + currentFilter + ' tasks in this phase.</div>';
+    } else {
+      const list = document.createElement('div');
+      list.className = 'task-list';
+      tasks.forEach(task => {
+        const done = isTaskDone(task.id);
+        const item = document.createElement('div');
+        item.className = 'task-item' + (done ? ' t-done' : '');
+        item.dataset.taskId = task.id;
+
+        const isPaid = task.text.startsWith('[PAID]');
+        const displayText = isPaid ? task.text.replace('[PAID]', '').trim() : task.text;
+
+        item.innerHTML = `
+          <input type="checkbox" class="task-cb" ${done ? 'checked' : ''} data-id="${task.id}">
+          <div class="task-content">
+            <span class="task-text">
+              ${isPaid ? '<span class="task-paid-badge">PAID</span> ' : ''}
+              ${task.isNew && !isPaid ? '<span class="task-new-badge">NEW</span> ' : ''}
+              ${displayText}
+            </span>
+            ${task.hint ? `<div class="task-hint-text">${task.hint}</div>` : ''}
+          </div>
+          ${task.hint ? '<button class="hint-btn" title="Show hint">?</button>' : ''}`;
+
+        // Checkbox
+        const cb = item.querySelector('.task-cb');
+        cb.addEventListener('change', (e) => {
+          e.stopPropagation();
+          setTaskDone(task.id, cb.checked);
+          item.classList.toggle('t-done', cb.checked);
+          updateProgress();
+          updatePhaseCount(phase.id);
+        });
+
+        // Hint toggle
+        const hintBtn = item.querySelector('.hint-btn');
+        if (hintBtn) {
+          hintBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            item.classList.toggle('hint-open');
+          });
+        }
+
+        // Click text to check
+        const textEl = item.querySelector('.task-text');
+        textEl.addEventListener('click', () => {
+          cb.checked = !cb.checked;
+          cb.dispatchEvent(new Event('change'));
+        });
+
+        list.appendChild(item);
+      });
+      body.appendChild(list);
+    }
+
+    // Set height for animation
+    if (open) {
+      body.style.maxHeight = '9999px';
+      body.style.opacity = '1';
+    }
+
+    block.appendChild(header);
+    block.appendChild(body);
+    container.appendChild(block);
+  });
+}
+
+function filterTasks(tasks) {
+  if (currentFilter === 'all') return tasks;
+  return tasks.filter(t => currentFilter === 'done' ? isTaskDone(t.id) : !isTaskDone(t.id));
+}
+
+function togglePhase(id) {
+  const body = document.getElementById('phase-body-' + id);
+  const chevron = document.getElementById('phase-chevron-' + id);
+  if (!body) return;
+  const isOpen = !body.classList.contains('collapsed');
+  if (isOpen) {
+    body.classList.add('collapsed');
+    body.style.maxHeight = '0';
+    body.style.opacity = '0';
+    if (chevron) chevron.classList.remove('rotated');
+  } else {
+    body.classList.remove('collapsed');
+    body.style.maxHeight = '9999px';
+    body.style.opacity = '1';
+    if (chevron) chevron.classList.add('rotated');
+  }
+  setPhaseOpen(id, !isOpen);
+}
+
+function updatePhaseCount(phaseId) {
+  const phase = PHASES.find(p => p.id === phaseId);
+  if (!phase) return;
+  const block = document.querySelector('[data-phase-id="' + phaseId + '"]');
+  if (!block) return;
+  const doneTasks = phase.tasks.filter(t => isTaskDone(t.id)).length;
+  const pill = block.querySelector('.task-count-pill');
+  if (pill) {
+    pill.textContent = doneTasks + ' / ' + phase.tasks.length;
+    pill.classList.toggle('all-done', doneTasks === phase.tasks.length);
+  }
+}
+
+function expandAll() {
+  PHASES.forEach(phase => {
+    const body = document.getElementById('phase-body-' + phase.id);
+    const chevron = document.getElementById('phase-chevron-' + phase.id);
+    if (body) { body.classList.remove('collapsed'); body.style.maxHeight = '9999px'; body.style.opacity = '1'; }
+    if (chevron) chevron.classList.add('rotated');
+    setPhaseOpen(phase.id, true);
+  });
+}
+
+function collapseAll() {
+  PHASES.forEach(phase => {
+    const body = document.getElementById('phase-body-' + phase.id);
+    const chevron = document.getElementById('phase-chevron-' + phase.id);
+    if (body) { body.classList.add('collapsed'); body.style.maxHeight = '0'; body.style.opacity = '0'; }
+    if (chevron) chevron.classList.remove('rotated');
+    setPhaseOpen(phase.id, false);
+  });
+}
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderChecklist();
+}
+
+function exportChecklist() {
+  let out = '24HourPharmacy.com Checklist Export\n';
+  out += new Date().toLocaleDateString() + '\n\n';
+  PHASES.forEach(phase => {
+    const done = phase.tasks.filter(t => isTaskDone(t.id)).length;
+    out += '=== ' + phase.title + ' (' + done + '/' + phase.tasks.length + ') ===\n';
+    phase.tasks.forEach(t => {
+      out += (isTaskDone(t.id) ? '[x] ' : '[ ] ') + t.text + '\n';
+    });
+    out += '\n';
+  });
+  const blob = new Blob([out], { type: 'text/plain' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = '24hp-checklist-' + new Date().toISOString().split('T')[0] + '.txt';
+  a.click();
+}
+
+function resetAll() {
+  if (!confirm('Reset all checklist and milestone progress? This cannot be undone.')) return;
+  const keys = Object.keys(localStorage).filter(k => k.startsWith(LS_PREFIX));
+  keys.forEach(k => { if (k.includes('task_') || k.includes('milestone_')) localStorage.removeItem(k); });
+  renderChecklist();
+  renderMilestones();
+  updateProgress();
+}
+
+// =====================================================================
+// RENDER LINKS
+// =====================================================================
+function renderLinks() {
+  const container = document.getElementById('links-container');
+  if (!container) return;
+  container.innerHTML = '';
+  LINK_GROUPS.forEach(group => {
+    const card = document.createElement('div');
+    card.className = 'link-card';
+    let html = '<div class="link-group-title">' + group.title + '</div>';
+    group.links.forEach(link => {
+      html += `<a href="${link.url}" target="_blank" rel="noopener" class="link-item">
+        <div class="link-icon" style="background:${link.color}">${link.abbr}</div>
+        <div class="link-info"><div class="link-name">${link.label}</div><div class="link-desc">${link.desc}</div></div>
+        <svg class="link-arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+      </a>`;
+    });
+    card.innerHTML = html;
+    container.appendChild(card);
+  });
+}
+
+// =====================================================================
+// RENDER METRICS
+// =====================================================================
+function renderMetrics() {
+  const table = document.getElementById('metrics-table');
+  if (!table) return;
+  let html = '<thead><tr><th>Metric</th>';
+  MONTHS_COLS.forEach(m => { html += '<th>' + m + '</th>'; });
+  html += '</tr></thead><tbody>';
+
+  METRIC_ROWS.forEach(row => {
+    if (row.section) {
+      html += '<tr class="section-row"><td colspan="' + (MONTHS_COLS.length + 1) + '">' + row.section + '</td></tr>';
+      return;
+    }
+    html += `<tr class="${row.isNew ? 'metric-new-row' : ''}">
+      <td>
+        <div class="metric-label">${row.label}${row.isNew ? ' <span class="task-new-badge" style="font-size:9px">NEW</span>' : ''}</div>
+        ${row.hint ? '<div class="metric-sub">' + row.hint + '</div>' : ''}
+      </td>`;
+    MONTHS_COLS.forEach(m => {
+      const val = getMetricVal(row.id, m);
+      html += `<td><input type="text" value="${val}" data-row="${row.id}" data-month="${m}" placeholder="-"></td>`;
+    });
+    html += '</tr>';
+  });
+  html += '</tbody>';
+  table.innerHTML = html;
+
+  table.querySelectorAll('input[type=text]').forEach(input => {
+    input.addEventListener('change', () => {
+      setMetricVal(input.dataset.row, input.dataset.month, input.value);
+    });
+  });
+}
+
+function exportMetrics() {
+  let csv = 'Metric,' + MONTHS_COLS.join(',') + '\n';
+  METRIC_ROWS.forEach(row => {
+    if (row.section) { csv += '\n"' + row.section + '",' + MONTHS_COLS.map(() => '').join(',') + '\n'; return; }
+    const vals = MONTHS_COLS.map(m => '"' + getMetricVal(row.id, m) + '"');
+    csv += '"' + row.label + '",' + vals.join(',') + '\n';
+  });
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+  a.download = '24hp-metrics-' + new Date().toISOString().split('T')[0] + '.csv';
+  a.click();
+}
+
+// =====================================================================
+// RENDER CALENDAR
+// =====================================================================
+function renderCalendar() {
+  const container = document.getElementById('calendar-container');
+  if (!container) return;
+  container.innerHTML = '';
+
+  const dotClass = { seo:'dot-seo', revenue:'dot-revenue', tax:'dot-tax', geo:'dot-geo' };
+
+  CALENDAR_MONTHS.forEach(month => {
+    const open = isMonthOpen(month.id);
+    const block = document.createElement('div');
+    block.className = 'month-block';
+
+    const tagMap = { revenue:'m-tag-revenue Revenue', seo:'m-tag-seo SEO', tax:'m-tag-tax Tax', peak:'m-tag-peak PEAK REVENUE' };
+    const tags = (month.tags || []).map(t => `<span class="m-tag ${tagMap[t] || ''}">${tagMap[t]?.split(' ').slice(1).join(' ') || t}</span>`).join('');
+
+    let html = `
+      <div class="month-header" data-month-id="${month.id}">
+        <div class="month-header-left">
+          <span class="month-title">${month.title}</span>
+          <div class="month-tags">${tags}</div>
+        </div>
+        <svg class="chevron ${open ? 'rotated' : ''}" id="month-chevron-${month.id}" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/>
+        </svg>
+      </div>
+      <div class="collapsible-body ${open ? '' : 'collapsed'}" id="month-body-${month.id}" style="${open ? 'max-height:9999px;opacity:1' : ''}">
+        <div class="month-body">`;
+
+    month.events.forEach(ev => {
+      html += `<div class="event-row">
+        <div class="event-dot ${dotClass[ev.type] || 'dot-seo'}"></div>
+        <div class="event-text">${ev.text}</div>
+      </div>`;
+    });
+
+    html += '</div></div>';
+    block.innerHTML = html;
+
+    block.querySelector('.month-header').addEventListener('click', () => {
+      const body = document.getElementById('month-body-' + month.id);
+      const chevron = document.getElementById('month-chevron-' + month.id);
+      const isOpen = !body.classList.contains('collapsed');
+      if (isOpen) {
+        body.classList.add('collapsed'); body.style.maxHeight='0'; body.style.opacity='0';
+        if (chevron) chevron.classList.remove('rotated');
+      } else {
+        body.classList.remove('collapsed'); body.style.maxHeight='9999px'; body.style.opacity='1';
+        if (chevron) chevron.classList.add('rotated');
+      }
+      setMonthOpen(month.id, !isOpen);
+    });
+
+    container.appendChild(block);
+  });
+
+  // Recurring card
+  const recurring = document.createElement('div');
+  recurring.className = 'recurring-card';
+  let rhtml = '<div class="recurring-title">Monthly recurring tasks</div>';
+  const dotClass2 = { seo:'dot-seo', revenue:'dot-revenue', tax:'dot-tax', geo:'dot-geo' };
+  RECURRING_TASKS.forEach(task => {
+    rhtml += `<div class="recurring-row">
+      <div class="event-dot ${dotClass2[task.type] || 'dot-seo'}" style="margin-top:5px"></div>
+      <div class="event-text">${task.text}${task.isNew ? '<span class="event-new">NEW</span>' : ''}</div>
+    </div>`;
+  });
+  recurring.innerHTML = rhtml;
+  container.appendChild(recurring);
+}
+
+// =====================================================================
+// RENDER SIDEBAR
+// =====================================================================
+function renderMilestones() {
+  const list = document.getElementById('milestones-list');
+  if (!list) return;
+  list.innerHTML = '';
+  MILESTONES.forEach(m => {
+    const done = isMilestoneDone(m.id);
+    const item = document.createElement('div');
+    item.className = 'milestone-item' + (done ? ' m-done' : '');
+    item.innerHTML = `<input type="checkbox" class="milestone-cb" ${done ? 'checked' : ''} data-id="${m.id}"><span class="milestone-text">${m.text}</span>`;
+    const cb = item.querySelector('.milestone-cb');
+    cb.addEventListener('change', () => {
+      setMilestoneDone(m.id, cb.checked);
+      item.classList.toggle('m-done', cb.checked);
+    });
+    item.addEventListener('click', (e) => { if (e.target !== cb) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); } });
+    list.appendChild(item);
+  });
+}
+
+function renderSidebar() {
+  // Revenue thesis
+  ['thesis','milestones'].forEach(id => {
+    const open = isSidebarOpen(id, true);
+    const body = document.getElementById('body-' + id);
+    const chevron = document.getElementById('chevron-' + id);
+    if (body) {
+      if (open) { body.style.maxHeight = '9999px'; body.style.opacity = '1'; }
+      else { body.classList.add('collapsed'); body.style.maxHeight = '0'; body.style.opacity = '0'; }
+    }
+    if (chevron && open) chevron.classList.add('rotated');
+  });
+
+  document.querySelectorAll('[data-sidebar]').forEach(header => {
+    const id = header.dataset.sidebar;
+    header.addEventListener('click', () => {
+      const body = document.getElementById('body-' + id);
+      const chevron = document.getElementById('chevron-' + id);
+      if (!body) return;
+      const isOpen = !body.classList.contains('collapsed');
+      if (isOpen) {
+        body.classList.add('collapsed'); body.style.maxHeight='0'; body.style.opacity='0';
+        if (chevron) chevron.classList.remove('rotated');
+      } else {
+        body.classList.remove('collapsed'); body.style.maxHeight='9999px'; body.style.opacity='1';
+        if (chevron) chevron.classList.add('rotated');
+      }
+      setSidebarOpen(id, !isOpen);
+    });
+  });
+
+  renderMilestones();
+}
+
+// =====================================================================
+// TABS
+// =====================================================================
+function switchTab(id) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const panel = document.getElementById('tab-' + id);
+  if (panel) panel.classList.add('active');
+  const btn = document.querySelector('[data-tab="' + id + '"]');
+  if (btn) btn.classList.add('active');
+  lsSet('active_tab', id);
+}
+
+// =====================================================================
+// INIT
+// =====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderChecklist();
+  renderLinks();
+  renderMetrics();
+  renderCalendar();
+  renderSidebar();
+  updateProgress();
+
+  // Tab buttons
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+  });
+
+  // Toolbar buttons
+  document.getElementById('btn-expand-all')?.addEventListener('click', expandAll);
+  document.getElementById('btn-collapse-all')?.addEventListener('click', collapseAll);
+  document.getElementById('btn-export')?.addEventListener('click', exportChecklist);
+  document.getElementById('btn-reset')?.addEventListener('click', resetAll);
+  document.getElementById('btn-export-metrics')?.addEventListener('click', exportMetrics);
+
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => setFilter(btn.dataset.filter, btn));
+  });
+
+  // Restore active tab
+  const savedTab = lsGet('active_tab', 'checklist');
+  if (savedTab !== 'checklist') switchTab(savedTab);
 });
-}
-renderMet();
-
-load();
-const orig=["thm","plg","dcw","f1","f2","c1","c2","c3","c4","c5","c6"];
-orig.forEach(id=>{if(S[id]===undefined)S[id]={d:true,n:""};});
-save();render();
 </script>
 </body>
 </html>
