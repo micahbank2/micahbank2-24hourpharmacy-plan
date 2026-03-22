@@ -57,10 +57,11 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 .tab-panel.active{display:block}
 
 /* ---- Sidebar ---- */
-.sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:108px;max-height:calc(100vh - 128px);overflow-y:auto;scrollbar-width:thin}
-.sidebar::-webkit-scrollbar{width:4px}
-.sidebar::-webkit-scrollbar-track{background:transparent}
-.sidebar::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
+.sidebar{display:flex;flex-direction:column;gap:12px;position:sticky;top:108px}
+.milestones-inner{padding:6px 0 10px;max-height:320px;overflow-y:auto;scrollbar-width:thin}
+.milestones-inner::-webkit-scrollbar{width:4px}
+.milestones-inner::-webkit-scrollbar-track{background:transparent}
+.milestones-inner::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px}
 
 /* ---- Cards ---- */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);box-shadow:var(--shadow);overflow:hidden}
@@ -97,7 +98,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 .milestone-cb{width:14px;height:14px;accent-color:var(--success);cursor:pointer;flex-shrink:0;margin-top:2px}
 .milestone-text{font-size:12px;color:var(--text);line-height:1.4}
 .milestone-item.m-done .milestone-text{text-decoration:line-through;color:var(--muted)}
-.milestones-inner{padding:6px 0 10px}
+/* milestones-inner now defined in sidebar block above */
 
 /* ---- Thesis box ---- */
 .thesis-body{padding:12px 16px;font-size:13px;color:var(--text);line-height:1.7}
@@ -1205,7 +1206,7 @@ function renderMilestones() {
 function renderSidebar() {
   // Revenue thesis
   ['thesis','milestones'].forEach(id => {
-    const open = isSidebarOpen(id, true);
+    const open = isSidebarOpen(id, id === 'milestones' ? false : true);
     const body = document.getElementById('body-' + id);
     const chevron = document.getElementById('chevron-' + id);
     if (body) {
