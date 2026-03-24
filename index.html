@@ -98,7 +98,6 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 .milestone-cb{width:14px;height:14px;accent-color:var(--success);cursor:pointer;flex-shrink:0;margin-top:2px}
 .milestone-text{font-size:12px;color:var(--text);line-height:1.4}
 .milestone-item.m-done .milestone-text{text-decoration:line-through;color:var(--muted)}
-/* milestones-inner scroll defined in sidebar block above */
 
 /* ---- Thesis box ---- */
 .thesis-body{padding:12px 16px;font-size:13px;color:var(--text);line-height:1.7}
@@ -547,8 +546,8 @@ const PHASES = [
       { id: 's13', text: 'Build email list with MailerLite and create lead magnet', hint: 'Lead magnet: a one-page "Pharmacy Savings Card" PDF showing how to combine discount cards, manufacturer coupons, and generic substitutions. Simple to create, high perceived value. Email list = traffic you own. If Google algo shifts, subscribers come back direct.' },
       { id: 's14', text: 'Apply to Mediavine or Raptive when hitting 25,000+ monthly sessions', hint: 'Mediavine: 50K sessions minimum (sometimes 25K for health niche). Raptive: 100K monthly pageviews, but $30-55 RPM for health content vs AdSense\'s $8-15. Apply to both, take the best offer.' },
       { id: 's15', text: '[PAID] Google Ads: launch to discount card and pharmacy finder pages once organic conversion rate is established', isNew: true, hint: 'New paid channel. Do not run paid traffic until you know your baseline organic CTR from page to affiliate link (target: 2%+). Once proven, Google search ads to "prescription discount card" and "pharmacy open near me" can profitably scale what already converts. Start: $10-15/day, single campaign, tight keyword match.' },
-      { id: 's16', text: '[PAID] Pinterest Ads: promote seasonal content to health-conscious demographics', isNew: true, hint: 'New paid channel. Pinterest skews 70%+ female and is heavily used for health research. Flu season guide, open enrollment guide, and pharmacy savings content perform well. Promoted pins to Health/Wellness audience. Test budget: $5-10/day. Lower intent than search but very cheap CPM.' },
-      { id: 's17', text: '[PAID] Meta Retargeting: target visitors who viewed discount card or insurance pages without clicking', isNew: true, hint: 'New paid channel. Install Meta Pixel. Build custom audience: visited /savings/discount-card/ or any insurance content page, did not click affiliate link. Retarget with direct benefit message: "Get your free prescription savings card." Often highest ROAS of any paid channel because intent is already proven.' },
+      { id: 's16', text: '[PAID] Pinterest Ads: promote seasonal content to health-conscious demographics', isNew: true, hint: 'New paid channel. Pinterest skews 70%+ female and is heavily used for health research. Flu season guide, open enrollment guide, and pharmacy savings content perform well. Promoted pins to Health/Wellness audience. Test budget: $5-10/day. Lower intent than search but very cheap CPM. Pinterest clicks open in-app browsers by default - set up Hoox (tryhoox.com) on your affiliate links before running paid Pinterest traffic or you will lose a significant share of conversions.' },
+      { id: 's17', text: '[PAID] Meta Retargeting: target visitors who viewed discount card or insurance pages without clicking', isNew: true, hint: 'New paid channel. Install Meta Pixel. Build custom audience: visited /savings/discount-card/ or any insurance content page, did not click affiliate link. Retarget with direct benefit message: "Get your free prescription savings card." Often highest ROAS of any paid channel because intent is already proven. Meta clicks open in-app browsers - set up Hoox (tryhoox.com) on your affiliate links before running Meta traffic or you will lose conversions to the in-app browser friction.' },
     ]
   },
   {
@@ -1020,6 +1019,7 @@ const LINK_GROUPS = [
       { abbr:'MK', label:'Make.com', desc:'No-code automation ($9/mo)', url:'https://make.com/', color:'#6366f1' },
       { abbr:'LW', label:'LinkWhisper', desc:'Internal linking automation', url:'https://linkwhisper.com/', color:'#7c3aed' },
       { abbr:'ID', label:'Ideogram', desc:'AI image generation', url:'https://ideogram.ai/', color:'#1f2937' },
+      { abbr:'HX', label:'Hoox', desc:'Fix in-app browser conversion loss', url:'https://tryhoox.com/', color:'#0891b2' },
     ]
   },
   {
@@ -1242,7 +1242,6 @@ function renderChecklist() {
     block.className = 'phase-block';
     block.dataset.phaseId = phase.id;
 
-    // Header
     const header = document.createElement('div');
     header.className = 'phase-header';
     header.style.borderLeftColor = phase.borderColor;
@@ -1260,7 +1259,6 @@ function renderChecklist() {
       </div>`;
     header.addEventListener('click', () => togglePhase(phase.id));
 
-    // Body
     const body = document.createElement('div');
     body.className = 'phase-tasks-body' + (open ? '' : ' collapsed');
     body.id = 'phase-body-' + phase.id;
@@ -1290,7 +1288,6 @@ function renderChecklist() {
             ${task.hint ? `<div class="task-hint-text">${task.hint}</div>` : ''}
           </div>`;
 
-        // Checkbox - only way to mark done
         const cb = item.querySelector('.task-cb');
         cb.addEventListener('change', (e) => {
           e.stopPropagation();
@@ -1300,7 +1297,6 @@ function renderChecklist() {
           updatePhaseCount(phase.id);
         });
 
-        // Click anywhere on row (except checkbox) toggles hint
         if (task.hint) {
           item.style.cursor = 'pointer';
           item.addEventListener('click', (e) => {
@@ -1314,7 +1310,6 @@ function renderChecklist() {
       body.appendChild(list);
     }
 
-    // Set height for animation
     if (open) {
       body.style.maxHeight = '9999px';
       body.style.opacity = '1';
@@ -1546,7 +1541,6 @@ function renderCalendar() {
     container.appendChild(block);
   });
 
-  // Recurring card
   const recurring = document.createElement('div');
   recurring.className = 'recurring-card';
   let rhtml = '<div class="recurring-title">Monthly recurring tasks</div>';
@@ -1654,7 +1648,6 @@ function renderPlaybooks() {
         </div>
       </div>`;
 
-    // Toggle open/close
     card.querySelector('.pb-header').addEventListener('click', (e) => {
       if (e.target.closest('.pb-todo-item') || e.target.closest('a')) return;
       const body = document.getElementById('pb-body-' + pb.id);
@@ -1670,7 +1663,6 @@ function renderPlaybooks() {
       setPbOpen(pb.id, !isOpen);
     });
 
-    // To-do checkboxes
     card.querySelectorAll('.pb-todo-item').forEach(item => {
       const cb = item.querySelector('.pb-todo-cb');
       const id = cb.dataset.id;
@@ -1678,7 +1670,6 @@ function renderPlaybooks() {
         cb.checked = !cb.checked;
         setPbTodoDone(id, cb.checked);
         item.classList.toggle('pb-done', cb.checked);
-        // Update meta count
         const pb_data = PLAYBOOKS.find(p => p.todos.some(t => t.id === id));
         if (pb_data) {
           const done = pb_data.todos.filter(t => isPbTodoDone(t.id)).length;
@@ -1729,7 +1720,6 @@ function renderMilestones() {
 }
 
 function renderSidebar() {
-  // Revenue thesis
   ['thesis','milestones'].forEach(id => {
     const open = isSidebarOpen(id, id === 'milestones' ? false : true);
     const body = document.getElementById('body-' + id);
@@ -1787,24 +1777,20 @@ document.addEventListener('DOMContentLoaded', () => {
   renderSidebar();
   updateProgress();
 
-  // Tab buttons
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => switchTab(btn.dataset.tab));
   });
 
-  // Toolbar buttons
   document.getElementById('btn-expand-all')?.addEventListener('click', expandAll);
   document.getElementById('btn-collapse-all')?.addEventListener('click', collapseAll);
   document.getElementById('btn-export')?.addEventListener('click', exportChecklist);
   document.getElementById('btn-reset')?.addEventListener('click', resetAll);
   document.getElementById('btn-export-metrics')?.addEventListener('click', exportMetrics);
 
-  // Filter buttons
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => setFilter(btn.dataset.filter, btn));
   });
 
-  // Restore active tab
   const savedTab = lsGet('active_tab', 'checklist');
   if (savedTab !== 'checklist') switchTab(savedTab);
 });
