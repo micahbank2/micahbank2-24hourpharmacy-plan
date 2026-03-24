@@ -131,16 +131,14 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 
 /* ---- Task items ---- */
 .task-list{padding:4px 0 8px}
-.task-item{display:flex;align-items:flex-start;gap:10px;padding:7px 16px;cursor:default}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:7px 16px}
 .task-item:hover{background:var(--bg)}
 .task-cb{width:14px;height:14px;margin-top:2px;accent-color:var(--accent);cursor:pointer;flex-shrink:0}
 .task-content{flex:1;min-width:120px}
-.task-text{font-size:13px;color:var(--text);line-height:1.45;cursor:pointer;display:block}
+.task-text{font-size:13px;color:var(--text);line-height:1.45;display:block}
 .task-item.t-done .task-text{text-decoration:line-through;color:var(--muted)}
 .task-hint-text{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5;display:none;padding:6px 9px;background:var(--bg);border-radius:5px;border-left:2px solid var(--border2)}
 .task-item.hint-open .task-hint-text{display:block}
-.hint-btn{width:17px;height:17px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--muted);font-size:9px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-family:inherit;transition:all .15s;line-height:1}
-.hint-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-light)}
 .task-new-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-border);border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
 .task-paid-badge{font-size:9px;font-weight:700;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
 .phase-tasks-body{overflow:hidden;transition:max-height .22s ease,opacity .22s ease}
@@ -629,13 +627,13 @@ const MILESTONES = [
 const PLAYBOOKS = [
   {
     id:'pb1', priority:1, name:'Prescription Discount Cards', tier:'immediate',
-    tierLabel:'Start now', potential:'$500–3K/mo', timing:'Month 1, grow forever',
+    tierLabel:'Start now', potential:'$500-3K/mo', timing:'Month 1, grow forever',
     color:'#16a34a', newStream:false,
-    summary:'The highest-lifetime-value stream on the site. Your affiliate code gets permanently embedded into pharmacy systems when someone fills a prescription with your card — every refill pays you again with zero additional effort. These commissions compound over years.',
-    why:['Evergreen: people refill prescriptions every 30-90 days forever','No seasonal dependency — earns year-round','Highest intent audience on the site is already here for this','Converts from every page — city pages, savings hub, informational content'],
+    summary:'The highest-lifetime-value stream on the site. Your affiliate code gets permanently embedded into pharmacy systems when someone fills a prescription with your card - every refill pays you again with zero additional effort. These commissions compound over years.',
+    why:['Evergreen: people refill prescriptions every 30-90 days forever','No seasonal dependency - earns year-round','Highest intent audience on the site is already here for this','Converts from every page - city pages, savings hub, informational content'],
     programs:[
       {abbr:'LM',name:'LowerMyRx',commission:'Up to $4/fill + overrides',color:'#16a34a',url:'https://affiliate.lowermyrx.com/'},
-      {abbr:'ND',name:'National Drug Card',commission:'$2–2.50/fill',color:'#0d9488',url:'https://ndcaffiliate.com/'},
+      {abbr:'ND',name:'National Drug Card',commission:'$2-2.50/fill',color:'#0d9488',url:'https://ndcaffiliate.com/'},
       {abbr:'SC',name:'SingleCare Partners',commission:'$2.50/signup',color:'#7c3aed',url:'https://partners.singlecare.com/'},
       {abbr:'RG',name:'RxGo',commission:'$1.50+/use, recurring',color:'#2563eb',url:'https://www.rxgo.com/partner-program'},
     ],
@@ -654,16 +652,16 @@ const PLAYBOOKS = [
   },
   {
     id:'pb2', priority:2, name:'Health Insurance Lead Gen', tier:'seasonal',
-    tierLabel:'Peak Oct–Jan', potential:'$2–5K/mo (peak season)',  timing:'Apply now, activate September',
+    tierLabel:'Peak Oct-Jan', potential:'$2-5K/mo (peak season)',  timing:'Apply now, activate September',
     color:'#b45309', newStream:false,
-    summary:'The single highest revenue-per-visitor window of the year. MediaAlpha and EverQuote insurance leads pay $50–200 each during ACA and Medicare open enrollment. One month of peak traffic can equal the rest of the year combined. You must be approved and integrated BEFORE October or you miss the window entirely.',
-    why:['ACA enrollment Nov 1–Jan 15, Medicare Oct 15–Dec 7 — both happen simultaneously','Insurance leads pay 10-20x more than discount card commissions during this window','Your audience (uninsured, underinsured) is exactly who shops for insurance','Content must be indexed before October — publish by September 1'],
+    summary:'The single highest revenue-per-visitor window of the year. MediaAlpha and EverQuote insurance leads pay $50-200 each during ACA and Medicare open enrollment. One month of peak traffic can equal the rest of the year combined. You must be approved and integrated BEFORE October or you miss the window entirely.',
+    why:['ACA enrollment Nov 1-Jan 15, Medicare Oct 15-Dec 7 - both happen simultaneously','Insurance leads pay 10-20x more than discount card commissions during this window','Your audience (uninsured, underinsured) is exactly who shops for insurance','Content must be indexed before October - publish by September 1'],
     programs:[
-      {abbr:'MA',name:'MediaAlpha',commission:'$50–200/lead',color:'#6366f1',url:'https://mediaalpha.com/publishers/'},
+      {abbr:'MA',name:'MediaAlpha',commission:'$50-200/lead',color:'#6366f1',url:'https://mediaalpha.com/publishers/'},
       {abbr:'EQ',name:'EverQuote',commission:'Health insurance leads',color:'#0ea5e9',url:'https://www.everquote.com/affiliates/'},
-      {abbr:'EH',name:'eHealthInsurance (CJ)',commission:'$10–75/application, 120-day cookie',color:'#0369a1',url:'https://members.cj.com/'},
+      {abbr:'EH',name:'eHealthInsurance (CJ)',commission:'$10-75/application, 120-day cookie',color:'#0369a1',url:'https://members.cj.com/'},
     ],
-    marketingPlan:['Build ACA open enrollment guide by Sept 1 for indexing time','Build Medicare Part D pharmacy guide by Sept 1','Add insurance CTA to every city page sidebar: "No insurance? Compare plans from $0/mo"','Run MediaAlpha widget on savings pages during Oct–Jan','Target long-tail: "[city] health insurance marketplace", "cheapest ACA plan [state]"','Email list: open enrollment countdown starting October 1'],
+    marketingPlan:['Build ACA open enrollment guide by Sept 1 for indexing time','Build Medicare Part D pharmacy guide by Sept 1','Add insurance CTA to every city page sidebar: "No insurance? Compare plans from $0/mo"','Run MediaAlpha widget on savings pages during Oct-Jan','Target long-tail: "[city] health insurance marketplace", "cheapest ACA plan [state]"','Email list: open enrollment countdown starting October 1'],
     techStack:['MediaAlpha publisher widget (JS embed)','CJ Affiliate tracking for eHealthInsurance','GA4 conversion event: insurance_cta_click','City page sidebar CTA (PHP in sidebar template)'],
     todos:[
       {id:'pbt_ins1',text:'Apply for MediaAlpha publisher account NOW (approval takes time)',done:false},
@@ -678,41 +676,41 @@ const PLAYBOOKS = [
   },
   {
     id:'pb3', priority:3, name:'GLP-1 Telehealth Referrals', tier:'growth',
-    tierLabel:'Month 2–3', potential:'$1–4K/mo', timing:'Apply Month 1, content Month 2–3',
+    tierLabel:'Month 2-3', potential:'$1-4K/mo', timing:'Apply Month 1, content Month 2-3',
     color:'#7c3aed', newStream:true,
-    summary:'The highest-CPA affiliate vertical in healthcare right now. Programs pay $75–300 per referred patient, and the audience overlap is unusually tight: someone searching for a pharmacy at 2am to fill a GLP-1 prescription who gets declined is the exact person who converts to telehealth. Nobody has exploited this angle on a pharmacy-focused site.',
-    why:['$75–300 CPA — highest single-referral payout available to this site','GLP-1 demand is generational — semaglutide/tirzepatide are not going away','Pharmacy audience = people who already have prescriptions, are cost-conscious, and want convenience','Near-zero competition for "GLP-1 without insurance" + pharmacy-adjacent queries'],
+    summary:'The highest-CPA affiliate vertical in healthcare right now. Programs pay $75-300 per referred patient, and the audience overlap is unusually tight: someone searching for a pharmacy at 2am to fill a GLP-1 prescription who gets declined is the exact person who converts to telehealth. Nobody has exploited this angle on a pharmacy-focused site.',
+    why:['$75-300 CPA - highest single-referral payout available to this site','GLP-1 demand is generational - semaglutide/tirzepatide are not going away','Pharmacy audience = people who already have prescriptions, are cost-conscious, and want convenience','Near-zero competition for "GLP-1 without insurance" + pharmacy-adjacent queries'],
     programs:[
       {abbr:'MO',name:'Mochi Health',commission:'$90 CPA',color:'#7c3aed',url:'https://mochi.health/affiliate'},
       {abbr:'OM',name:'OrderlyMeds',commission:'$75 CPA',color:'#0d9488',url:'https://orderlymeds.com/affiliate-program/get-started/'},
       {abbr:'FR',name:'Fridays Health',commission:'$300 CPA',color:'#16a34a',url:'https://www.joinfridays.com/'},
-      {abbr:'HI',name:'Hims (weight loss)',commission:'$35–88 CPA via Impact',color:'#1f2937',url:'https://app.impact.com/'},
+      {abbr:'HI',name:'Hims (weight loss)',commission:'$35-88 CPA via Impact',color:'#1f2937',url:'https://app.impact.com/'},
     ],
-    marketingPlan:['Build /telehealth/glp1/ comparison page: Mochi vs OrderlyMeds vs Fridays','Target: "semaglutide without insurance", "GLP-1 online doctor", "ozempic alternative telehealth"','Write "My pharmacy is out of Ozempic — what now?" emergency guide with telehealth CTA','Add GLP-1 telehealth CTA to city pages in high-obesity metros (Houston, Dallas, Phoenix, Chicago)','Create "How much does semaglutide really cost with and without insurance" evergreen guide'],
-    techStack:['Standard affiliate links via Impact or direct programs','Lasso for link management','No special tech required — pure content play'],
+    marketingPlan:['Build /telehealth/glp1/ comparison page: Mochi vs OrderlyMeds vs Fridays','Target: "semaglutide without insurance", "GLP-1 online doctor", "ozempic alternative telehealth"','Write "My pharmacy is out of Ozempic - what now?" emergency guide with telehealth CTA','Add GLP-1 telehealth CTA to city pages in high-obesity metros (Houston, Dallas, Phoenix, Chicago)','Create "How much does semaglutide really cost with and without insurance" evergreen guide'],
+    techStack:['Standard affiliate links via Impact or direct programs','Lasso for link management','No special tech required - pure content play'],
     todos:[
       {id:'pbt_glp1',text:'Apply for Mochi Health affiliate program',done:false},
       {id:'pbt_glp2',text:'Apply for OrderlyMeds affiliate program',done:false},
       {id:'pbt_glp3',text:'Apply for Fridays Health affiliate (high CPA, may require traffic proof)',done:false},
       {id:'pbt_glp4',text:'Build /telehealth/glp1/ comparison page',done:false},
-      {id:'pbt_glp5',text:'Write "My pharmacy is out of Ozempic — what now?" guide',done:false},
+      {id:'pbt_glp5',text:'Write "My pharmacy is out of Ozempic - what now?" guide',done:false},
       {id:'pbt_glp6',text:'Write "How much does semaglutide cost without insurance" guide',done:false},
       {id:'pbt_glp7',text:'Add GLP-1 CTA to city pages in top 10 obesity metros',done:false},
     ]
   },
   {
     id:'pb4', priority:4, name:'General Telehealth Referrals', tier:'growth',
-    tierLabel:'Month 2–3', potential:'$500–2K/mo', timing:'Apply Month 1, content Month 2–3',
+    tierLabel:'Month 2-3', potential:'$500-2K/mo', timing:'Apply Month 1, content Month 2-3',
     color:'#2563eb', newStream:false,
-    summary:'Hims, Ro, Nurx, and Teladoc all pay $25–100+ per qualified referral. The off-hours pharmacy visitor who cannot get a prescription filled is the exact telehealth conversion target. This stream activates the same content infrastructure as GLP-1 but across birth control, urgent care, dermatology, and mental health.',
-    why:['High-intent audience: people at pharmacies at 2am who cannot get prescriptions filled','$25–100 CPA across multiple verticals — birth control, UTI treatment, skin, urgent care','Nurx/Hims/Ro have proven conversion funnels built for mobile — your 70% mobile audience'],
+    summary:'Hims, Ro, Nurx, and Teladoc all pay $25-100+ per qualified referral. The off-hours pharmacy visitor who cannot get a prescription filled is the exact telehealth conversion target. This stream activates the same content infrastructure as GLP-1 but across birth control, urgent care, dermatology, and mental health.',
+    why:['High-intent audience: people at pharmacies at 2am who cannot get prescriptions filled','$25-100 CPA across multiple verticals - birth control, UTI treatment, skin, urgent care','Nurx/Hims/Ro have proven conversion funnels built for mobile - your 70% mobile audience'],
     programs:[
-      {abbr:'HM',name:'Hims & Hers',commission:'$50–100+/referral via Impact',color:'#1f2937',url:'https://app.impact.com/'},
-      {abbr:'RO',name:'Ro',commission:'$50–100+/referral via Impact',color:'#dc2626',url:'https://app.impact.com/'},
-      {abbr:'NX',name:'Nurx',commission:'$25–75/lead via PerformCB',color:'#7c3aed',url:'https://www.performcb.com/'},
+      {abbr:'HM',name:'Hims & Hers',commission:'$50-100+/referral via Impact',color:'#1f2937',url:'https://app.impact.com/'},
+      {abbr:'RO',name:'Ro',commission:'$50-100+/referral via Impact',color:'#dc2626',url:'https://app.impact.com/'},
+      {abbr:'NX',name:'Nurx',commission:'$25-75/lead via PerformCB',color:'#7c3aed',url:'https://www.performcb.com/'},
       {abbr:'TD',name:'Teladoc',commission:'CPL/CPA, contact for rates',color:'#16a34a',url:'https://www.teladoc.com/partners/'},
     ],
-    marketingPlan:['Build /telehealth/ hub comparing all major telehealth platforms','Create condition-specific pages: birth control online, UTI treatment, dermatology telehealth','Target emergency queries: "pharmacy closed need prescription" → telehealth CTA','Add telehealth widget/CTA to city pages as fallback when no 24hr pharmacy nearby','Write "Is telehealth cheaper than urgent care?" comparison guide'],
+    marketingPlan:['Build /telehealth/ hub comparing all major telehealth platforms','Create condition-specific pages: birth control online, UTI treatment, dermatology telehealth','Target emergency queries: "pharmacy closed need prescription" -> telehealth CTA','Add telehealth widget/CTA to city pages as fallback when no 24hr pharmacy nearby','Write "Is telehealth cheaper than urgent care?" comparison guide'],
     techStack:['Impact.com publisher account for Hims/Ro tracking','PerformCB account for Nurx','Standard affiliate links via Lasso'],
     todos:[
       {id:'pbt_th1',text:'Apply for Impact publisher account (Hims + Ro)',done:false},
@@ -724,16 +722,16 @@ const PLAYBOOKS = [
   },
   {
     id:'pb5', priority:5, name:'Display Advertising', tier:'growth',
-    tierLabel:'Month 1 (AdSense) → Month 6+ (premium)', potential:'$500–3K/mo', timing:'Apply AdSense at launch, Raptive at 25K sessions',
+    tierLabel:'Month 1 (AdSense) -> Month 6+ (premium)', potential:'$500-3K/mo', timing:'Apply AdSense at launch, Raptive at 25K sessions',
     color:'#4285f4', newStream:false,
-    summary:'Passive income layered on top of every other stream. AdSense pays $8–15 RPM for health content. Raptive pays $30–55 RPM — a 3-4x upgrade requiring 25K+ monthly sessions. The goal is to qualify for Raptive as fast as possible, then optimize ad layout with their team.',
-    why:['Zero additional effort once installed — earns on every pageview','Health content RPMs are among the highest of any niche','Raptive upgrade alone can add $1–2K/mo without changing traffic'],
+    summary:'Passive income layered on top of every other stream. AdSense pays $8-15 RPM for health content. Raptive pays $30-55 RPM - a 3-4x upgrade requiring 25K+ monthly sessions. The goal is to qualify for Raptive as fast as possible, then optimize ad layout with their team.',
+    why:['Zero additional effort once installed - earns on every pageview','Health content RPMs are among the highest of any niche','Raptive upgrade alone can add $1-2K/mo without changing traffic'],
     programs:[
-      {abbr:'AS',name:'Google AdSense',commission:'$8–15 RPM, phase 1',color:'#4285f4',url:'https://www.google.com/adsense/'},
-      {abbr:'RP',name:'Raptive',commission:'$30–55 RPM, 25K+ pvs',color:'#dc2626',url:'https://www.raptive.com/'},
-      {abbr:'MV',name:'Mediavine',commission:'$20–40 RPM, 50K+ sessions',color:'#16a34a',url:'https://www.mediavine.com/'},
+      {abbr:'AS',name:'Google AdSense',commission:'$8-15 RPM, phase 1',color:'#4285f4',url:'https://www.google.com/adsense/'},
+      {abbr:'RP',name:'Raptive',commission:'$30-55 RPM, 25K+ pvs',color:'#dc2626',url:'https://www.raptive.com/'},
+      {abbr:'MV',name:'Mediavine',commission:'$20-40 RPM, 50K+ sessions',color:'#16a34a',url:'https://www.mediavine.com/'},
     ],
-    marketingPlan:['Install AdSense at launch on all pages','Optimize Core Web Vitals — LCP <2.5s, CLS <0.1, INP <200ms (ad network approval requirement)','Apply to Raptive at 25K monthly sessions','Work with Raptive layout team to optimize ad zones for health content','Test sticky sidebar, in-content, and mobile anchor ad formats'],
+    marketingPlan:['Install AdSense at launch on all pages','Optimize Core Web Vitals - LCP <2.5s, CLS <0.1, INP <200ms (ad network approval requirement)','Apply to Raptive at 25K monthly sessions','Work with Raptive layout team to optimize ad zones for health content','Test sticky sidebar, in-content, and mobile anchor ad formats'],
     techStack:['AdSense JS snippet via RankMath or plugin','WP Rocket for CWV optimization','Cloudflare CDN for TTFB','Raptive plugin when approved'],
     todos:[
       {id:'pbt_ads1',text:'Apply for Google AdSense (requires 10+ published pages)',done:false},
@@ -744,20 +742,20 @@ const PLAYBOOKS = [
   },
   {
     id:'pb6', priority:6, name:'Medical Alert Systems', tier:'niche',
-    tierLabel:'Month 2–3', potential:'$300–1.5K/mo', timing:'Apply Month 1, content Month 2',
+    tierLabel:'Month 2-3', potential:'$300-1.5K/mo', timing:'Apply Month 1, content Month 2',
     color:'#dc2626', newStream:true,
-    summary:'$75–150 per sale with 180-day cookies. The senior audience filling multiple prescriptions is the same person whose family is shopping for a fall alert device. Nobody has connected these two things on a pharmacy-focused site. A single comparison page can passively earn for years.',
-    why:['$150/sale (Medical Alert) with 30-day cookie, $75/sale (LifeFone) with 180-day cookie','Senior demographic = highest prescription volume + highest fall risk','The content angle is natural and un-claimed: "medical supplies to keep at home alongside your prescriptions"','Completely unexploited on pharmacy-adjacent sites — almost no competition'],
+    summary:'$75-150 per sale with 180-day cookies. The senior audience filling multiple prescriptions is the same person whose family is shopping for a fall alert device. Nobody has connected these two things on a pharmacy-focused site. A single comparison page can passively earn for years.',
+    why:['$150/sale (Medical Alert) with 30-day cookie, $75/sale (LifeFone) with 180-day cookie','Senior demographic = highest prescription volume + highest fall risk','The content angle is natural and un-claimed: "medical supplies to keep at home alongside your prescriptions"','Completely unexploited on pharmacy-adjacent sites - almost no competition'],
     programs:[
       {abbr:'MA',name:'Medical Alert',commission:'$150/sale, 30-day cookie',color:'#dc2626',url:'https://www.medicalalert.com/'},
       {abbr:'LF',name:'LifeFone',commission:'$75/sale, 180-day cookie (!)',color:'#2563eb',url:'https://www.lifefone.com/affiliates'},
       {abbr:'PL',name:'Philips Lifeline',commission:'$75/sale',color:'#1d4ed8',url:'https://www.lifeline.philips.com/'},
     ],
     marketingPlan:['Build /seniors/medical-alerts/ comparison page targeting "best medical alert systems 2026"','Internal link from Medicare guide, Part D content, senior-focused city pages','Write "What seniors should keep at home alongside their prescriptions" guide','Target caregiver queries: "medical alert for mom who lives alone"','Add medical alert CTA to any content mentioning Medicare or elderly pharmacy use'],
-    techStack:['Standard affiliate links via CJ or direct programs','Lasso for link management','No special tech — pure content play'],
+    techStack:['Standard affiliate links via CJ or direct programs','Lasso for link management','No special tech - pure content play'],
     todos:[
       {id:'pbt_ma1',text:'Apply for Medical Alert affiliate via Commission Junction',done:false},
-      {id:'pbt_ma2',text:'Apply for LifeFone affiliate (180-day cookie is rare — prioritize this)',done:false},
+      {id:'pbt_ma2',text:'Apply for LifeFone affiliate (180-day cookie is rare - prioritize this)',done:false},
       {id:'pbt_ma3',text:'Build /seniors/medical-alerts/ comparison page',done:false},
       {id:'pbt_ma4',text:'Write seniors at-home supplies guide',done:false},
       {id:'pbt_ma5',text:'Add medical alert internal links to Medicare and senior content',done:false},
@@ -765,33 +763,33 @@ const PLAYBOOKS = [
   },
   {
     id:'pb7', priority:7, name:'Mental Health Platforms', tier:'growth',
-    tierLabel:'Month 3–4', potential:'$300–1K/mo', timing:'Apply Month 2, content Month 3',
+    tierLabel:'Month 3-4', potential:'$300-1K/mo', timing:'Apply Month 2, content Month 3',
     color:'#6366f1', newStream:true,
     summary:'Brightside pays $65+ per referral and accepts major insurance including Medicare and Medicaid. People managing chronic illness have statistically elevated rates of anxiety and depression. The content angle is natural and underserved on pharmacy sites.',
-    why:['$65+ CPA, most insurance accepted including Medicare/Medicaid — very low friction for user','Chronic illness + pharmacy use correlates directly with mental health needs','High-intent queries: "what to do when pharmacy doesn\'t have my antidepressant" convert directly'],
+    why:['$65+ CPA, most insurance accepted including Medicare/Medicaid - very low friction for user','Chronic illness + pharmacy use correlates directly with mental health needs','High-intent queries: "what to do when pharmacy doesn\'t have my antidepressant" convert directly'],
     programs:[
       {abbr:'BS',name:'Brightside',commission:'$65+/referral',color:'#6366f1',url:'https://www.brightside.com/'},
       {abbr:'BD',name:'BetterHelp',commission:'~$100+/signup via Impact',color:'#0d9488',url:'https://app.impact.com/'},
       {abbr:'TK',name:'Talkspace',commission:'CPA via Commission Junction',color:'#2563eb',url:'https://members.cj.com/'},
     ],
-    marketingPlan:['Write "What to do when your pharmacy doesn\'t have your antidepressant" — links to Brightside','Build /mental-health-resources/ hub connecting pharmacy access to mental health support','Target: "online psychiatrist without insurance", "cheapest antidepressant online"','Internal link from SSRI/antidepressant drug price comparison pages','Add mental health CTA to content about chronic conditions (diabetes, hypertension)'],
+    marketingPlan:['Write "What to do when your pharmacy doesn\'t have your antidepressant" - links to Brightside','Build /mental-health-resources/ hub connecting pharmacy access to mental health support','Target: "online psychiatrist without insurance", "cheapest antidepressant online"','Internal link from SSRI/antidepressant drug price comparison pages','Add mental health CTA to content about chronic conditions (diabetes, hypertension)'],
     techStack:['Standard affiliate links via Impact or direct','Lasso for link management'],
     todos:[
       {id:'pbt_mh1',text:'Apply for Brightside affiliate program',done:false},
       {id:'pbt_mh2',text:'Apply for BetterHelp via Impact',done:false},
-      {id:'pbt_mh3',text:'Write "pharmacy out of antidepressant — what to do" guide',done:false},
+      {id:'pbt_mh3',text:'Write "pharmacy out of antidepressant - what to do" guide',done:false},
       {id:'pbt_mh4',text:'Build /mental-health-resources/ hub',done:false},
       {id:'pbt_mh5',text:'Add mental health CTAs to chronic condition content',done:false},
     ]
   },
   {
     id:'pb8', priority:8, name:'At-Home Health Testing', tier:'niche',
-    tierLabel:'Month 3–4', potential:'$200–800/mo', timing:'Apply Month 2, content Month 3',
+    tierLabel:'Month 3-4', potential:'$200-800/mo', timing:'Apply Month 2, content Month 3',
     color:'#0891b2', newStream:true,
-    summary:'EverlyWell offers 4.8–9.6% commission with a 45-day cookie on tests averaging $99–299. The uninsured audience that visits your site for prescription savings is the same audience that cannot afford a lab order visit. The content pitch is direct and honest.',
-    why:['45-day cookie gives extended attribution window','Direct pitch for your exact audience: "can\'t afford a doctor to order a test? Here\'s the $99 at-home option"','Thyroid, STI, hormone, food sensitivity tests — broad coverage of what pharmacy visitors need','Growing market with very little quality comparison content'],
+    summary:'EverlyWell offers 4.8-9.6% commission with a 45-day cookie on tests averaging $99-299. The uninsured audience that visits your site for prescription savings is the same audience that cannot afford a lab order visit. The content pitch is direct and honest.',
+    why:['45-day cookie gives extended attribution window','Direct pitch for your exact audience: "can\'t afford a doctor to order a test? Here\'s the $99 at-home option"','Thyroid, STI, hormone, food sensitivity tests - broad coverage of what pharmacy visitors need','Growing market with very little quality comparison content'],
     programs:[
-      {abbr:'EW',name:'EverlyWell',commission:'4.8–9.6%, 45-day cookie',color:'#0891b2',url:'https://www.everlywell.com/affiliates/'},
+      {abbr:'EW',name:'EverlyWell',commission:'4.8-9.6%, 45-day cookie',color:'#0891b2',url:'https://www.everlywell.com/affiliates/'},
       {abbr:'LG',name:'LetsGetChecked',commission:'CPA via Impact',color:'#16a34a',url:'https://app.impact.com/'},
       {abbr:'MB',name:'myLab Box',commission:'CPA, STI-focused',color:'#7c3aed',url:'https://www.mylabbox.com/affiliates/'},
     ],
@@ -807,10 +805,10 @@ const PLAYBOOKS = [
   },
   {
     id:'pb9', priority:9, name:'CPAP and Sleep Apnea Supplies', tier:'niche',
-    tierLabel:'Month 4–6', potential:'$200–600/mo', timing:'Content Month 4',
+    tierLabel:'Month 4-6', potential:'$200-600/mo', timing:'Content Month 4',
     color:'#475569', newStream:true,
-    summary:'The CPAP Shop pays 10% on average orders of $125–200. Sleep apnea is a prescription-driven condition — patients fill prescriptions AND need ongoing supplies. The pharmacy audience includes CPAP users who can be reached with comparison content.',
-    why:['10% commission on $125–200 average orders = $12–20 per sale','Prescription-driven condition — same audience already filling prescriptions at pharmacies','Recurring supply purchases (masks, filters, tubing) create returning buyers','Very few pharmacy sites have made this connection'],
+    summary:'The CPAP Shop pays 10% on average orders of $125-200. Sleep apnea is a prescription-driven condition - patients fill prescriptions AND need ongoing supplies. The pharmacy audience includes CPAP users who can be reached with comparison content.',
+    why:['10% commission on $125-200 average orders = $12-20 per sale','Prescription-driven condition - same audience already filling prescriptions at pharmacies','Recurring supply purchases (masks, filters, tubing) create returning buyers','Very few pharmacy sites have made this connection'],
     programs:[
       {abbr:'CP',name:'The CPAP Shop',commission:'10% commission',color:'#475569',url:'https://www.thecpapshop.com/affiliate'},
       {abbr:'CS',name:'CPAPsupplies.com',commission:'CPA via Commission Junction',color:'#0d9488',url:'https://members.cj.com/'},
@@ -825,16 +823,16 @@ const PLAYBOOKS = [
   },
   {
     id:'pb10', priority:10, name:'Pet Medications', tier:'niche',
-    tierLabel:'Month 3–4', potential:'$200–500/mo', timing:'Content Month 3',
+    tierLabel:'Month 3-4', potential:'$200-500/mo', timing:'Content Month 3',
     color:'#ff9900', newStream:true,
     summary:'Pet owners filling human prescriptions also fill pet prescriptions at the same pharmacies. "Can I fill my pet\'s prescription at Walgreens or CVS?" is a real high-volume query with almost no quality content ranking for it. Very low competition, ranks fast.',
-    why:['Almost no quality content on this query — easy ranking opportunity','Pet owners are already your audience (same pharmacies, same savings mindset)','PetMeds offers consistent affiliate commissions via CJ','One article can generate passive traffic and commissions for years'],
+    why:['Almost no quality content on this query - easy ranking opportunity','Pet owners are already your audience (same pharmacies, same savings mindset)','PetMeds offers consistent affiliate commissions via CJ','One article can generate passive traffic and commissions for years'],
     programs:[
       {abbr:'PM',name:'PetMeds',commission:'CJ Affiliate, per sale',color:'#ff9900',url:'https://www.petmeds.org/'},
       {abbr:'CH',name:'Chewy Pharmacy',commission:'Amazon Associates adjacent',color:'#e11d48',url:'https://www.chewy.com/'},
     ],
     marketingPlan:['Write "Can I fill my pet\'s prescription at CVS, Walgreens, or Costco?" guide','Cover: which chains fill pet prescriptions, when PetMeds is cheaper, how to transfer','Internal link from city pages (pharmacies that fill pet prescriptions nearby)','Target: "pet prescription at human pharmacy", "cheapest place to fill dog prescription"'],
-    techStack:['Standard affiliate links via CJ','No special tech — content play'],
+    techStack:['Standard affiliate links via CJ','No special tech - content play'],
     todos:[
       {id:'pbt_pet1',text:'Apply for PetMeds affiliate via Commission Junction',done:false},
       {id:'pbt_pet2',text:'Write pet pharmacy guide: human pharmacies vs PetMeds vs Chewy',done:false},
@@ -843,16 +841,16 @@ const PLAYBOOKS = [
   },
   {
     id:'pb11', priority:11, name:'OTC and Amazon Associates', tier:'growth',
-    tierLabel:'Month 2 onward', potential:'$300–1K/mo', timing:'Apply Month 1, add to all content',
+    tierLabel:'Month 2 onward', potential:'$300-1K/mo', timing:'Apply Month 1, add to all content',
     color:'#f97316', newStream:false,
-    summary:'Amazon Associates and iHerb cover the broad surface area of health products your audience buys at pharmacies. OTC cold medicine comparisons, pill organizers, blood pressure monitors, supplements — every article about pharmacy visits can link to relevant products.',
-    why:['Broadest possible coverage — any health product = potential commission','Amazon\'s 24-hour cookie is short but conversion rate is high','iHerb pays 10% on supplements — much better than Amazon for that category','Evergreen content (flu season guide, OTC comparisons) compounds over years'],
+    summary:'Amazon Associates and iHerb cover the broad surface area of health products your audience buys at pharmacies. OTC cold medicine comparisons, pill organizers, blood pressure monitors, supplements - every article about pharmacy visits can link to relevant products.',
+    why:['Broadest possible coverage - any health product = potential commission','Amazon\'s 24-hour cookie is short but conversion rate is high','iHerb pays 10% on supplements - much better than Amazon for that category','Evergreen content (flu season guide, OTC comparisons) compounds over years'],
     programs:[
-      {abbr:'AZ',name:'Amazon Associates',commission:'1–10% by category',color:'#ff9900',url:'https://affiliate-program.amazon.com/'},
+      {abbr:'AZ',name:'Amazon Associates',commission:'1-10% by category',color:'#ff9900',url:'https://affiliate-program.amazon.com/'},
       {abbr:'IH',name:'iHerb',commission:'10% commission',color:'#16a34a',url:'https://www.iherb.com/info/affiliates/'},
       {abbr:'VC',name:'Vitacost',commission:'Supplement affiliate',color:'#65a30d',url:'https://www.vitacost.com/affiliate-program/'},
     ],
-    marketingPlan:['Add OTC product links to all seasonal health content (flu, allergies, cold)','Write OTC comparison guides: Claritin vs Zyrtec vs generic, best blood pressure monitors','Build holiday gift guide for health-conscious readers (health gadgets, pill organizers)','iHerb for all supplement content — 10% is much better than Amazon\'s rates'],
+    marketingPlan:['Add OTC product links to all seasonal health content (flu, allergies, cold)','Write OTC comparison guides: Claritin vs Zyrtec vs generic, best blood pressure monitors','Build holiday gift guide for health-conscious readers (health gadgets, pill organizers)','iHerb for all supplement content - 10% is much better than Amazon\'s rates'],
     techStack:['Amazon Associates tracking tag in Lasso','iHerb affiliate links','AAWP plugin for Amazon product displays (optional)'],
     todos:[
       {id:'pbt_otc1',text:'Apply for Amazon Associates',done:false},
@@ -864,10 +862,10 @@ const PLAYBOOKS = [
   },
   {
     id:'pb12', priority:12, name:'Retail Pharmacy Affiliates', tier:'growth',
-    tierLabel:'Month 1 (easy pickups)', potential:'$50–300/mo', timing:'Apply via CJ at launch',
+    tierLabel:'Month 1 (easy pickups)', potential:'$50-300/mo', timing:'Apply via CJ at launch',
     color:'#64748b', newStream:false,
     summary:'Walgreens (2%), Rite Aid (5.6%), and CVS via CJ Affiliate. Weak commissions because most purchases happen in-store, not online. Worth having but should not be a strategic focus. Apply now and let them earn passively.',
-    why:['Low effort — apply once, earn passively on online orders','Rite Aid at 5.6% is the best of the three','Useful for product pages and gift guides'],
+    why:['Low effort - apply once, earn passively on online orders','Rite Aid at 5.6% is the best of the three','Useful for product pages and gift guides'],
     programs:[
       {abbr:'WG',name:'Walgreens',commission:'2% per online sale, 30-day cookie',color:'#e11d48',url:'https://members.cj.com/'},
       {abbr:'RA',name:'Rite Aid',commission:'5.6% per sale, 15-day cookie',color:'#2563eb',url:'https://members.cj.com/'},
@@ -883,10 +881,10 @@ const PLAYBOOKS = [
   },
   {
     id:'pb13', priority:13, name:'Direct Advertising (Independent Pharmacies)', tier:'scale',
-    tierLabel:'Month 6+', potential:'$500–3K/mo', timing:'Start outreach at Month 6',
+    tierLabel:'Month 6+', potential:'$500-3K/mo', timing:'Start outreach at Month 6',
     color:'#1d4ed8', newStream:false,
-    summary:'Independent pharmacies will pay $50–200/month for featured placement on their local city pages. One advertiser at $100/mo from your top 20 cities = $2K/mo with no affiliate dependency. This is Phase 3 revenue but worth building the infrastructure for in Phase 2.',
-    why:['No affiliate middleman — direct relationship, direct payment','Independent pharmacies cannot compete with chains on SEO — they need you','Predictable monthly recurring revenue, not CPA-dependent','Your city page traffic is exactly the audience they want'],
+    summary:'Independent pharmacies will pay $50-200/month for featured placement on their local city pages. One advertiser at $100/mo from your top 20 cities = $2K/mo with no affiliate dependency. This is Phase 3 revenue but worth building the infrastructure for in Phase 2.',
+    why:['No affiliate middleman - direct relationship, direct payment','Independent pharmacies cannot compete with chains on SEO - they need you','Predictable monthly recurring revenue, not CPA-dependent','Your city page traffic is exactly the audience they want'],
     programs:[],
     marketingPlan:['Build /advertise/ page with pitch and pricing ($99/mo starter, $199/mo premium)','Email outreach to independent pharmacies in top 20 traffic cities','Lead with traffic data: "Your city page gets X visitors/month"','Offer free trial month to prove ROI before paid commitment','Expand to 50+ cities as traffic grows'],
     techStack:['Simple /advertise/ landing page','Stripe or PayPal for monthly billing','Featured pharmacy card component in city page template (already in plugin)'],
@@ -900,12 +898,12 @@ const PLAYBOOKS = [
   },
   {
     id:'pb14', priority:14, name:'Sponsored Newsletter', tier:'scale',
-    tierLabel:'Year 2', potential:'$500–2K/mo', timing:'Build list first, sell ads at 2K+ subscribers',
+    tierLabel:'Year 2', potential:'$500-2K/mo', timing:'Build list first, sell ads at 2K+ subscribers',
     color:'#0d9488', newStream:true,
     summary:'Health newsletters command meaningful sponsorship rates from insurance companies, telehealth platforms, and supplement brands. A list of 2,000+ engaged pharmacy-and-savings readers is a sellable asset that earns outside of Google.',
-    why:['Traffic you own — algorithm-independent revenue','Sponsorships pay $20–100 per 1,000 subscribers per issue at this niche','Health brands (telehealth, supplements, insurance) actively seek targeted lists','Also drives repeat affiliate revenue from every send'],
+    why:['Traffic you own - algorithm-independent revenue','Sponsorships pay $20-100 per 1,000 subscribers per issue at this niche','Health brands (telehealth, supplements, insurance) actively seek targeted lists','Also drives repeat affiliate revenue from every send'],
     programs:[
-      {abbr:'ML',name:'MailerLite',commission:'Your email tool — not affiliate, your revenue',color:'#0d9488',url:'https://app.mailerlite.com/'},
+      {abbr:'ML',name:'MailerLite',commission:'Your email tool - not affiliate, your revenue',color:'#0d9488',url:'https://app.mailerlite.com/'},
       {abbr:'BS',name:'Beehiiv',commission:'Alternative newsletter platform',color:'#1f2937',url:'https://www.beehiiv.com/'},
     ],
     marketingPlan:['Lead magnet: free "Pharmacy Savings Cheat Sheet" PDF on email capture','Grow list via city pages, savings hub, and discount card widget','Weekly or biweekly newsletter: pharmacy hours alerts, savings tips, seasonal health content','Pitch sponsorships to MediaAlpha, SingleCare, Brightside, EverlyWell at 2K+ subs','Segment by interest: discount card users vs insurance seekers vs general health'],
@@ -1290,10 +1288,9 @@ function renderChecklist() {
               ${displayText}
             </span>
             ${task.hint ? `<div class="task-hint-text">${task.hint}</div>` : ''}
-          </div>
-          ${task.hint ? '<button class="hint-btn" title="Show hint">?</button>' : ''}`;
+          </div>`;
 
-        // Checkbox
+        // Checkbox - only way to mark done
         const cb = item.querySelector('.task-cb');
         cb.addEventListener('change', (e) => {
           e.stopPropagation();
@@ -1303,21 +1300,14 @@ function renderChecklist() {
           updatePhaseCount(phase.id);
         });
 
-        // Hint toggle
-        const hintBtn = item.querySelector('.hint-btn');
-        if (hintBtn) {
-          hintBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+        // Click anywhere on row (except checkbox) toggles hint
+        if (task.hint) {
+          item.style.cursor = 'pointer';
+          item.addEventListener('click', (e) => {
+            if (e.target === cb || e.target.classList.contains('task-cb')) return;
             item.classList.toggle('hint-open');
           });
         }
-
-        // Click text to check
-        const textEl = item.querySelector('.task-text');
-        textEl.addEventListener('click', () => {
-          cb.checked = !cb.checked;
-          cb.dispatchEvent(new Event('change'));
-        });
 
         list.appendChild(item);
       });
