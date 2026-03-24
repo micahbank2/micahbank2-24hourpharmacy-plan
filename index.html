@@ -140,6 +140,7 @@ body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);c
 .task-item.hint-open .task-hint-text{display:block}
 .task-new-badge{font-size:9px;font-weight:700;color:var(--accent);background:var(--accent-light);border:1px solid var(--accent-border);border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
 .task-paid-badge{font-size:9px;font-weight:700;color:#7c3aed;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
+.task-waiting-badge{font-size:9px;font-weight:700;color:#b45309;background:#fffbeb;border:1px solid #fde68a;border-radius:3px;padding:1px 5px;margin-left:6px;white-space:nowrap;vertical-align:middle}
 .phase-tasks-body{overflow:hidden;transition:max-height .22s ease,opacity .22s ease}
 .phase-tasks-body.collapsed{max-height:0!important;opacity:0}
 .no-tasks-msg{padding:12px 16px;font-size:12px;color:var(--muted);font-style:italic}
@@ -440,8 +441,10 @@ const PHASES = [
     borderColor: '#475569',
     defaultOpen: true,
     tasks: [
-      { id: 'f1', text: 'Purchase Hostinger Business hosting plan (minimum for custom plugins)', hint: 'Shared starter plans do not support the custom plugin architecture this site requires. Business plan minimum.' },
-      { id: 'f2', text: 'Confirm domain access with current owner and point DNS to Hostinger', hint: 'Domain is currently controlled externally. Once you have access, update the nameservers in the domain registrar to Hostinger\'s nameservers.' },
+      { id: 'f1', text: 'Purchase Hostinger Business hosting plan (minimum for custom plugins)', hint: 'Hostinger is your web host -- this is where WordPress and all site files live. ExonHost (your domain registrar) and Hostinger (your web host) are two separate things and do not need to be at the same company. Business plan is the minimum; shared starter plans do not support the custom plugin architecture this site requires.' },
+      { id: 'f2', text: '[WAITING] Domain transfer in progress -- 24hourpharmacy.com moving to ExonHost', hint: 'Transfer initiated 3/25/2026. ExonHost is your domain registrar (holds the domain name and handles renewal). Hostinger is your web host (where WordPress lives). These are separate services. The transfer typically completes in 5-7 days. Watch your email for any approval request -- if you get one, click approve immediately.' },
+      { id: 'f2b', text: 'Enable auto-renew for 24hourpharmacy.com at ExonHost once transfer completes', hint: 'Log into my.exonhost.com after the transfer confirms. Find the domain and turn on auto-renew. Domain renews at $15.99/yr. Keep your payment method current -- the only way you lose this domain is if auto-renew fails because your card expired or was replaced. Set a calendar reminder once a year to verify the card on file is still valid.' },
+      { id: 'f2c', text: 'Point nameservers from ExonHost to Hostinger after hosting is set up', hint: 'Once you have a Hostinger hosting account, Hostinger will give you two nameserver addresses (like ns1.hostinger.com and ns2.hostinger.com). Log into ExonHost at my.exonhost.com, go to Domains > Manage DNS, and swap in Hostinger\'s nameservers. This is what connects your domain name to your hosting account. DNS propagation takes up to 24 hours.' },
       { id: 'f3', text: 'Install WordPress from Hostinger hPanel one-click installer' },
       { id: 'f4', text: 'Install and activate GeneratePress theme' },
       { id: 'f5', text: 'Deploy child theme from GitHub repo (Appearance > Themes > Add New > Upload)', hint: 'Upload the child theme zip built by Claude Code. Contains: single-city.php, front-page.php, archive-state.php, header.php, footer.php, style.css, functions.php.' },
@@ -452,7 +455,7 @@ const PHASES = [
       { id: 'f10', text: 'Install UpdraftPlus and configure daily backups to Google Drive', hint: 'Free tier backs up to Google Drive. Settings: daily backup schedule, keep last 7 backups, back up database and files separately. Test a restore before the site goes live.' },
       { id: 'f11', text: 'Set permalink structure to custom: /city/%postname%/ in Settings > Permalinks' },
       { id: 'f12', text: 'Add security constants to wp-config.php: DISALLOW_FILE_EDIT, FORCE_SSL_ADMIN', hint: 'DISALLOW_FILE_EDIT prevents editing theme/plugin files through WordPress admin (major security risk). FORCE_SSL_ADMIN ensures all admin traffic uses HTTPS.' },
-      { id: 'f13', text: 'Set up Cloudflare (free tier) for CDN, DNS, and DDoS protection', hint: 'Add domain to Cloudflare, update nameservers at registrar. Enable: Auto Minify, Always Use HTTPS, Brotli compression. Test Rocket Loader carefully with React widgets - may need to exclude widget scripts.' },
+      { id: 'f13', text: 'Set up Cloudflare (free tier) for CDN, DNS, and DDoS protection', hint: 'Add domain to Cloudflare, update nameservers at ExonHost to point to Cloudflare instead of Hostinger directly. Cloudflare then proxies traffic to Hostinger. Enable: Auto Minify, Always Use HTTPS, Brotli compression. Test Rocket Loader carefully with React widgets - may need to exclude widget scripts. Note: if using Cloudflare, your nameservers point to Cloudflare, and Cloudflare forwards to Hostinger.' },
       { id: 'f14', text: 'Restrict Google Maps API key to 24hourpharmacy.com in Google Cloud Console', hint: 'Cloud Console > APIs & Services > Credentials > Edit key. HTTP referrer restrictions: 24hourpharmacy.com/*. API restrictions: Maps JavaScript API, Places API, Geocoding API only. The key is client-side visible, so restriction is essential.' },
       { id: 'f15', text: 'Enter all API keys and affiliate codes in plugin Settings page (never in repo)', hint: 'The custom plugin has a Settings page in WP admin. Store Google Maps key, LowerMyRx BIN/PCN/Group, affiliate IDs. These get passed to React via wp_localize_script - keeps everything out of git.' },
       { id: 'f16', text: 'Set up Google Analytics 4 and add tracking code', hint: 'Install via RankMath or a dedicated GA4 plugin. Create conversion events: affiliate_link_click, phone_tap, widget_interaction. You need conversion data before running any paid traffic.' },
@@ -598,29 +601,31 @@ const PHASES = [
 
 const MILESTONES = [
   { id: 'ms1', text: 'LLC formed and EIN received' },
-  { id: 'ms2', text: 'WordPress live with child theme + plugin' },
-  { id: 'ms3', text: 'First city page published' },
-  { id: 'ms4', text: 'All 10 launch city pages live' },
-  { id: 'ms5', text: 'AdSense approved' },
-  { id: 'ms6', text: 'First affiliate commission earned' },
-  { id: 'ms7', text: '1,000 monthly organic sessions' },
-  { id: 'ms8', text: '10,000 monthly pageviews' },
-  { id: 'ms9', text: 'First $100 revenue month' },
-  { id: 'ms10', text: '25,000 monthly sessions (ad network threshold)' },
-  { id: 'ms11', text: 'Accepted to Mediavine or Raptive' },
-  { id: 'ms12', text: 'First insurance lead commission (Oct-Jan)' },
-  { id: 'ms13', text: '100 city pages published' },
-  { id: 'ms14', text: 'Email list reaches 500 subscribers' },
-  { id: 'ms15', text: 'First $500 revenue month' },
-  { id: 'ms16', text: 'First $1,000 revenue month' },
-  { id: 'ms17', text: 'First $2,000 revenue month' },
-  { id: 'ms18', text: 'First direct advertiser signed' },
-  { id: 'ms19', text: 'First $5,000 revenue month' },
-  { id: 'ms20', text: 'First GLP-1 telehealth referral commission' },
-  { id: 'ms21', text: 'First medical alert system sale commission' },
-  { id: 'ms22', text: 'Email list reaches 2,000 subscribers' },
-  { id: 'ms23', text: 'First sponsored newsletter deal closed' },
-  { id: 'ms24', text: 'Cited by ChatGPT or Perplexity for a pharmacy query' },
+  { id: 'ms2', text: 'Domain transfer to ExonHost confirmed' },
+  { id: 'ms2b', text: 'Auto-renew enabled at ExonHost' },
+  { id: 'ms3', text: 'WordPress live with child theme + plugin' },
+  { id: 'ms4', text: 'First city page published' },
+  { id: 'ms5', text: 'All 10 launch city pages live' },
+  { id: 'ms6', text: 'AdSense approved' },
+  { id: 'ms7', text: 'First affiliate commission earned' },
+  { id: 'ms8', text: '1,000 monthly organic sessions' },
+  { id: 'ms9', text: '10,000 monthly pageviews' },
+  { id: 'ms10', text: 'First $100 revenue month' },
+  { id: 'ms11', text: '25,000 monthly sessions (ad network threshold)' },
+  { id: 'ms12', text: 'Accepted to Mediavine or Raptive' },
+  { id: 'ms13', text: 'First insurance lead commission (Oct-Jan)' },
+  { id: 'ms14', text: '100 city pages published' },
+  { id: 'ms15', text: 'Email list reaches 500 subscribers' },
+  { id: 'ms16', text: 'First $500 revenue month' },
+  { id: 'ms17', text: 'First $1,000 revenue month' },
+  { id: 'ms18', text: 'First $2,000 revenue month' },
+  { id: 'ms19', text: 'First direct advertiser signed' },
+  { id: 'ms20', text: 'First $5,000 revenue month' },
+  { id: 'ms21', text: 'First GLP-1 telehealth referral commission' },
+  { id: 'ms22', text: 'First medical alert system sale commission' },
+  { id: 'ms23', text: 'Email list reaches 2,000 subscribers' },
+  { id: 'ms24', text: 'First sponsored newsletter deal closed' },
+  { id: 'ms25', text: 'Cited by ChatGPT or Perplexity for a pharmacy query' },
 ];
 
 const PLAYBOOKS = [
@@ -921,8 +926,9 @@ const LINK_GROUPS = [
   {
     title: 'Your site',
     links: [
+      { abbr:'EX', label:'ExonHost', desc:'Domain registrar -- auto-renew lives here', url:'https://my.exonhost.com/', color:'#22c55e' },
       { abbr:'WP', label:'WordPress admin', desc:'Content, pages, settings', url:'https://24hourpharmacy.com/wp-admin/', color:'#2563eb' },
-      { abbr:'H', label:'Hostinger hPanel', desc:'Hosting, files, SSL', url:'https://hpanel.hostinger.com/', color:'#673de6' },
+      { abbr:'H', label:'Hostinger hPanel', desc:'Web hosting, files, SSL', url:'https://hpanel.hostinger.com/', color:'#673de6' },
       { abbr:'GH', label:'GitHub repo', desc:'Source code', url:'https://github.com/micahbank2/24hourpharmacy', color:'#1f2937' },
       { abbr:'CF', label:'Cloudflare', desc:'CDN, DNS, security', url:'https://dash.cloudflare.com/', color:'#f6821f' },
     ]
@@ -1275,14 +1281,20 @@ function renderChecklist() {
         item.dataset.taskId = task.id;
 
         const isPaid = task.text.startsWith('[PAID]');
-        const displayText = isPaid ? task.text.replace('[PAID]', '').trim() : task.text;
+        const isWaiting = task.text.startsWith('[WAITING]');
+        const displayText = isPaid
+          ? task.text.replace('[PAID]', '').trim()
+          : isWaiting
+            ? task.text.replace('[WAITING]', '').trim()
+            : task.text;
 
         item.innerHTML = `
           <input type="checkbox" class="task-cb" ${done ? 'checked' : ''} data-id="${task.id}">
           <div class="task-content">
             <span class="task-text">
               ${isPaid ? '<span class="task-paid-badge">PAID</span> ' : ''}
-              ${task.isNew && !isPaid ? '<span class="task-new-badge">NEW</span> ' : ''}
+              ${isWaiting ? '<span class="task-waiting-badge">WAITING</span> ' : ''}
+              ${task.isNew && !isPaid && !isWaiting ? '<span class="task-new-badge">NEW</span> ' : ''}
               ${displayText}
             </span>
             ${task.hint ? `<div class="task-hint-text">${task.hint}</div>` : ''}
